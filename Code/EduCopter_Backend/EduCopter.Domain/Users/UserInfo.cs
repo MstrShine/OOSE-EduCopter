@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EduCopter.Domain.Models
+namespace EduCopter.Domain.Users
 {
-    public class User : Entity
+    public class UserInfo : Entity
     {
         public string UserName { get; set; }
 

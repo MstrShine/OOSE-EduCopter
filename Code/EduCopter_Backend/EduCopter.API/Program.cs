@@ -1,4 +1,6 @@
-using EduCopter.API.Extensions;
+using EduCopter.Persistency.DataBase;
+using EduCopter.Persistency.DataBase.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduCopter.API
 {
@@ -10,27 +12,16 @@ namespace EduCopter.API
 
             // Add services to the container.
             #region Configure Services
+            builder.Services.AddRepositories();
+            builder.Services.AddDataBase();
+
             builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
-            builder.Services.AddControllers(o =>
-            {
-                o.UseGeneralRoutePrefix("api/v{version:apiVersion}");
-            });
-            builder.Services.AddApiVersioning(o =>
-            {
-                o.ReportApiVersions = true;
-            });
-            builder.Services.AddVersionedApiExplorer(options =>
-            {
-                // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
-                // note: the specified format code will format the version as "'v'major[.minor][-status]"
-                options.GroupNameFormat = "'v'VVV";
+            builder.Services.AddControllers();
 
-                // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
-                // can also be used to control the format of the API version in route templates
-                options.SubstituteApiVersionInUrl = true;
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.ResolveConflictingActions(description => description.First());
             });
-
-            builder.Services.AddSwaggerGen();
             #endregion
 
             #region Configure App
@@ -44,10 +35,8 @@ namespace EduCopter.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthorization();
-
-            app.UsePathBase(new PathString("/api"));
             app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
