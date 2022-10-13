@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EduCopter.Persistency.DataBase.Repository.Interfaces
 {
-    public interface IEntityRepositorySession<E> : IDisposable, IEntityProvider<E> where E : Entity, new()
+    public interface IEntityRepositorySession<E> : IDisposable, IEntityProvider<E> where E : Entity
     {
     }
 }

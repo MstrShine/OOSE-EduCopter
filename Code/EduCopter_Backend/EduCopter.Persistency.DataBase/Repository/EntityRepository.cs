@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EduCopter.Persistency.DataBase.Repository
 {
-    public class EntityRepository<E> : IEntityRepository<E>  where E : Entity, new()
+    public class EntityRepository<E> : IEntityRepository<E>  where E : Entity
     {
         private readonly IServiceProvider _service;
 

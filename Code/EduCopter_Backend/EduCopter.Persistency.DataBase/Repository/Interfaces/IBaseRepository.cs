@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EduCopter.Persistency.DataBase.Repository.Interfaces
 {
-    public interface IBaseRepository<S, E> where S : IEntityRepositorySession<E> where E : Entity, new()
+    public interface IBaseRepository<S, E> where S : IEntityRepositorySession<E> where E : Entity
     {
         S CreateSession();
     }
