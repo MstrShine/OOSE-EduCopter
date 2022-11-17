@@ -9,8 +9,6 @@ namespace EduCopter.Persistency.DataBase
 {
     public class EduCopterContext : DbContext
     {
-        private readonly DbContextOptions _options;
-
         private readonly string _connectionString;
 
         public EduCopterContext(IConfiguration configuration)
@@ -22,14 +20,11 @@ namespace EduCopter.Persistency.DataBase
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            if (_options == null)
-            {
-                optionsBuilder.UseSqlServer(_connectionString);
+            optionsBuilder.UseSqlServer(_connectionString);
 
-                if (Debugger.IsAttached)
-                {
-                    optionsBuilder.EnableSensitiveDataLogging();
-                }
+            if (Debugger.IsAttached)
+            {
+                optionsBuilder.EnableSensitiveDataLogging();
             }
         }
 
