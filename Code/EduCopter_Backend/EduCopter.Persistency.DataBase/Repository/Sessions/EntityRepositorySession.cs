@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain;
+using EduCopter.Persistency.DataBase.Domain;
 using EduCopter.Persistency.DataBase.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace EduCopter.Persistency.DataBase.Repository.Sessions
 {
-    public abstract class EntityRepositorySession<E> : IEntityRepositorySession<E> where E : Entity, new()
+    public abstract class EntityRepositorySession<E, EF> : IEntityRepositorySession<E> where E : Entity, new() where EF : EFEntity<E, EF>, new()
     {
         protected readonly EduCopterContext _context;
-        protected abstract DbSet<E> Table { get; }
+        protected abstract DbSet<EF> Table { get; }
 
         private bool disposedValue;
 
@@ -31,7 +32,7 @@ namespace EduCopter.Persistency.DataBase.Repository.Sessions
             if (e == null)
                 throw new ArgumentOutOfRangeException($"Could not find entity in table {typeof(E)} with id {id}");
 
-            Table.Remove(e);
+            Table.Remove(new EF().FromDomain(e));
             await _context.SaveChangesAsync();
         }
 
@@ -42,14 +43,14 @@ namespace EduCopter.Persistency.DataBase.Repository.Sessions
 
             var entity = await Table.FirstOrDefaultAsync(x => x.Id == id);
 
-            return entity;
+            return entity?.ToDomain();
         }
 
         public virtual async Task<List<E>> GetAll()
         {
             var entities = await Table.ToListAsync();
 
-            return entities;
+            return entities.Select(x => x.ToDomain()).ToList();
         }
 
         public virtual async Task<E> SaveOrUpdate(E entity)
@@ -60,11 +61,11 @@ namespace EduCopter.Persistency.DataBase.Repository.Sessions
             if(entity.Id == Guid.Empty)
             {
                 entity.Id = Guid.NewGuid();
-                await Table.AddAsync(entity);
+                await Table.AddAsync(new EF().FromDomain(entity));
             }
             else
             {
-                Table.Update(entity);
+                Table.Update(new EF().FromDomain(entity));
             }
 
             await _context.SaveChangesAsync();

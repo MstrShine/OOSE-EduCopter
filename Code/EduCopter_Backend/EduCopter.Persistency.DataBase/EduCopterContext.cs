@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.Users;
+using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -34,7 +35,7 @@ namespace EduCopter.Persistency.DataBase
 
         #region Tables
 
-        public DbSet<Student> Students { get; set; }
+        public DbSet<EFStudent> Students { get; set; }
 
         #endregion
 
