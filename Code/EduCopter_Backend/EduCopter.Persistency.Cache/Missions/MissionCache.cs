@@ -13,8 +13,6 @@ namespace EduCopter.Persistency.Cache.Missions
     {
         private readonly ConcurrentDictionary<Guid, MissionCacheModel> _Cache = new();
 
-        public MissionCache() { }
-
         public Task AddOrChange(Mission mission)
         {
             if (mission == null) throw new ArgumentNullException(nameof(mission));
