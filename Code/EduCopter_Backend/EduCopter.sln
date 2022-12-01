@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EduCopter.Persistency.DataB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EduCopter.Persistency.DataBase.Domain", "EduCopter.Persistency.DataBase.Domain\EduCopter.Persistency.DataBase.Domain.csproj", "{8156D00D-6DB8-4058-9015-EBCF5D93E214}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduCopter.Persistency.Cache", "EduCopter.Persistency.Cache\EduCopter.Persistency.Cache.csproj", "{56B9B12E-07B0-4EEE-8F80-2F11584FBD86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EduCopter.Persistency.Cache", "EduCopter.Persistency.Cache\EduCopter.Persistency.Cache.csproj", "{56B9B12E-07B0-4EEE-8F80-2F11584FBD86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C9402159-4B0B-4364-9167-929FFBA1CD5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduCopter.Persistency.Cache.Test", "EduCopter.Persistency.Cache.Test\EduCopter.Persistency.Cache.Test.csproj", "{7B50534F-8465-45D5-8ACB-F28CD29AA619}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{56B9B12E-07B0-4EEE-8F80-2F11584FBD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56B9B12E-07B0-4EEE-8F80-2F11584FBD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56B9B12E-07B0-4EEE-8F80-2F11584FBD86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B50534F-8465-45D5-8ACB-F28CD29AA619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B50534F-8465-45D5-8ACB-F28CD29AA619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B50534F-8465-45D5-8ACB-F28CD29AA619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B50534F-8465-45D5-8ACB-F28CD29AA619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7B50534F-8465-45D5-8ACB-F28CD29AA619} = {C9402159-4B0B-4364-9167-929FFBA1CD5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B96476B7-1B02-4831-A92F-5C2DCA266F82}
