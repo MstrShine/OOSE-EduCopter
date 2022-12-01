@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EduCopter.Domain.Geography
+namespace EduCopter.Domain
 {
-    public class Country : Entity
+    public class Map : Entity
     {
         public string Name { get; set; }
 
-        public List<Province> Provinces { get; set; } = new();
+        public string Path { get; set; }
 
-        public Country() { }
+        public Guid TeacherId { get; set; }
+
+        public Map() { }
     }
 }
