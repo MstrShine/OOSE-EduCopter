@@ -1,3 +1,4 @@
+import 'package:educopter_frontend/pages/missioncreate.dart';
 import 'package:flutter/material.dart';
 import '../helperwidgets/customformfield.dart';
 import '../model/logindata.dart';
@@ -14,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     GlobalKey<FormState> formKey = GlobalKey();
     final loginData = LoginData();
+    final user; 
 
     return Scaffold(
         body: SafeArea(
@@ -23,25 +25,67 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               CustomFormField(
-                  labelText: 'Naam school', loginValue: loginData.school),
+                  labelText: 'Naam school', saveValue: loginData.setSchool),
               CustomFormField(
-                  labelText: 'Login naam', loginValue: loginData.login),
+                  labelText: 'Login naam', saveValue: loginData.setLogin),
               CustomFormField(
-                  labelText: 'Password', loginValue: loginData.password),
+                  labelText: 'Password', saveValue: loginData.setPassword),
             ],
           )),
       ElevatedButton(
           onPressed: () {
             final form = formKey.currentState!;
-            form.validate();
-            form.save();
-            loginData.saveTest();
-            print(loginData.password);
+            if (form.validate()) {
+              form.save();
+              loginData.saveTest();
+              print(loginData.login +
+                  ' ' +
+                  loginData.school +
+                  ' ' +
+                  loginData.password);
+              loginHandler(loginData);
+            }
           },
           child: Text('Log in'))
     ])));
   }
 
+  loginHandler(LoginData loginData) {
+    if (loginData.attemptLogin(loginData)) {
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Inlogpoging succesvol'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushReplacementNamed('/select');
+              },
+            )
+          ],
+        ),
+      );
+    } else {
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Inlogpoging succesvol'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushReplacementNamed('/select');
+              },
+            )
+          ],
+        ),
+      );
+    }
+  }
+}
   // return Scaffold(
   //     body: Container(
   //         decoration: const BoxDecoration(
@@ -92,30 +136,30 @@ class _LoginScreenState extends State<LoginScreen> {
   //           }));
   // }
 
-  Widget customFormField(String value, String labeltext) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
-          child: TextFormField(
-            //padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            decoration: InputDecoration(
-              labelText: 'Naam school',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Invoer vereist';
-              } else {}
-            },
-            onSaved: (val) => setState(() => value = val.toString()),
-          ),
-        ),
-      ),
-    );
-  }
-}
+  // Widget customFormField(String value, String labeltext) {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(20.0),
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         color: Colors.grey[200],
+  //         borderRadius: BorderRadius.circular(10.0),
+  //       ),
+  //       child: Padding(
+  //         padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
+  //         child: TextFormField(
+  //           //padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  //           decoration: InputDecoration(
+  //             labelText: 'Naam school',
+  //           ),
+  //           validator: (value) {
+  //             if (value == null || value.isEmpty) {
+  //               return 'Invoer vereist';
+  //             } else {}
+  //           },
+  //           onSaved: (val) => setState(() => value = val.toString()),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+// }

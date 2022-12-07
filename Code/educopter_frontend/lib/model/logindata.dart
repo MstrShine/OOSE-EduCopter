@@ -5,14 +5,24 @@ class LoginData {
 
   LoginData({this.login = '', this.password = '', this.school = ''});
 
-  attemptLogin(LoginData loginData) {}
+  bool attemptLogin(LoginData loginData) {
+    return true;
+  }
 
   saveTest() {
     //loginHandler('Roos', 'Lanteerne', 'kat123');
     print('ik ben nu data aan het saven');
   }
 
-  set setLogin(String loginnaam) {
+  void setLogin(String loginnaam) {
     login = loginnaam;
+  }
+
+  void setSchool(String schoolnaam) {
+    school = schoolnaam;
+  }
+
+  void setPassword(String password) {
+    this.password = password;
   }
 }
