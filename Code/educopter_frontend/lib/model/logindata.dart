@@ -25,4 +25,14 @@ class LoginData {
   void setPassword(String password) {
     this.password = password;
   }
+
+  Map getUser() {
+    return {
+      'token': 'p@ssword',
+      'id': 12345,
+      'rol': 'teacher',
+      'naam': 'Roos',
+      'school': 'Lanteerne'
+    };
+  }
 }

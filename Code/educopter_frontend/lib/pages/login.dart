@@ -11,43 +11,53 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  
+  GlobalKey<FormState> formKey = GlobalKey();
+    final loginData = LoginData();
+  
+
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formKey = GlobalKey();
-    final loginData = LoginData();
-    final user; 
+    final user;
 
     return Scaffold(
-        body: SafeArea(
-            child: Column(children: [
-      Form(
-          key: formKey,
-          child: Column(
-            children: [
-              CustomFormField(
-                  labelText: 'Naam school', saveValue: loginData.setSchool),
-              CustomFormField(
-                  labelText: 'Login naam', saveValue: loginData.setLogin),
-              CustomFormField(
-                  labelText: 'Password', saveValue: loginData.setPassword),
-            ],
-          )),
-      ElevatedButton(
-          onPressed: () {
-            final form = formKey.currentState!;
-            if (form.validate()) {
-              form.save();
-              loginData.saveTest();
-              print(loginData.login +
-                  ' ' +
-                  loginData.school +
-                  ' ' +
-                  loginData.password);
-              loginHandler(loginData);
-            }
-          },
-          child: Text('Log in'))
-    ])));
+      body: SafeArea(
+        child: Column(
+          children: [
+            Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    CustomFormField(
+                        labelText: 'Naam school',
+                        saveValue: loginData.setSchool),
+                    CustomFormField(
+                        labelText: 'Login naam', saveValue: loginData.setLogin),
+                    CustomFormField(
+                        labelText: 'Password',
+                        saveValue: loginData.setPassword),
+                  ],
+                )),
+            ElevatedButton(
+              onPressed: () {
+                final form = formKey.currentState!;
+                if (form.validate()) {
+                  form.save();
+                  loginData.saveTest();
+                  print(loginData.login +
+                      ' ' +
+                      loginData.school +
+                      ' ' +
+                      loginData.password);
+                  loginHandler(loginData);
+                }
+              },
+              child: Text('Log in'),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   loginHandler(LoginData loginData) {
@@ -61,7 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text('OK'),
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.of(context).pushReplacementNamed('/select');
+                Map userdata = loginData.getUser();
+                Navigator.of(context)
+                    .pushReplacementNamed('/select', arguments: userdata);
               },
             )
           ],
