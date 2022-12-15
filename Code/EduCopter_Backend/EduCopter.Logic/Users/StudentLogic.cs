@@ -15,22 +15,22 @@ namespace EduCopter.Logic.Users
         {
         }
 
-        public override void Delete(Guid id)
+        public override Task Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override Student Get(Guid id)
+        public override Task<Student> Get(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override List<Student> GetAll()
+        public override Task<List<Student>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public override Student SaveOrUpdate(Student entity)
+        public override Task<Student> SaveOrUpdate(Student entity)
         {
             throw new NotImplementedException();
         }

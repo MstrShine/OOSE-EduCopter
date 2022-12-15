@@ -5,7 +5,7 @@ using EduCopter.Persistency.DataBase.Repository.Interfaces;
 
 namespace EduCopter.Logic
 {
-    public abstract class BaseEntityLogic<E, EF> : IEntityLogic<E, EF> where E : Entity where EF : EFEntity
+    public abstract class BaseEntityLogic<E, EF> : IEntityLogic<E> where E : Entity where EF : EFEntity
     {
         protected readonly IEntityRepository<EF> _repository;
 
@@ -14,13 +14,13 @@ namespace EduCopter.Logic
             _repository = repository;
         }
 
-        public abstract void Delete(Guid id);
+        public abstract Task Delete(Guid id);
 
-        public abstract E Get(Guid id);
+        public abstract Task<E> Get(Guid id);
 
-        public abstract List<E> GetAll();
+        public abstract Task<List<E>> GetAll();
 
-        public abstract E SaveOrUpdate(E entity);
+        public abstract Task<E> SaveOrUpdate(E entity);
 
         protected abstract E Convert(EF entity);
 

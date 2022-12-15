@@ -3,14 +3,14 @@ using EduCopter.Persistency.DataBase.Domain;
 
 namespace EduCopter.Logic.Interfaces
 {
-    public interface IEntityLogic<E, EF> where E : Entity where EF : EFEntity
+    public interface IEntityLogic<E> where E : Entity
     {
-        List<E> GetAll();
+        Task<List<E>> GetAll();
 
-        E Get(Guid id);
+        Task<E> Get(Guid id);
 
-        E SaveOrUpdate(E entity);
+        Task<E> SaveOrUpdate(E entity);
 
-        void Delete(Guid id);
+        Task Delete(Guid id);
     }
 }
