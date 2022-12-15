@@ -17,7 +17,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
+      padding: const EdgeInsets.all(3.0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.grey[200],

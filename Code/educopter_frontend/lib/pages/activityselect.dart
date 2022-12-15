@@ -50,8 +50,116 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
         children: [
           CreateTeacherOptions(userData: userData),
           CreateMissionList(availableMissions: availableMissions),
+          CreateAvailableWorldmapList(availableWorldmaps: availableWorldmaps),
         ],
       ),
+    );
+  }
+}
+
+class CreateAvailableWorldmapList extends StatefulWidget {
+  const CreateAvailableWorldmapList(
+      {super.key, required this.availableWorldmaps});
+
+  final List<Worldmap> availableWorldmaps;
+
+  @override
+  State<CreateAvailableWorldmapList> createState() =>
+      _CreateAvailableWorldmapListState();
+}
+
+class _CreateAvailableWorldmapListState
+    extends State<CreateAvailableWorldmapList> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.amber,
+          alignment: FractionalOffset.center,
+          child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                child: Text('Oneindige speelmodus'),
+              ),
+              Text(
+                  'Bezoek zoveel mogelijk steden voordat je brandstof opraakt!'),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                child: Column(
+                  children: [
+                    ConstrainedBox(
+                      constraints:
+                          BoxConstraints(maxWidth: 340, maxHeight: 170),
+                      child: Scrollbar(
+                        child: ListView.builder(
+                          itemCount: widget.availableWorldmaps.length,
+                          itemBuilder: ((context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                selectedIndex = index;
+                                setState(() {
+                                  selectedIndex = index;
+                                });
+                                setState(() {
+                                  selectedIndex = index;
+                                });
+                              },
+                              child: Container(
+                                color: (index % 2 == 0)
+                                    ? Colors.lightBlueAccent[400]
+                                    : Colors.lightBlueAccent[200],
+                                height: 40,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      Text(widget
+                                          .availableWorldmaps[index].mapName),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                child: Column(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    SizedBox(height: 30),
+                    Container(
+                        color: Colors.blueAccent,
+                        child: ConstrainedBox(
+                            constraints:
+                                BoxConstraints(maxWidth: 340, maxHeight: 170),
+                            child: Text(widget.availableWorldmaps[selectedIndex]
+                                .mapLocation)))
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -74,7 +182,10 @@ class CreateTeacherOptions extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: (() {}),
+                    onPressed: (() {
+                      Navigator.of(context)
+                          .pushReplacementNamed('/createmission');
+                    }),
                     child: Text('Create mission'),
                   ),
                   ElevatedButton(
@@ -87,7 +198,7 @@ class CreateTeacherOptions extends StatelessWidget {
   }
 }
 
-class CreateMissionList extends StatelessWidget {
+class CreateMissionList extends StatefulWidget {
   const CreateMissionList({
     Key? key,
     required this.availableMissions,
@@ -96,33 +207,65 @@ class CreateMissionList extends StatelessWidget {
   final List<Mission> availableMissions;
 
   @override
+  State<CreateMissionList> createState() => _CreateMissionListState();
+}
+
+class _CreateMissionListState extends State<CreateMissionList> {
+  int selectedIndex = -1;
+
+  @override
   Widget build(BuildContext context) {
+    print('de selectedindex is $selectedIndex');
+
     return Column(
       children: [
         Container(
           color: Colors.amber,
           alignment: FractionalOffset.center,
-          child: Text('Missies'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              Text('Missies'),
+              ElevatedButton(
+                  onPressed: (() {
+                    //start geselecteerde missie
+                  }),
+                  child: Text('Start missie'))
+            ],
+          ),
         ),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 340, maxHeight: 170),
           child: Scrollbar(
             child: ListView.builder(
-              itemCount: availableMissions.length,
+              itemCount: widget.availableMissions.length,
               itemBuilder: ((context, index) {
-                return Container(
-                  color: (index % 2 == 0)
-                      ? Colors.lightBlueAccent[400]
-                      : Colors.lightBlueAccent[200],
-                  height: 40,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Row(
-                      children: [
-                        Text(availableMissions[index].mapName),
-                        SizedBox(width: 10),
-                        Text(availableMissions[index].missionDescription),
-                      ],
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = index;
+                      print('ik heb nu de index veranderd naar $selectedIndex');
+                    });
+                  },
+                  child: Container(
+                    color: (index == selectedIndex)
+                        ? Colors.red
+                        : (index % 2 == 0)
+                            ? Colors.lightBlueAccent[400]
+                            : Colors.lightBlueAccent[200],
+                    height: 40,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Row(
+                        children: [
+                          Text(widget.availableMissions[index].mapName),
+                          SizedBox(width: 10),
+                          Text(widget
+                              .availableMissions[index].missionDescription),
+                          Text(index.toString()),
+                        ],
+                      ),
                     ),
                   ),
                 );
