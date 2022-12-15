@@ -2,7 +2,7 @@
 
 namespace EduCopter.Persistency.DataBase.Providers
 {
-    public interface IEntityProvider<EF> where EF : EFEntity
+    public interface IEFEntityProvider<EF> where EF : EFEntity
     {
         Task<List<EF>> GetAll();
 

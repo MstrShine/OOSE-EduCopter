@@ -3,7 +3,7 @@ using EduCopter.Persistency.DataBase.Providers;
 
 namespace EduCopter.Persistency.DataBase.Repository.Interfaces
 {
-    public interface IEntityRepositorySession<EF> : IDisposable, IEntityProvider<EF> where EF : EFEntity
+    public interface IEntityRepositorySession<EF> : IDisposable, IEFEntityProvider<EF> where EF : EFEntity
     {
     }
 }
