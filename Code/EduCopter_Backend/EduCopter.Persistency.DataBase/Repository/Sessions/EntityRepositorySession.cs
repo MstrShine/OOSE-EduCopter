@@ -1,16 +1,10 @@
-﻿using EduCopter.Domain;
-using EduCopter.Persistency.DataBase.Domain;
+﻿using EduCopter.Persistency.DataBase.Domain;
 using EduCopter.Persistency.DataBase.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Persistency.DataBase.Repository.Sessions
 {
-    public abstract class EntityRepositorySession<E, EF> : IEntityRepositorySession<E> where E : Entity, new() where EF : EFEntity<E, EF>, new()
+    public abstract class EntityRepositorySession<EF> : IEntityRepositorySession<EF> where EF : EFEntity, new()
     {
         protected readonly EduCopterContext _context;
         protected abstract DbSet<EF> Table { get; }
@@ -24,48 +18,48 @@ namespace EduCopter.Persistency.DataBase.Repository.Sessions
 
         public virtual async Task Delete(Guid id)
         {
-            if(id == Guid.Empty)
+            if (id == Guid.Empty)
                 throw new ArgumentNullException(nameof(id));
 
             var e = await Get(id);
 
             if (e == null)
-                throw new ArgumentOutOfRangeException($"Could not find entity in table {typeof(E)} with id {id}");
+                throw new ArgumentOutOfRangeException($"Could not find entity in table {typeof(EF)} with id {id}");
 
-            Table.Remove(new EF().FromDomain(e));
+            Table.Remove(new EF());
             await _context.SaveChangesAsync();
         }
 
-        public virtual async Task<E> Get(Guid id)
+        public virtual async Task<EF> Get(Guid id)
         {
             if (id == Guid.Empty)
                 throw new ArgumentNullException(nameof(id));
 
             var entity = await Table.FirstOrDefaultAsync(x => x.Id == id);
 
-            return entity?.ToDomain();
+            return entity;
         }
 
-        public virtual async Task<List<E>> GetAll()
+        public virtual async Task<List<EF>> GetAll()
         {
             var entities = await Table.ToListAsync();
 
-            return entities.Select(x => x.ToDomain()).ToList();
+            return entities;
         }
 
-        public virtual async Task<E> SaveOrUpdate(E entity)
+        public virtual async Task<EF> SaveOrUpdate(EF entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if(entity.Id == Guid.Empty)
+            if (entity.Id == Guid.Empty)
             {
                 entity.Id = Guid.NewGuid();
-                await Table.AddAsync(new EF().FromDomain(entity));
+                await Table.AddAsync(new EF());
             }
             else
             {
-                Table.Update(new EF().FromDomain(entity));
+                Table.Update(new EF());
             }
 
             await _context.SaveChangesAsync();

@@ -1,19 +1,14 @@
-﻿using EduCopter.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EduCopter.Persistency.DataBase.Domain;
 
 namespace EduCopter.Persistency.DataBase.Providers
 {
-    public interface IEntityProvider<E> where E : Entity
+    public interface IEntityProvider<EF> where EF : EFEntity
     {
-        Task<List<E>> GetAll();
+        Task<List<EF>> GetAll();
 
-        Task<E> Get(Guid id);
+        Task<EF> Get(Guid id);
 
-        Task<E> SaveOrUpdate(E entity);
+        Task<EF> SaveOrUpdate(EF entity);
 
         Task Delete(Guid id);
     }

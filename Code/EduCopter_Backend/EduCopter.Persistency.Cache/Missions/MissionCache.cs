@@ -1,11 +1,6 @@
 ﻿using EduCopter.Domain.Mission;
 using EduCopter.Persistency.Cache.Models;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Persistency.Cache.Missions
 {
@@ -35,11 +30,11 @@ namespace EduCopter.Persistency.Cache.Missions
 
         public Task<Mission> Get(Guid id)
         {
-            if(_Cache.TryGetValue(id, out var cached)) 
+            if (_Cache.TryGetValue(id, out var cached))
             {
                 return Task.FromResult(cached.Mission);
             }
-            
+
             throw new KeyNotFoundException();
         }
     }

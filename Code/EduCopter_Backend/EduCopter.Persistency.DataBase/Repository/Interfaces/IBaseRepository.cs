@@ -1,13 +1,8 @@
-﻿using EduCopter.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EduCopter.Persistency.DataBase.Domain;
 
 namespace EduCopter.Persistency.DataBase.Repository.Interfaces
 {
-    public interface IBaseRepository<S, E> where S : IEntityRepositorySession<E> where E : Entity
+    public interface IBaseRepository<S, EF> where S : IEntityRepositorySession<EF> where EF : EFEntity
     {
         S CreateSession();
     }

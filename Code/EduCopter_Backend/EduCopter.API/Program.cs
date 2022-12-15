@@ -1,6 +1,4 @@
-using EduCopter.Persistency.DataBase;
 using EduCopter.Persistency.DataBase.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace EduCopter.API
 {

@@ -1,8 +1,6 @@
-﻿using EduCopter.Domain.Users;
-using EduCopter.Persistency.DataBase.Domain.Users;
+﻿using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace EduCopter.Persistency.DataBase

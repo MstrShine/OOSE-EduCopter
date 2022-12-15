@@ -1,9 +1,4 @@
 ﻿using EduCopter.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Domain
 {
@@ -11,7 +6,7 @@ namespace EduCopter.Domain
     {
         public string Name { get; set; }
 
-        public List<Student> Students { get; set; } = new(); 
+        public List<Student> Students { get; set; } = new();
 
         public Teacher Teacher { get; set; }
 
