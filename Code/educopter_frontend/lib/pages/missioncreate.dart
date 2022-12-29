@@ -105,6 +105,15 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                               child: CustomFormField(
                                   labelText: 'Maximum aantal inwoners',
                                   saveValue: setMaxPopulationFilter)),
+                          ElevatedButton(
+                            onPressed: () {
+                              final form = formKey.currentState!;
+                              if (form.validate()) {
+                                form.save();
+                              }
+                            },
+                            child: Text('Filter steden'),
+                          )
                         ],
                       ),
                     )
@@ -118,7 +127,9 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
     );
   }
 
-  setMinPopulationFilter(var value) {}
+  setMinPopulationFilter(var value) {
+    minPopulationFilter = value;
+  }
 
   setMaxPopulationFilter(var value) {}
 
