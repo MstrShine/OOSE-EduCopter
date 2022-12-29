@@ -1,3 +1,4 @@
+import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
 import 'package:educopter_frontend/pages/missioncreate.dart';
 import 'package:flutter/material.dart';
 import '../helperwidgets/customformfield.dart';
@@ -20,38 +21,43 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  CustomFormField(
-                      labelText: 'Naam school', saveValue: loginData.setSchool),
-                  CustomFormField(
-                      labelText: 'Login naam', saveValue: loginData.setLogin),
-                  CustomFormField(
-                      labelText: 'Password', saveValue: loginData.setPassword),
-                ],
-              ),
+        child: Center(
+          child: MaxContentWidth(
+            widthConstraint: 700,
+            childWidget: Column(
+              children: [
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomFormField(
+                          labelText: 'Naam school', saveValue: loginData.setSchool),
+                      CustomFormField(
+                          labelText: 'Login naam', saveValue: loginData.setLogin),
+                      CustomFormField(
+                          labelText: 'Password', saveValue: loginData.setPassword),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    final form = formKey.currentState!;
+                    if (form.validate()) {
+                      form.save();
+                      loginData.saveTest();
+                      print(loginData.login +
+                          ' ' +
+                          loginData.school +
+                          ' ' +
+                          loginData.password);
+                      loginHandler(loginData);
+                    }
+                  },
+                  child: Text('Log in'),
+                )
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                final form = formKey.currentState!;
-                if (form.validate()) {
-                  form.save();
-                  loginData.saveTest();
-                  print(loginData.login +
-                      ' ' +
-                      loginData.school +
-                      ' ' +
-                      loginData.password);
-                  loginHandler(loginData);
-                }
-              },
-              child: Text('Log in'),
-            )
-          ],
+          ),
         ),
       ),
     );

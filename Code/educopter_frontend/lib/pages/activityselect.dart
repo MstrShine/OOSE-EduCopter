@@ -1,3 +1,4 @@
+import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
 import 'package:flutter/material.dart';
 import '../model/mission.dart';
 import '../model/worldmap.dart';
@@ -46,12 +47,18 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
         title: Text('Welkom ' + userData['naam']),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          CreateTeacherOptions(userData: userData),
-          CreateMissionList(availableMissions: availableMissions),
-          CreateAvailableWorldmapList(availableWorldmaps: availableWorldmaps),
-        ],
+      body: Center(
+        child: MaxContentWidth(
+          widthConstraint: 700,
+          childWidget: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CreateTeacherOptions(userData: userData),
+              CreateMissionList(availableMissions: availableMissions),
+              CreateAvailableWorldmapList(availableWorldmaps: availableWorldmaps),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -150,7 +157,7 @@ class _CreateAvailableWorldmapListState
                         color: Colors.blueAccent,
                         child: ConstrainedBox(
                             constraints:
-                                BoxConstraints(maxWidth: 340, maxHeight: 170),
+                                BoxConstraints(maxWidth: 340, maxHeight: 270),
                             child: Text(widget.availableWorldmaps[selectedIndex]
                                 .mapLocation)))
                   ],
@@ -236,7 +243,7 @@ class _CreateMissionListState extends State<CreateMissionList> {
           ),
         ),
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 340, maxHeight: 170),
+          constraints: BoxConstraints(maxWidth: 340, maxHeight: 270),
           child: Scrollbar(
             child: ListView.builder(
               itemCount: widget.availableMissions.length,
