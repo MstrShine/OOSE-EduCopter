@@ -5,9 +5,13 @@ import '../pages/login.dart';
 class CustomFormField extends StatefulWidget {
   final String labelText;
   Function saveValue;
+  bool numOnly;
 
   CustomFormField(
-      {super.key, required this.labelText, required this.saveValue});
+      {super.key,
+      required this.labelText,
+      required this.saveValue,
+      this.numOnly = false});
 
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
@@ -33,7 +37,14 @@ class _CustomFormFieldState extends State<CustomFormField> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Invoer vereist';
-              } else {}
+              } else if (widget.numOnly) {
+                //print('check nu of widget numonly is');
+                if (int.tryParse(value) == null) {
+                  return 'Alleen cijfers';
+                }
+              } else {
+                //return 'Geen probleem';
+              }
             },
             onSaved: (val) =>
                 //setState(() => loginData.setLogin(val.toString()) ),

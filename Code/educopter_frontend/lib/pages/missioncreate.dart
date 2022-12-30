@@ -52,6 +52,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                     ConstrainedBox(
                       constraints: BoxConstraints(maxWidth: 200),
                       child: CustomFormField(
+                          numOnly: true,
                           labelText: 'Aantal Steden',
                           saveValue: setDestinationCount),
                     ),
@@ -96,20 +97,24 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           BoxConstraints(maxWidth: 1400, minWidth: 500),
                       child: Row(
                         children: [
-                          //Text('Aantal inwoners'),
                           Expanded(
-                              child: CustomFormField(
-                                  labelText: 'Minimum aantal inwoners',
-                                  saveValue: setMinPopulationFilter)),
+                            child: CustomFormField(
+                                numOnly: true,
+                                labelText: 'Minimum aantal inwoners',
+                                saveValue: setMinPopulationFilter),
+                          ),
                           Expanded(
-                              child: CustomFormField(
-                                  labelText: 'Maximum aantal inwoners',
-                                  saveValue: setMaxPopulationFilter)),
+                            child: CustomFormField(
+                                numOnly: true,
+                                labelText: 'Maximum aantal inwoners',
+                                saveValue: setMaxPopulationFilter),
+                          ),
                           ElevatedButton(
                             onPressed: () {
                               final form = formKey.currentState!;
                               if (form.validate()) {
                                 form.save();
+                                print('Formulier gevalideerd ik save');
                               }
                             },
                             child: Text('Filter steden'),
@@ -128,10 +133,12 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   }
 
   setMinPopulationFilter(var value) {
-    minPopulationFilter = value;
+    minPopulationFilter = int.tryParse(value)!;
   }
 
-  setMaxPopulationFilter(var value) {}
+  setMaxPopulationFilter(var value) {
+    maxPopulationFilter = int.tryParse(value)!;
+  }
 
   setMissionName(var value) {
     missionName = value;
@@ -142,6 +149,6 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   }
 
   setDestinationCount(var value) {
-    destinationCount = value;
+    destinationCount = int.tryParse(value)!;
   }
 }
