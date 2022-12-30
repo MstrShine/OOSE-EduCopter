@@ -2,6 +2,7 @@ import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
 import 'package:flutter/material.dart';
 
 import '../helperwidgets/customformfield.dart';
+import '../model/worldmap.dart';
 
 class MissionCreateScreen extends StatefulWidget {
   const MissionCreateScreen({super.key});
@@ -12,6 +13,15 @@ class MissionCreateScreen extends StatefulWidget {
 
 class _MissionCreateScreenState extends State<MissionCreateScreen> {
   GlobalKey<FormState> formKey = GlobalKey();
+
+  final List<Worldmap> availableWorldmaps = [
+    Worldmap(mapId: 1, mapName: 'Nederland', mapLocation: 'Netherlands.svg'),
+    Worldmap(mapId: 2, mapName: 'Duitsland', mapLocation: 'Duitsland.svg'),
+    Worldmap(mapId: 3, mapName: 'Europa', mapLocation: 'Europa.svg'),
+    Worldmap(mapId: 4, mapName: 'Zweden', mapLocation: 'Zweden.svg'),
+    Worldmap(mapId: 5, mapName: 'Verenigde Staten', mapLocation: 'VS.svg'),
+  ];
+  String dropdownvalue = 'Kies een kaart';
 
   String missionName = '';
   String missionNameDisplayed = '';
@@ -118,10 +128,20 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                               }
                             },
                             child: Text('Filter steden'),
-                          )
+                          ),
                         ],
                       ),
-                    )
+                    ),
+                    DropdownButton(
+                        value: dropdownvalue,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: availableWorldmaps.map((Worldmap map) {
+                          return DropdownMenuItem(
+                            value: map,
+                            child: Text(map.mapName),
+                          );
+                        }).toList(),
+                        onChanged: (value) {}),
                   ],
                 ),
               ),
