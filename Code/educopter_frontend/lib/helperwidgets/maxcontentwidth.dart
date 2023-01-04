@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class MaxContentWidth extends StatelessWidget {
-  MaxContentWidth(
+  const MaxContentWidth(
       {super.key, required this.childWidget, required this.widthConstraint});
 
   final Widget childWidget;

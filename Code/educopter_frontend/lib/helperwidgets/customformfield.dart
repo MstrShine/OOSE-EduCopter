@@ -1,13 +1,11 @@
-import 'package:educopter_frontend/model/logindata.dart';
 import 'package:flutter/material.dart';
-import '../pages/login.dart';
 
 class CustomFormField extends StatefulWidget {
   final String labelText;
-  Function saveValue;
-  bool numOnly;
+  final Function saveValue;
+  final bool numOnly;
 
-  CustomFormField(
+  const CustomFormField(
       {super.key,
       required this.labelText,
       required this.saveValue,
@@ -43,7 +41,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
                   return 'Alleen cijfers';
                 }
               } else {
-                //return 'Geen probleem';
+                  //return 'Geen probleem';
               }
             },
             onSaved: (val) =>

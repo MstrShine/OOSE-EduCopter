@@ -21,7 +21,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
     Worldmap(mapId: 4, mapName: 'Zweden', mapLocation: 'Zweden.svg'),
     Worldmap(mapId: 5, mapName: 'Verenigde Staten', mapLocation: 'VS.svg'),
   ];
-  String dropdownvalue = 'Kies een kaart';
+  String dropdownvalue = '';
 
   String missionName = '';
   String missionNameDisplayed = '';
@@ -35,8 +35,16 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
   bool fixedRoute = false;
 
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dropdownvalue = availableWorldmaps.first.mapName;
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -133,15 +141,20 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                       ),
                     ),
                     DropdownButton(
-                        value: dropdownvalue,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: availableWorldmaps.map((Worldmap map) {
-                          return DropdownMenuItem(
-                            value: map,
-                            child: Text(map.mapName),
-                          );
-                        }).toList(),
-                        onChanged: (value) {}),
+                      value: dropdownvalue,
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                      items: availableWorldmaps.map((Worldmap map) {
+                        return DropdownMenuItem(
+                          value: map.mapName,
+                          child: Text(map.mapName),
+                        );
+                      }).toList(),
+                      onChanged: (String? selectedValue) {
+                        setState(() {
+                          dropdownvalue = selectedValue!;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
