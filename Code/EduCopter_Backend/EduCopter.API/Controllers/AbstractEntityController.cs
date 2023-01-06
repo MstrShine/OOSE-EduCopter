@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain;
+using EduCopter.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduCopter.API.Controllers
@@ -8,68 +9,90 @@ namespace EduCopter.API.Controllers
     /// </summary>
     public abstract class AbstractEntityController<E> : ControllerBase where E : Entity, new()
     {
-        //protected readonly IEntityRepository<E> _repository;
+        protected readonly IEntityLogic<E> _logic;
 
-        //public AbstractEntityController(IEntityRepository<E> repository)
-        //{
-        //    _repository = repository;
-        //}
+        public AbstractEntityController(IEntityLogic<E> logic)
+        {
+            _logic = logic;
+        }
 
-        //[HttpGet]
-        //public virtual async Task<IActionResult> GetAll()
-        //{
-        //    List<E> e;
-        //    using (var session = _repository.CreateSession())
-        //    {
-        //        e = await session.GetAll();
-        //    }
+        [HttpGet]
+        public virtual async Task<List<E>> GetAll()
+        {
+            List<E> eList = null;
+            try
+            {
+                eList = await _logic.GetAll();
+            }
+            catch (Exception ex)
+            {
 
-        //    return Ok();
-        //}
+            }
 
-        //[HttpGet("{id}")]
-        //public virtual async Task<IActionResult> Get(Guid id)
-        //{
-        //    E entity;
-        //    using (var session = _repository.CreateSession())
-        //    {
-        //        entity = await session.Get(id);
-        //    }
+            return eList;
+        }
 
-        //    return Ok(entity);
-        //}
+        [HttpGet("{id}")]
+        public virtual async Task<E> Get(Guid id)
+        {
+            E e = null;
+            try
+            {
+                e = await _logic.Get(id);
+            }
+            catch (Exception ex)
+            {
 
-        //[HttpPost]
-        //public virtual async Task<IActionResult> Post(E entity)
-        //{
-        //    using (var session = _repository.CreateSession())
-        //    {
-        //        entity = await session.SaveOrUpdate(entity);
-        //    }
+            }
 
-        //    return Ok(entity);
-        //}
+            return e;
+        }
 
-        //[HttpPut("{id}")]
-        //public virtual async Task<IActionResult> Put(Guid id, E entity)
-        //{
-        //    using (var session = _repository.CreateSession())
-        //    {
-        //        entity = await session.SaveOrUpdate(entity);
-        //    }
+        [HttpPost]
+        public virtual async Task<E> Post(E entity)
+        {
+            E e = null;
+            try
+            {
+                e = await _logic.SaveOrUpdate(entity);
+            }
+            catch (Exception ex)
+            {
 
-        //    return Ok(entity);
-        //}
+            }
 
-        //[HttpDelete("{id}")]
-        //public virtual async Task<IActionResult> Delete(Guid id)
-        //{
-        //    using (var session = _repository.CreateSession())
-        //    {
-        //        await session.Delete(id);
-        //    }
+            return e;
+        }
 
-        //    return Ok();
-        //}
+        [HttpPut("{id}")]
+        public virtual async Task<E> Put(Guid id, E entity)
+        {
+            E e = null;
+            try
+            {
+                e = await _logic.SaveOrUpdate(entity);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return e;
+        }
+
+        [HttpDelete("{id}")]
+        public virtual async Task Delete(Guid id)
+        {
+            try
+            {
+                await _logic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return;
+        }
     }
 }

@@ -5,7 +5,7 @@ using EduCopter.Persistency.DataBase.Repository.Interfaces;
 
 namespace EduCopter.Logic
 {
-    public abstract class BaseEntityLogic<E, EF> : IEntityLogic<E, EF> where E : Entity where EF : EFEntity
+    public abstract class BaseEntityLogic<E, EF> : IEntityLogic<E> where E : Entity where EF : EFEntity
     {
         protected readonly IEntityRepository<EF> _repository;
 
@@ -14,13 +14,49 @@ namespace EduCopter.Logic
             _repository = repository;
         }
 
-        public abstract void Delete(Guid id);
+        public virtual async Task<E> Get(Guid id)
+        {
+            E entity;
+            using (var session = _repository.CreateSession())
+            {
+                var efEntity = await session.Get(id);
+                entity = Convert(efEntity);
+            }
 
-        public abstract E Get(Guid id);
+            return entity;
+        }
 
-        public abstract List<E> GetAll();
+        public virtual async Task<List<E>> GetAll()
+        {
+            List<E> entityList;
+            using (var session = _repository.CreateSession())
+            {
+                var efList = await session.GetAll();
+                entityList = efList.Select(x => Convert(x)).ToList();
+            }
 
-        public abstract E SaveOrUpdate(E entity);
+            return entityList;
+        }
+
+        public virtual async Task<E> SaveOrUpdate(E entity)
+        {
+            E updatedEntity;
+            using (var session = _repository.CreateSession())
+            {
+                var efEntity = await session.SaveOrUpdate(Convert(entity));
+                updatedEntity = Convert(efEntity);
+            }
+
+            return updatedEntity;
+        }
+
+        public virtual async Task Delete(Guid id)
+        {
+            using (var session = _repository.CreateSession())
+            {
+                await session.Delete(id);
+            }
+        }
 
         protected abstract E Convert(EF entity);
 

@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using EduCopter.Domain.Users;
+using EduCopter.Logic.Interfaces;
+using EduCopter.Logic.Users;
+using EduCopter.Persistency.DataBase.Domain.Users;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +15,8 @@ namespace EduCopter.Logic.Extensions
     {
         public static IServiceCollection AddLogic(this IServiceCollection services)
         {
+            services.AddScoped<IEntityLogic<Student>, StudentLogic>();
+
             return services;
         }
     }

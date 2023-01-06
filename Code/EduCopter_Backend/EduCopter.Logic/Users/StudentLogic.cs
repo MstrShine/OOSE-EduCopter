@@ -15,34 +15,20 @@ namespace EduCopter.Logic.Users
         {
         }
 
-        public override void Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Student Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override List<Student> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Student SaveOrUpdate(Student entity)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override Student Convert(EFStudent entity)
         {
-            throw new NotImplementedException();
+            return new Student()
+            {
+                Id = entity.Id,
+            };
         }
 
         protected override EFStudent Convert(Student entity)
         {
-            throw new NotImplementedException();
+            return new EFStudent()
+            {
+                Id = entity.Id
+            };
         }
     }
 }

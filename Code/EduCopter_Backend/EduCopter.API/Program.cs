@@ -1,3 +1,4 @@
+using EduCopter.Logic.Extensions;
 using EduCopter.Persistency.DataBase.Extensions;
 
 namespace EduCopter.API
@@ -12,6 +13,7 @@ namespace EduCopter.API
             #region Configure Services
             builder.Services.AddRepositories();
             builder.Services.AddDataBase();
+            builder.Services.AddLogic();
 
             builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             builder.Services.AddControllers();

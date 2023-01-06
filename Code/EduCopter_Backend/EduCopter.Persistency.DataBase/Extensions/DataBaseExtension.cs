@@ -1,5 +1,6 @@
 ﻿using EduCopter.Persistency.DataBase.Domain;
 using EduCopter.Persistency.DataBase.Domain.Users;
+using EduCopter.Persistency.DataBase.Repository;
 using EduCopter.Persistency.DataBase.Repository.Interfaces;
 using EduCopter.Persistency.DataBase.Repository.Sessions.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,7 @@ namespace EduCopter.Persistency.DataBase.Extensions
 
         private static IServiceCollection AddEntityRepository<EF>(this IServiceCollection services) where EF : EFEntity, new()
         {
-            //services.AddScoped<IEntityRepository<E>, EntityRepository<E>>();
+            services.AddScoped<IEntityRepository<EF>, EntityRepository<EF>>();
 
             return services;
         }

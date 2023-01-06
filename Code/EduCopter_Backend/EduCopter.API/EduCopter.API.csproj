@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EduCopter.Domain\EduCopter.Domain.csproj" />
+    <ProjectReference Include="..\EduCopter.Logic\EduCopter.Logic.csproj" />
     <ProjectReference Include="..\EduCopter.Persistency.DataBase\EduCopter.Persistency.DataBase.csproj" />
   </ItemGroup>
 
