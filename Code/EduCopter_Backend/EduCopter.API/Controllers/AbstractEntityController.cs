@@ -79,7 +79,7 @@ namespace EduCopter.API.Controllers
 
             return e;
         }
-
+        //    {
         [HttpDelete("{id}")]
         public virtual async Task Delete(Guid id)
         {
@@ -91,8 +91,14 @@ namespace EduCopter.API.Controllers
             {
 
             }
-
+        //public virtual async Task<IActionResult> Delete(Guid id)
             return;
         }
+        //    {
+        //        await session.Delete(id);
+        //    }
+
+        //    return Ok();
+        //}
     }
 }
