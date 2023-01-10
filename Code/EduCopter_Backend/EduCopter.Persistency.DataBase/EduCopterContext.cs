@@ -7,6 +7,7 @@ using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace EduCopter.Persistency.DataBase
 {
@@ -18,6 +19,13 @@ namespace EduCopter.Persistency.DataBase
         {
             _connectionString = configuration.GetConnectionString("EduCopterContext");
             DisableEntityTracking();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(EduCopterContext)));
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -40,6 +48,7 @@ namespace EduCopter.Persistency.DataBase
         public DbSet<EFCountry> Countries { get; set; }
         public DbSet<EFProvince> Provinces { get; set; }
         public DbSet<EFMission> Missions { get; set; }
+        public DbSet<EFStudentMission> StudentMissions { get; set; }
         public DbSet<EFMissionCity> MissionCities { get; set; }
         public DbSet<EFClass> Classes { get; set; }
         public DbSet<EFMap> Maps { get; set; }

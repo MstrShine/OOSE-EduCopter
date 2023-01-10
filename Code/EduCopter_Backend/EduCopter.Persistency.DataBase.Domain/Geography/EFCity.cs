@@ -14,7 +14,7 @@ namespace EduCopter.Domain.Geography
 
         public Guid ProvinceId { get; set; }
 
-        public virtual EFProvince Province { get; set; }
+        public EFProvince Province { get; set; }
 
         public List<EFMissionCity> MissionCities { get; set; }
 

@@ -20,13 +20,13 @@ namespace EduCopter.Persistency.DataBase.Domain.Users
 
         public Guid SchoolId { get; set; }
 
-        public virtual EFSchool School { get; set; }
+        public EFSchool School { get; set; }
 
         public Guid ClassId { get; set; }
 
-        public virtual EFClass Class { get; set; }
+        public EFClass Class { get; set; }
 
-        public List<EFMission> Missions { get; set; }
+        public List<EFStudentMission> StudentMissions { get; set; }
 
         public List<EFGame> Games { get; set; }
     }

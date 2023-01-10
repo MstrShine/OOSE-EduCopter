@@ -8,13 +8,9 @@ namespace EduCopter.Persistency.DataBase.Domain.School
     {
         public string Name { get; set; }
 
-        public Guid TeacherId { get; set; }
-
-        public virtual EFTeacher Teacher { get; set; }
-
         public Guid SchoolId { get; set; }
 
-        public virtual EFSchool School { get; set; }
+        public EFSchool School { get; set; }
 
         public List<EFStudent> Students { get; set; }
     }
