@@ -1,5 +1,4 @@
 import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
-import 'package:educopter_frontend/pages/missioncreate.dart';
 import 'package:flutter/material.dart';
 import '../helperwidgets/customformfield.dart';
 import '../model/logindata.dart';
@@ -45,11 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (form.validate()) {
                       form.save();
                       loginData.saveTest();
-                      print(loginData.login +
-                          ' ' +
-                          loginData.school +
-                          ' ' +
-                          loginData.password);
+                      print('Ik gebruik nu ${loginData.login} en ${loginData.school} en ${loginData.password}');
                       loginHandler(loginData);
                     }
                   },
