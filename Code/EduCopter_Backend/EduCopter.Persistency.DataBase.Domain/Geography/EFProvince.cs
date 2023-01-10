@@ -7,6 +7,8 @@ namespace EduCopter.Domain.Geography
 
         public Guid CountryId { get; set; }
 
+        public EFCountry Country { get; set; }
+
         public List<EFCity> Cities { get; set; } = new();
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EduCopter.Persistency.DataBase.Domain
+namespace EduCopter.Persistency.DataBase.Domain.School
 {
     public class EFSchool : EFEntity
     {

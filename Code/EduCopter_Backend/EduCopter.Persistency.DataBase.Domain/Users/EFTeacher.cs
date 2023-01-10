@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EduCopter.Persistency.DataBase.Domain.Mission;
+using EduCopter.Persistency.DataBase.Domain.School;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace EduCopter.Persistency.DataBase.Domain.Users
 {
     public class EFTeacher : EFEntity
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public string Password { get; set; }
 
@@ -20,6 +22,10 @@ namespace EduCopter.Persistency.DataBase.Domain.Users
 
         public Guid ClassId { get; set; }
 
+        public virtual EFClass Class { get; set; }
+
         public Guid SchoolId { get; set; }
+
+        public virtual EFSchool School { get; set; }
     }
 }

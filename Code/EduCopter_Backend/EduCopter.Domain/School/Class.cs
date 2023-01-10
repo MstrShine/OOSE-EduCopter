@@ -1,6 +1,6 @@
 ﻿using EduCopter.Domain.Users;
 
-namespace EduCopter.Domain
+namespace EduCopter.Domain.School
 {
     public class Class : Entity
     {

@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.Geography;
+using EduCopter.Persistency.DataBase.Domain.Geography;
 using EduCopter.Persistency.DataBase.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,14 @@ namespace EduCopter.Persistency.DataBase.Domain.Mission
     {
         public DateTime Date { get; set; }
 
-        public EFMap Map { get; set; }
+        public Guid MapId { get; set; }
 
-        public EFTeacher Teacher { get; set; }
+        public virtual EFMap Map { get; set; }
 
-        public List<EFCity> Cities { get; set; } = new();
+        public Guid TeacherId { get; set; }
+
+        public virtual EFTeacher Teacher { get; set; }
+
+        public virtual List<EFCity> Cities { get; set; } = new();
     }
 }

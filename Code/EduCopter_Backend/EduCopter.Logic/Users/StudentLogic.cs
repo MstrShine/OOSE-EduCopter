@@ -20,6 +20,13 @@ namespace EduCopter.Logic.Users
             return new Student()
             {
                 Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                Username = entity.Username,
+                Password = entity.Password,
+                Email = entity.Email,
+                ClassId = entity.ClassId,
+                SchoolId = entity.SchoolId
             };
         }
 
@@ -30,7 +37,7 @@ namespace EduCopter.Logic.Users
                 Id = entity.Id,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
-                UserName = entity.UserName,
+                Username = entity.Username,
                 Password = entity.Password,
                 Email = entity.Email,
                 ClassId = entity.ClassId,
