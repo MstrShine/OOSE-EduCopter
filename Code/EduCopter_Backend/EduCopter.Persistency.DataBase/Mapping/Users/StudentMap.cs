@@ -20,6 +20,8 @@ namespace EduCopter.Persistency.DataBase.Mapping.Users
 
             builder.HasOne(x => x.School).WithMany(x => x.Students).HasForeignKey(x => x.SchoolId);
             builder.HasOne(x => x.Class).WithMany(x => x.Students).HasForeignKey(x => x.ClassId);
+
+            builder.HasMany(x => x.Missions).WithMany(x => x.Students);
         }
     }
 }

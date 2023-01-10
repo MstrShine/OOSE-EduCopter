@@ -1,7 +1,11 @@
-﻿using EduCopter.Persistency.DataBase.Domain.School;
+﻿using EduCopter.Persistency.DataBase.Domain.Game;
+using EduCopter.Persistency.DataBase.Domain.Mission;
+using EduCopter.Persistency.DataBase.Domain.School;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Users
 {
+    [Table("Student")]
     public class EFStudent : EFEntity
     {
         public string Username { get; set; }
@@ -21,5 +25,9 @@ namespace EduCopter.Persistency.DataBase.Domain.Users
         public Guid ClassId { get; set; }
 
         public virtual EFClass Class { get; set; }
+
+        public List<EFMission> Missions { get; set; }
+
+        public List<EFGame> Games { get; set; }
     }
 }

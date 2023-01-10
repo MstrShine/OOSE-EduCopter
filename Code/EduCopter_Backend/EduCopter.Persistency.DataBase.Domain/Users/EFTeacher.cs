@@ -1,13 +1,9 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Mission;
-using EduCopter.Persistency.DataBase.Domain.School;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EduCopter.Persistency.DataBase.Domain.School;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Users
 {
+    [Table("Teacher")]
     public class EFTeacher : EFEntity
     {
         public string Username { get; set; }

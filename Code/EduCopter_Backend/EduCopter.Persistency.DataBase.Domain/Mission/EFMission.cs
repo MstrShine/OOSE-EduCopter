@@ -1,14 +1,11 @@
-﻿using EduCopter.Domain.Geography;
+﻿using EduCopter.Persistency.DataBase.Domain.Game;
 using EduCopter.Persistency.DataBase.Domain.Geography;
 using EduCopter.Persistency.DataBase.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Mission
 {
+    [Table("Mission")]
     public class EFMission : EFEntity
     {
         public DateTime Date { get; set; }
@@ -21,6 +18,10 @@ namespace EduCopter.Persistency.DataBase.Domain.Mission
 
         public virtual EFTeacher Teacher { get; set; }
 
-        public virtual List<EFCity> Cities { get; set; } = new();
+        public List<EFMissionCity> MissionCities { get; set; }
+
+        public List<EFStudent> Students { get; set; }
+
+        public List<EFGame> Games { get; set; }
     }
 }

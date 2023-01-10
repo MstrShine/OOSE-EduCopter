@@ -1,13 +1,9 @@
 ﻿using EduCopter.Persistency.DataBase.Domain.Mission;
-using EduCopter.Persistency.DataBase.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Geography
 {
+    [Table("Map")]
     public class EFMap : EFEntity
     {
         public string Name { get; set; }

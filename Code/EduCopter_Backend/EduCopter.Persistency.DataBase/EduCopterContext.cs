@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.Geography;
+using EduCopter.Persistency.DataBase.Domain.Game;
 using EduCopter.Persistency.DataBase.Domain.Geography;
 using EduCopter.Persistency.DataBase.Domain.Mission;
 using EduCopter.Persistency.DataBase.Domain.School;
@@ -39,9 +40,12 @@ namespace EduCopter.Persistency.DataBase
         public DbSet<EFCountry> Countries { get; set; }
         public DbSet<EFProvince> Provinces { get; set; }
         public DbSet<EFMission> Missions { get; set; }
+        public DbSet<EFMissionCity> MissionCities { get; set; }
         public DbSet<EFClass> Classes { get; set; }
         public DbSet<EFMap> Maps { get; set; }
         public DbSet<EFSchool> Schools { get; set; }
+        public DbSet<EFGame> Games { get; set; }
+        public DbSet<EFGameCity> GameCities { get; set; }
 
         #endregion
 

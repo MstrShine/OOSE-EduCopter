@@ -17,8 +17,6 @@ namespace EduCopter.Persistency.DataBase.Mapping.Mission
 
             builder.HasOne(x => x.Map).WithMany(x => x.Missions).HasForeignKey(x => x.MapId);
             builder.HasOne(x => x.Teacher).WithMany().HasForeignKey(x => x.TeacherId);
-
-            builder.HasMany(x => x.Cities).WithMany(x => x.Missions);
         }
     }
 }
