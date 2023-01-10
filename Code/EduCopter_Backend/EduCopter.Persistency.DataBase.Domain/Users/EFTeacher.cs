@@ -1,6 +1,12 @@
-﻿namespace EduCopter.Persistency.DataBase.Domain.Users
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EduCopter.Persistency.DataBase.Domain.Users
 {
-    public class EFStudent : EFEntity
+    public class EFTeacher : EFEntity
     {
         public string UserName { get; set; }
 
@@ -12,8 +18,8 @@
 
         public string LastName { get; set; }
 
-        public Guid SchoolId { get; set; }
-
         public Guid ClassId { get; set; }
+
+        public Guid SchoolId { get; set; }
     }
 }

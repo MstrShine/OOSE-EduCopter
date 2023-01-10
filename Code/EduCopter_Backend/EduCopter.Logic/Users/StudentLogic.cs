@@ -27,7 +27,14 @@ namespace EduCopter.Logic.Users
         {
             return new EFStudent()
             {
-                Id = entity.Id
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                UserName = entity.UserName,
+                Password = entity.Password,
+                Email = entity.Email,
+                ClassId = entity.ClassId,
+                SchoolId = entity.SchoolId
             };
         }
     }
