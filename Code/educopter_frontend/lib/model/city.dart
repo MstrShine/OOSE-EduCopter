@@ -1,6 +1,8 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../handlers/filterpattern.dart';
+
 class City {
   String country;
   String cityName;
@@ -34,7 +36,7 @@ Future<List> processCsv(context) async {
   //return listResult;
 
   //Map<String, dynamic> cityList = {};
-  List cities = [];
+  List<City> cities = [];
 
   for (int i = 0; i < listResult.length; i++) {
     cities.add(City(
@@ -46,7 +48,11 @@ Future<List> processCsv(context) async {
     ));
   }
   print(cities);
+  // List<City> cityResult = completeFilter.meetCriteria(cities);
+  // print(cityResult);
+
   return cities;
+  // return cityResult;
 }
 
 

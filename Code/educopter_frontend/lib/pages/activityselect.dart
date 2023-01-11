@@ -44,7 +44,7 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welkom userData["naam"]'),
+        title: Text('Welkom ${userData["naam"]}'),
         centerTitle: true,
       ),
       body: Center(
@@ -55,7 +55,8 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
             children: [
               CreateTeacherOptions(userData: userData),
               CreateMissionList(availableMissions: availableMissions),
-              CreateAvailableWorldmapList(availableWorldmaps: availableWorldmaps),
+              CreateAvailableWorldmapList(
+                  availableWorldmaps: availableWorldmaps),
             ],
           ),
         ),

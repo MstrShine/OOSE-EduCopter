@@ -1,3 +1,4 @@
+import 'package:educopter_frontend/handlers/filterpattern.dart';
 import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
 import 'package:educopter_frontend/model/city.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
   bool fixedRoute = false;
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -77,7 +78,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 200),
                           child: CustomFormField(
-                          numOnly: true,
+                              numOnly: true,
                               labelText: 'Aantal Steden',
                               saveValue: setDestinationCount),
                         ),
@@ -122,24 +123,24 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                               BoxConstraints(maxWidth: 1400, minWidth: 500),
                           child: Row(
                             children: [
-                                  Expanded(
-                                child: CustomFormField(
-                                numOnly: true,
-                                    labelText: 'Minimum aantal inwoners',
-                                    saveValue: setMinPopulationFilter),
-                          ),
                               Expanded(
                                 child: CustomFormField(
-                                numOnly: true,
+                                    numOnly: true,
+                                    labelText: 'Minimum aantal inwoners',
+                                    saveValue: setMinPopulationFilter),
+                              ),
+                              Expanded(
+                                child: CustomFormField(
+                                    numOnly: true,
                                     labelText: 'Maximum aantal inwoners',
                                     saveValue: setMaxPopulationFilter),
-                          ),
+                              ),
                               ElevatedButton(
                                 onPressed: () {
                                   final form = formKey.currentState!;
                                   if (form.validate()) {
                                     form.save();
-                                print('Formulier gevalideerd ik save');
+                                    print('Formulier gevalideerd ik save');
                                   }
                                 },
                                 child: Text('Filter steden'),
@@ -147,21 +148,21 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                             ],
                           ),
                         ),
-                    DropdownButton(
-                      value: dropdownvalue,
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      items: availableWorldmaps.map((Worldmap map) {
-                        return DropdownMenuItem(
-                          value: map.mapName,
-                          child: Text(map.mapName),
-                        );
-                      }).toList(),
-                      onChanged: (String? selectedValue) {
-                        setState(() {
-                          dropdownvalue = selectedValue!;
-                        });
-                      },
-                    ),
+                        DropdownButton(
+                          value: dropdownvalue,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: availableWorldmaps.map((Worldmap map) {
+                            return DropdownMenuItem(
+                              value: map.mapName,
+                              child: Text(map.mapName),
+                            );
+                          }).toList(),
+                          onChanged: (String? selectedValue) {
+                            setState(() {
+                              dropdownvalue = selectedValue!;
+                            });
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -171,6 +172,17 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                 future: processCsv(context),
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
+                    List<City> allCitiesFromMap = snapshot.data as List<City>;
+                    List<City> filteredCities =
+                        completeFilter.meetCriteria(allCitiesFromMap);
+                    print(filteredCities[5].cityName);
+
+                    //Ik wil iets zeggen als...
+                    //Criteria totalFilter = createFilter(filterCriteria);
+                    //en dan...
+                    //List<City> filteredCities =
+                    //    totalFilter.meetCriteria(allCitiesFromMap);
+
                     return ConstrainedBox(
                       constraints:
                           BoxConstraints(maxWidth: 340, maxHeight: 270),
