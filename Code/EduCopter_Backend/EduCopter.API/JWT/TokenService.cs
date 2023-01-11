@@ -12,11 +12,23 @@ namespace EduCopter.API.JWT
 
         public string BuildToken(string key, string issuer, UserInfo user)
         {
-            var claims = new[] {
+            var claims = new List<Claim>() {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.NameIdentifier,
-                Guid.NewGuid().ToString())
             };
+
+
+            if (user is Student)
+            {
+                claims.Add(new Claim(ClaimTypes.Actor, nameof(Student)));
+            }
+            else if (user is Teacher)
+            {
+                claims.Add(new Claim(ClaimTypes.Actor, nameof(Teacher)));
+            }
+            else if (user is Administrator)
+            {
+                claims.Add(new Claim(ClaimTypes.Actor, nameof(Administrator)));
+            }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);

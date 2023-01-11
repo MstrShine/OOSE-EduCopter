@@ -15,6 +15,8 @@ namespace EduCopter.Logic.Extensions
     {
         public static IServiceCollection AddLogic(this IServiceCollection services)
         {
+            services.AddTransient<IPasswordHandler, PasswordHandler>();
+
             services.AddScoped<IEntityLogic<Student>, StudentLogic>();
 
             return services;
