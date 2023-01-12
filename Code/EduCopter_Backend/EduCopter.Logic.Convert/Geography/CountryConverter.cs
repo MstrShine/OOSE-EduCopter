@@ -15,7 +15,6 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = ef.Id,
                 Name = ef.Name,
-                Provinces = ef.Provinces.Select(x => ProvinceConverter.Convert(x)).ToList()
             };
         }
 
@@ -25,7 +24,6 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = e.Id,
                 Name = e.Name,
-                Provinces = e.Provinces.Select(x => ProvinceConverter.Convert(x)).ToList()
             };
         }
     }

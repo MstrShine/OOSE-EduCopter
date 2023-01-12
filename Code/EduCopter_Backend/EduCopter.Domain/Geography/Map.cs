@@ -5,7 +5,5 @@
         public string Name { get; set; }
 
         public string Path { get; set; }
-
-        public List<Mission.Mission> Missions { get; set; }
     }
 }

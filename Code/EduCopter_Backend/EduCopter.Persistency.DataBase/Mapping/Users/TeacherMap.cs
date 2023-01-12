@@ -1,4 +1,5 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Users;
+﻿using EduCopter.Persistency.DataBase.Domain.School;
+using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,8 +15,8 @@ namespace EduCopter.Persistency.DataBase.Mapping.Users
             builder.Property(x => x.FirstName).IsRequired();
             builder.Property(x => x.LastName).IsRequired();
 
-            builder.HasOne(x => x.School).WithMany(x => x.Teachers).HasForeignKey(x => x.SchoolId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Class).WithOne().HasForeignKey<EFTeacher>(x => x.ClassId);
+            builder.HasOne<EFSchool>().WithMany().HasForeignKey(x => x.SchoolId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne<EFClass>().WithOne().HasForeignKey<EFTeacher>(x => x.ClassId);
         }
     }
 }

@@ -19,9 +19,7 @@ namespace EduCopter.Logic.Convert.Geography
                 Id = ef.Id,
                 Name = ef.Name,
                 Population = ef.Population,
-                Province = ProvinceConverter.Convert(ef.Province),
-                GameCities = ef.GameCities.Select(x => GameCityConverter.Convert(x)).ToList(),
-                MissionCities = ef.MissionCities.Select(x => MissionCityConverter.Convert(x)).ToList()
+                ProvinceId = ef.ProvinceId,
             };
         }
 
@@ -32,10 +30,7 @@ namespace EduCopter.Logic.Convert.Geography
                 Id = e.Id,
                 Name = e.Name,
                 Population = e.Population,
-                ProvinceId = e.Province.Id,
-                Province = ProvinceConverter.Convert(e.Province),
-                GameCities = e.GameCities.Select(x => GameCityConverter.Convert(x)).ToList(),
-                MissionCities = e.MissionCities.Select(x => MissionCityConverter.Convert(x)).ToList()
+                ProvinceId = e.ProvinceId,
             };
         }
     }

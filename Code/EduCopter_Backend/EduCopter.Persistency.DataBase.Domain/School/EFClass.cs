@@ -9,9 +9,5 @@ namespace EduCopter.Persistency.DataBase.Domain.School
         public string Name { get; set; }
 
         public Guid SchoolId { get; set; }
-
-        public EFSchool School { get; set; }
-
-        public List<EFStudent> Students { get; set; }
     }
 }

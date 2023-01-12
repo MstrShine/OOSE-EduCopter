@@ -11,8 +11,8 @@ namespace EduCopter.Domain.Mission
     {
         public int MissionOrder { get; set; }
 
-        public Mission Mission { get; set; }
+        public Guid MissionId { get; set; }
 
-        public City City { get; set; }
+        public Guid CityId { get; set; }
     }
 }

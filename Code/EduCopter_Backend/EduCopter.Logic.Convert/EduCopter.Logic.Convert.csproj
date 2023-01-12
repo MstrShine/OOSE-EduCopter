@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EduCopter.Domain\EduCopter.Domain.csproj" />
+    <ProjectReference Include="..\EduCopter.Persistency.DataBase.Domain\EduCopter.Persistency.DataBase.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

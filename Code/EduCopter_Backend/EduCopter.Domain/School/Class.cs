@@ -6,8 +6,6 @@ namespace EduCopter.Domain.School
     {
         public string Name { get; set; }
 
-        public School School { get; set; }
-
-        public List<Student> Students { get; set; }
+        public Guid SchoolId { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using EduCopter.Persistency.DataBase.Domain.Game;
+using EduCopter.Persistency.DataBase.Domain.Mission;
+using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,8 +12,8 @@ namespace EduCopter.Persistency.DataBase.Mapping.Game
         {
             builder.Property(x => x.Date);
 
-            builder.HasOne(x => x.Student).WithMany(x => x.Games).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Mission).WithMany(x => x.Games).HasForeignKey(x => x.MissionId);
+            builder.HasOne<EFStudent>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne<EFMission>().WithMany().HasForeignKey(x => x.MissionId);
         }
     }
 }

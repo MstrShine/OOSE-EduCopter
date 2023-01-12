@@ -4,8 +4,6 @@
     {
         public string Name { get; set; }
 
-        public List<Province> Provinces { get; set; } = new();
-
         public Country() { }
     }
 }

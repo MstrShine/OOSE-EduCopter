@@ -9,8 +9,8 @@ namespace EduCopter.Domain.Mission
 {
     public class StudentMission
     {
-        public Student Student { get; set; }
+        public Guid StudentId { get; set; }
 
-        public Mission Mission { get; set; }
+        public Guid MissionId { get; set; }
     }
 }

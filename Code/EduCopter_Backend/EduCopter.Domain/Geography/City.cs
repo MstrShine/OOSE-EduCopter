@@ -9,10 +9,6 @@ namespace EduCopter.Domain.Geography
 
         public long Population { get; set; }
 
-        public Province Province { get; set; }
-
-        public List<MissionCity> MissionCities { get; set; }
-
-        public List<GameCity> GameCities { get; set; }
+        public Guid ProvinceId { get; set; }
     }
 }

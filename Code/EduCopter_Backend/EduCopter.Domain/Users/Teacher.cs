@@ -4,8 +4,8 @@ namespace EduCopter.Domain.Users
 {
     public class Teacher : UserInfo
     {
-        public School.School School { get; set; }
+        public Guid SchoolId { get; set; }
 
-        public Class Class { get; set; }
+        public Guid ClassId { get; set; }
     }
 }

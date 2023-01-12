@@ -15,8 +15,8 @@ namespace EduCopter.Logic.Convert.Game
         {
             return new()
             {
-                City = CityConverter.Convert(ef.City),
-                Game = GameConverter.Convert(ef.Game),
+                CityId = ef.CityId,
+                GameId = ef.GameId,
                 Score = ef.Score
             };
         }
@@ -25,10 +25,8 @@ namespace EduCopter.Logic.Convert.Game
         {
             return new()
             {
-                CityId = e.City.Id,
-                City = CityConverter.Convert(e.City),
-                GameId = e.Game.Id,
-                Game = GameConverter.Convert(e.Game),
+                CityId = e.CityId,
+                GameId = e.GameId,
                 Score = e.Score
             };
         }

@@ -14,7 +14,7 @@ namespace EduCopter.Persistency.Cache.Missions
 
             if (_Cache.TryGetValue(mission.Id, out var cached))
             {
-                cached.AddCities(mission.MissionCities);
+                //cached.AddCities(mission.);
             }
             else
             {

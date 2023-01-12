@@ -1,4 +1,6 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Mission;
+﻿using EduCopter.Persistency.DataBase.Domain.Geography;
+using EduCopter.Persistency.DataBase.Domain.Mission;
+using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EduCopter.Persistency.DataBase.Mapping.Mission
@@ -9,8 +11,8 @@ namespace EduCopter.Persistency.DataBase.Mapping.Mission
         {
             builder.Property(x => x.Date);
 
-            builder.HasOne(x => x.Map).WithMany(x => x.Missions).HasForeignKey(x => x.MapId);
-            builder.HasOne(x => x.Teacher).WithMany().HasForeignKey(x => x.TeacherId);
+            builder.HasOne<EFMap>().WithMany().HasForeignKey(x => x.MapId);
+            builder.HasOne<EFTeacher>().WithMany().HasForeignKey(x => x.TeacherId);
         }
     }
 }

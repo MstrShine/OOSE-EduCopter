@@ -9,7 +9,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.School
         {
             builder.Property(x => x.Name).IsRequired();
 
-            builder.HasOne(x => x.School).WithMany(x => x.Classes).HasForeignKey(x => x.SchoolId);
+            builder.HasOne<EFSchool>().WithMany().HasForeignKey(x => x.SchoolId);
         }
     }
 }

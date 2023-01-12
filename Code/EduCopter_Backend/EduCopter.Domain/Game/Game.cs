@@ -11,10 +11,8 @@ namespace EduCopter.Domain.Game
     {
         public DateTime Date { get; set; }
 
-        public Student Student { get; set; }
+        public Guid StudentId { get; set; }
 
-        public Mission.Mission Mission { get; set; }
-
-        public List<GameCity> GameCities { get; set; }
+        public Guid MissionId { get; set; }
     }
 }

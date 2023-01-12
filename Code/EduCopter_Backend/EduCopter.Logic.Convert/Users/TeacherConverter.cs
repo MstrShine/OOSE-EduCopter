@@ -21,8 +21,8 @@ namespace EduCopter.Logic.Convert.Users
                 Username = ef.Username,
                 Password = ef.Password,
                 Email = ef.Email,
-                Class = ClassConverter.Convert(ef.Class),
-                School = SchoolConverter.Convert(ef.School),
+                ClassId = ef.ClassId,
+                SchoolId = ef.SchoolId,
             };
         }
 
@@ -36,10 +36,8 @@ namespace EduCopter.Logic.Convert.Users
                 Username = e.Username,
                 Password = e.Password,
                 Email = e.Email,
-                ClassId = e.Class.Id,
-                Class = ClassConverter.Convert(e.Class),
-                SchoolId = e.School.Id,
-                School = SchoolConverter.Convert(e.School)
+                ClassId = e.ClassId,
+                SchoolId = e.SchoolId,
             };
         }
     }

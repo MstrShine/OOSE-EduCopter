@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EduCopter.Domain\EduCopter.Domain.csproj" />
+    <ProjectReference Include="..\EduCopter.Logic.Convert\EduCopter.Logic.Convert.csproj" />
     <ProjectReference Include="..\EduCopter.Persistency.DataBase.Domain\EduCopter.Persistency.DataBase.Domain.csproj" />
     <ProjectReference Include="..\EduCopter.Persistency.DataBase\EduCopter.Persistency.DataBase.csproj" />
   </ItemGroup>

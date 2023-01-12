@@ -13,10 +13,6 @@ namespace EduCopter.Persistency.DataBase.Domain.Mission
     {
         public Guid StudentId { get; set; }
 
-        public EFStudent Student { get; set; }
-
         public Guid MissionId { get; set; }
-
-        public EFMission Mission { get; set; }
     }
 }

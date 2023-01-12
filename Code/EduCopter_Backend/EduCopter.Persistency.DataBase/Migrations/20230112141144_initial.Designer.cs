@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduCopter.Persistency.DataBase.Migrations
 {
     [DbContext(typeof(EduCopterContext))]
-    [Migration("20230110153553_initial")]
+    [Migration("20230112141144_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -339,225 +339,134 @@ namespace EduCopter.Persistency.DataBase.Migrations
 
             modelBuilder.Entity("EduCopter.Domain.Geography.EFCity", b =>
                 {
-                    b.HasOne("EduCopter.Domain.Geography.EFProvince", "Province")
-                        .WithMany("Cities")
+                    b.HasOne("EduCopter.Domain.Geography.EFProvince", null)
+                        .WithMany()
                         .HasForeignKey("ProvinceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Province");
                 });
 
             modelBuilder.Entity("EduCopter.Domain.Geography.EFProvince", b =>
                 {
-                    b.HasOne("EduCopter.Domain.Geography.EFCountry", "Country")
-                        .WithMany("Provinces")
+                    b.HasOne("EduCopter.Domain.Geography.EFCountry", null)
+                        .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Game.EFGame", b =>
                 {
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", "Mission")
-                        .WithMany("Games")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", null)
+                        .WithMany()
                         .HasForeignKey("MissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Users.EFStudent", "Student")
-                        .WithMany("Games")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Users.EFStudent", null)
+                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Mission");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Game.EFGameCity", b =>
                 {
-                    b.HasOne("EduCopter.Domain.Geography.EFCity", "City")
-                        .WithMany("GameCities")
+                    b.HasOne("EduCopter.Domain.Geography.EFCity", null)
+                        .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Game.EFGame", "Game")
-                        .WithMany("GameCities")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Game.EFGame", null)
+                        .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("City");
-
-                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", b =>
                 {
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Geography.EFMap", "Map")
-                        .WithMany("Missions")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Geography.EFMap", null)
+                        .WithMany()
                         .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Users.EFTeacher", "Teacher")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Users.EFTeacher", null)
                         .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Map");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Mission.EFMissionCity", b =>
                 {
-                    b.HasOne("EduCopter.Domain.Geography.EFCity", "City")
-                        .WithMany("MissionCities")
+                    b.HasOne("EduCopter.Domain.Geography.EFCity", null)
+                        .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", "Mission")
-                        .WithMany("MissionCities")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", null)
+                        .WithMany()
                         .HasForeignKey("MissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("City");
-
-                    b.Navigation("Mission");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Mission.EFStudentMission", b =>
                 {
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", "Mission")
-                        .WithMany("StudentMissions")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", null)
+                        .WithMany()
                         .HasForeignKey("MissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Users.EFStudent", "Student")
-                        .WithMany("StudentMissions")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.Users.EFStudent", null)
+                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Mission");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.School.EFClass", b =>
                 {
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFSchool", "School")
-                        .WithMany("Classes")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFSchool", null)
+                        .WithMany()
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Users.EFStudent", b =>
                 {
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFClass", "Class")
-                        .WithMany("Students")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFClass", null)
+                        .WithMany()
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFSchool", "School")
-                        .WithMany("Students")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFSchool", null)
+                        .WithMany()
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Class");
-
-                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Users.EFTeacher", b =>
                 {
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFClass", "Class")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFClass", null)
                         .WithOne()
                         .HasForeignKey("EduCopter.Persistency.DataBase.Domain.Users.EFTeacher", "ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFSchool", "School")
-                        .WithMany("Teachers")
+                    b.HasOne("EduCopter.Persistency.DataBase.Domain.School.EFSchool", null)
+                        .WithMany()
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Class");
-
-                    b.Navigation("School");
-                });
-
-            modelBuilder.Entity("EduCopter.Domain.Geography.EFCity", b =>
-                {
-                    b.Navigation("GameCities");
-
-                    b.Navigation("MissionCities");
-                });
-
-            modelBuilder.Entity("EduCopter.Domain.Geography.EFCountry", b =>
-                {
-                    b.Navigation("Provinces");
-                });
-
-            modelBuilder.Entity("EduCopter.Domain.Geography.EFProvince", b =>
-                {
-                    b.Navigation("Cities");
-                });
-
-            modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Game.EFGame", b =>
-                {
-                    b.Navigation("GameCities");
-                });
-
-            modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Geography.EFMap", b =>
-                {
-                    b.Navigation("Missions");
-                });
-
-            modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Mission.EFMission", b =>
-                {
-                    b.Navigation("Games");
-
-                    b.Navigation("MissionCities");
-
-                    b.Navigation("StudentMissions");
-                });
-
-            modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.School.EFClass", b =>
-                {
-                    b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.School.EFSchool", b =>
-                {
-                    b.Navigation("Classes");
-
-                    b.Navigation("Students");
-
-                    b.Navigation("Teachers");
-                });
-
-            modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Users.EFStudent", b =>
-                {
-                    b.Navigation("Games");
-
-                    b.Navigation("StudentMissions");
                 });
 #pragma warning restore 612, 618
         }

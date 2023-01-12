@@ -10,10 +10,6 @@ namespace EduCopter.Persistency.DataBase.Domain.Mission
 
         public Guid MissionId { get; set; }
 
-        public EFMission Mission { get; set; }
-
         public Guid CityId { get; set; }
-
-        public EFCity City { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace EduCopter.Logic.Convert.Mission
             return new()
             {
                 MissionOrder = ef.MissionOrder,
-                City = CityConverter.Convert(ef.City),
-                Mission = MissionConverter.Convert(ef.Mission),
+                CityId = ef.CityId,
+                MissionId = ef.MissionId,
             };
         }
 
@@ -26,10 +26,8 @@ namespace EduCopter.Logic.Convert.Mission
             return new()
             {
                 MissionOrder = e.MissionOrder,
-                CityId = e.City.Id,
-                City = CityConverter.Convert(e.City),
-                MissionId = e.Mission.Id,
-                Mission = MissionConverter.Convert(e.Mission)
+                CityId = e.CityId,         
+                MissionId = e.MissionId,
             };
         }
     }

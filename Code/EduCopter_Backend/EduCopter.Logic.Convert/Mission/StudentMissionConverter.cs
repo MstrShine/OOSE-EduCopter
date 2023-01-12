@@ -15,8 +15,8 @@ namespace EduCopter.Logic.Convert.Mission
         {
             return new()
             {
-                Mission = MissionConverter.Convert(ef.Mission),
-                Student = StudentConverter.Convert(ef.Student)
+                MissionId = ef.MissionId,
+                StudentId = ef.StudentId
             };
         }
 
@@ -24,10 +24,8 @@ namespace EduCopter.Logic.Convert.Mission
         {
             return new()
             {
-                MissionId = e.Mission.Id,
-                Mission = MissionConverter.Convert(e.Mission),
-                StudentId = e.Student.Id,
-                Student = StudentConverter.Convert(e.Student)
+                MissionId = e.MissionId,
+                StudentId = e.StudentId,
             };
         }
     }

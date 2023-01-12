@@ -11,11 +11,7 @@ namespace EduCopter.Persistency.DataBase.Domain.Game
 
         public Guid GameId { get; set; }
 
-        public EFGame Game { get; set; }
-
         public Guid CityId { get; set; }
-
-        public EFCity City { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EduCopter.Persistency.DataBase.Domain.Mission;
+using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -15,8 +16,8 @@ namespace EduCopter.Persistency.DataBase.Mapping.Mission
         {
             builder.HasKey(x => new { x.StudentId, x.MissionId });
 
-            builder.HasOne(x => x.Student).WithMany(x => x.StudentMissions).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Mission).WithMany(x => x.StudentMissions).HasForeignKey(x => x.MissionId);
+            builder.HasOne<EFStudent>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne<EFMission>().WithMany().HasForeignKey(x => x.MissionId);
         }
     }
 }

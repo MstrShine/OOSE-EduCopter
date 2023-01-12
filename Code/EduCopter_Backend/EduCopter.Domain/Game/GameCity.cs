@@ -11,8 +11,8 @@ namespace EduCopter.Domain.Game
     {
         public double Score { get; set; }
 
-        public Game Game { get; set; }
+        public Guid GameId { get; set; }
 
-        public City City { get; set; }
+        public Guid CityId { get; set; }
     }
 }

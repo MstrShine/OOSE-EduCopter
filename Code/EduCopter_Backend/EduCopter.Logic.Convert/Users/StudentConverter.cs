@@ -23,10 +23,8 @@ namespace EduCopter.Logic.Convert.Users
                 Email = ef.Email,
                 Username = ef.Username,
                 Password = ef.Password,
-                Class = ClassConverter.Convert(ef.Class),
-                School = SchoolConverter.Convert(ef.School),
-                Games = ef.Games.Select(x => GameConverter.Convert(x)).ToList(),
-                StudentMissions = ef.StudentMissions.Select(x => StudentMissionConverter.Convert(x)).ToList()
+                ClassId = ef.ClassId,
+                SchoolId = ef.SchoolId,
             };
         }
 
@@ -40,12 +38,8 @@ namespace EduCopter.Logic.Convert.Users
                 Email = e.Email,
                 Username = e.Username,
                 Password = e.Password,
-                ClassId = e.Class.Id,
-                Class = ClassConverter.Convert(e.Class),
-                SchoolId = e.School.Id,
-                School = SchoolConverter.Convert(e.School),
-                Games = e.Games.Select(x => GameConverter.Convert(x)).ToList(),
-                StudentMissions = e.StudentMissions.Select(x => StudentMissionConverter.Convert(x)).ToList()
+                ClassId = e.ClassId,
+                SchoolId = e.SchoolId,
             };
         }
     }

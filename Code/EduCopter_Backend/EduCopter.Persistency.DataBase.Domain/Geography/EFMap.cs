@@ -9,7 +9,5 @@ namespace EduCopter.Persistency.DataBase.Domain.Geography
         public string Name { get; set; }
 
         public string Path { get; set; }
-
-        public List<EFMission> Missions { get; set; }
     }
 }

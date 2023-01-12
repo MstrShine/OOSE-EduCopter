@@ -8,14 +8,8 @@ namespace EduCopter.Domain.Mission
     {
         public DateTime Date { get; set; }
 
-        public Map Map { get; set; }
+        public Guid MapId { get; set; }
 
-        public Teacher Teacher { get; set; }
-
-        public List<MissionCity> MissionCities { get; set; }
-
-        public List<StudentMission> StudentMissions { get; set; }
-
-        public List<Game.Game> Games { get; set; }
+        public Guid TeacherId { get; set; }
     }
 }

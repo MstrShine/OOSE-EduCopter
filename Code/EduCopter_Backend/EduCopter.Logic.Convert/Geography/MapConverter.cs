@@ -18,7 +18,6 @@ namespace EduCopter.Logic.Convert.Geography
                 Id = ef.Id,
                 Name = ef.Name,
                 Path = ef.Path,
-                Missions = ef.Missions.Select(x => MissionConverter.Convert(x)).ToList()
             };
         }
 
@@ -29,7 +28,6 @@ namespace EduCopter.Logic.Convert.Geography
                 Id = e.Id,
                 Name = e.Name,
                 Path = e.Path,
-                Missions = e.Missions.Select(x => MissionConverter.Convert(x)).ToList()
             };
         }
     }

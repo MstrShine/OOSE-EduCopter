@@ -9,7 +9,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.Geography
         {
             builder.Property(x => x.Name).IsRequired();
 
-            builder.HasOne(x => x.Country).WithMany(x => x.Provinces).HasForeignKey(x => x.CountryId);
+            builder.HasOne<EFCountry>().WithMany().HasForeignKey(x => x.CountryId);
         }
     }
 }

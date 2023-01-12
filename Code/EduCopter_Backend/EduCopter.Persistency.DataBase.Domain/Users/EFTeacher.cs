@@ -18,10 +18,6 @@ namespace EduCopter.Persistency.DataBase.Domain.Users
 
         public Guid ClassId { get; set; }
 
-        public EFClass Class { get; set; }
-
         public Guid SchoolId { get; set; }
-
-        public EFSchool School { get; set; }
     }
 }

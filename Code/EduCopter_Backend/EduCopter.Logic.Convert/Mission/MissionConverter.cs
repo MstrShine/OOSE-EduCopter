@@ -18,11 +18,8 @@ namespace EduCopter.Logic.Convert.Mission
             {
                 Id = ef.Id,
                 Date = ef.Date,
-                Map = MapConverter.Convert(ef.Map),
-                Teacher = TeacherConverter.Convert(ef.Teacher),
-                Games = ef.Games.Select(x => GameConverter.Convert(x)).ToList(),
-                MissionCities = ef.MissionCities.Select(x => MissionCityConverter.Convert(x)).ToList(),
-                StudentMissions = ef.StudentMissions.Select(x => StudentMissionConverter.Convert(x)).ToList()
+                MapId = ef.MapId,
+                TeacherId = ef.TeacherId,
             };
         }
 
@@ -32,13 +29,8 @@ namespace EduCopter.Logic.Convert.Mission
             {
                 Id = e.Id,
                 Date = e.Date,
-                MapId = e.Map.Id,
-                Map = MapConverter.Convert(e.Map),
-                TeacherId = e.Teacher.Id,
-                Teacher = TeacherConverter.Convert(e.Teacher),
-                Games = e.Games.Select(x => GameConverter.Convert(x)).ToList(),
-                MissionCities = e.MissionCities.Select(x => MissionCityConverter.Convert(x)).ToList(),
-                StudentMissions = e.StudentMissions.Select(x => StudentMissionConverter.Convert(x)).ToList()
+                MapId = e.MapId,
+                TeacherId = e.TeacherId,
             };
         }
     }

@@ -15,8 +15,7 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = ef.Id,
                 Name = ef.Name,
-                Country = CountryConverter.Convert(ef.Country),
-                Cities = ef.Cities.Select(x => CityConverter.Convert(x)).ToList()
+                CountryId = ef.CountryId,
             };
         }
 
@@ -26,9 +25,7 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = e.Id,
                 Name = e.Name,
-                CountryId = e.Country.Id,
-                Country = CountryConverter.Convert(e.Country),
-                Cities = e.Cities.Select(x => CityConverter.Convert(x)).ToList(),
+                CountryId = e.CountryId,
             };
         }
     }

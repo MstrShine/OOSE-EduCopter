@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.Users;
+using EduCopter.Logic.Convert.Users;
 using EduCopter.Persistency.DataBase.Domain.Users;
 using EduCopter.Persistency.DataBase.Repository.Interfaces;
 using System;
@@ -17,12 +18,12 @@ namespace EduCopter.Logic.Users
 
         protected override Student Convert(EFStudent entity)
         {
-
+            return StudentConverter.Convert(entity);
         }
 
         protected override EFStudent Convert(Student entity)
         {
-
+            return StudentConverter.Convert(entity);
         }
     }
 }

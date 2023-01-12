@@ -1,4 +1,5 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Mission;
+﻿using EduCopter.Domain.Geography;
+using EduCopter.Persistency.DataBase.Domain.Mission;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,8 +12,8 @@ namespace EduCopter.Persistency.DataBase.Mapping.Mission
             builder.HasKey(x => new { x.CityId, x.MissionId });
             builder.Property(x => x.MissionOrder).IsRequired();
 
-            builder.HasOne(x => x.Mission).WithMany(x => x.MissionCities).HasForeignKey(x => x.MissionId);
-            builder.HasOne(x => x.City).WithMany(x => x.MissionCities).HasForeignKey(x => x.CityId);
+            builder.HasOne<EFMission>().WithMany().HasForeignKey(x => x.MissionId);
+            builder.HasOne<EFCity>().WithMany().HasForeignKey(x => x.CityId);
         }
     }
 }

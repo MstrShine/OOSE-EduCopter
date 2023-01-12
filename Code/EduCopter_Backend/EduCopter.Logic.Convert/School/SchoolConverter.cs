@@ -17,9 +17,6 @@ namespace EduCopter.Logic.Convert.School
             {
                 Id = ef.Id,
                 Name = ef.Name,
-                Classes = ef.Classes.Select(x => ClassConverter.Convert(x)).ToList(),
-                Students = ef.Students.Select(x => StudentConverter.Convert(x)).ToList(),
-                Teachers = ef.Teachers.Select(x => TeacherConverter.Convert(x)).ToList()
             };
         }
 
@@ -29,9 +26,6 @@ namespace EduCopter.Logic.Convert.School
             {
                 Id = e.Id,
                 Name = e.Name,
-                Classes = e.Classes.Select(x => ClassConverter.Convert(x)).ToList(),
-                Students = e.Students.Select(x => StudentConverter.Convert(x)).ToList(),
-                Teachers = e.Teachers.Select(x => TeacherConverter.Convert(x)).ToList()
             };
         }
     }
