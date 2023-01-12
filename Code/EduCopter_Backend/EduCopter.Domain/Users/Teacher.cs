@@ -1,11 +1,11 @@
-﻿namespace EduCopter.Domain.Users
+﻿using EduCopter.Domain.School;
+
+namespace EduCopter.Domain.Users
 {
     public class Teacher : UserInfo
     {
-        public Guid ClassId { get; set; }
+        public School.School School { get; set; }
 
-        public Guid SchoolId { get; set; }
-
-        public Teacher() { }
+        public Class Class { get; set; }
     }
 }

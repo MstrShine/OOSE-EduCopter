@@ -1,11 +1,17 @@
-﻿namespace EduCopter.Domain.Users
+﻿using EduCopter.Domain.Game;
+using EduCopter.Domain.Mission;
+using EduCopter.Domain.School;
+
+namespace EduCopter.Domain.Users
 {
     public class Student : UserInfo
     {
-        public Guid SchoolId { get; set; }
+        public School.School School { get; set; }
 
-        public Guid ClassId { get; set; }
+        public Class Class { get; set; }
 
-        public Student() { }
+        public List<StudentMission> StudentMissions { get; set; }
+
+        public List<Game.Game> Games { get; set; }
     }
 }

@@ -6,6 +6,6 @@
 
         public string Path { get; set; }
 
-        public Map() { }
+        public List<Mission.Mission> Missions { get; set; }
     }
 }

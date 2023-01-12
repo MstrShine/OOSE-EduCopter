@@ -1,4 +1,5 @@
-﻿using EduCopter.Domain.Geography;
+﻿using EduCopter.Domain.Game;
+using EduCopter.Domain.Geography;
 using EduCopter.Domain.Users;
 
 namespace EduCopter.Domain.Mission
@@ -11,8 +12,10 @@ namespace EduCopter.Domain.Mission
 
         public Teacher Teacher { get; set; }
 
-        public List<City> Cities { get; set; } = new();
+        public List<MissionCity> MissionCities { get; set; }
 
-        public Mission() { }
+        public List<StudentMission> StudentMissions { get; set; }
+
+        public List<Game.Game> Games { get; set; }
     }
 }

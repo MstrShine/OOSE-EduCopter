@@ -4,10 +4,8 @@
     {
         public string Name { get; set; }
 
-        public Guid CountryId { get; set; }
+        public Country Country { get; set; }
 
-        public List<City> Cities { get; set; } = new();
-
-        public Province() { }
+        public List<City> Cities { get; set; }
     }
 }

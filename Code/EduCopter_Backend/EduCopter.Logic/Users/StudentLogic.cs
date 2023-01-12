@@ -17,32 +17,12 @@ namespace EduCopter.Logic.Users
 
         protected override Student Convert(EFStudent entity)
         {
-            return new Student()
-            {
-                Id = entity.Id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                Username = entity.Username,
-                Password = entity.Password,
-                Email = entity.Email,
-                ClassId = entity.ClassId,
-                SchoolId = entity.SchoolId
-            };
+
         }
 
         protected override EFStudent Convert(Student entity)
         {
-            return new EFStudent()
-            {
-                Id = entity.Id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                Username = entity.Username,
-                Password = entity.Password,
-                Email = entity.Email,
-                ClassId = entity.ClassId,
-                SchoolId = entity.SchoolId
-            };
+
         }
     }
 }
