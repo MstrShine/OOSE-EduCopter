@@ -38,6 +38,7 @@ namespace EduCopter.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("login")]
         public async Task<string> Login(LoginModel loginModel)
         {
             if (loginModel == null || string.IsNullOrWhiteSpace(loginModel.Username) || string.IsNullOrWhiteSpace(loginModel.Password))

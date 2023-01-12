@@ -11,5 +11,7 @@ namespace EduCopter.Domain.Mission
         public Guid MapId { get; set; }
 
         public Guid TeacherId { get; set; }
+
+        public List<City> Cities { get; set; } = new();
     }
 }

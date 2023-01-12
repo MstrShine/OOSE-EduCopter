@@ -19,12 +19,12 @@ namespace EduCopter.Persistency.Cache.Models
             this.Mission = mission;
         }
 
-        public void AddCities(List<MissionCity> cities)
+        public void AddCities(List<City> cities)
         {
             // Getting cities out of var cities except the ones allready in the mission
-            //var distinct = cities.Except(this.Mission.MissionCities).ToList();
+            var distinct = cities.Except(this.Mission.Cities).ToList();
 
-            //this.Mission.MissionCities.AddRange(distinct);
+            this.Mission.Cities.AddRange(distinct);
             this._LastAccessed = DateTime.Now;
         }
     }
