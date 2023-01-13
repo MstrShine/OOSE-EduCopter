@@ -25,6 +25,7 @@ namespace EduCopter.Persistency.DataBase
         {
             base.OnModelCreating(modelBuilder);
 
+            // all loose mapping classes get chosen from assembly and activated
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(EduCopterContext)));
         }
 

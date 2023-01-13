@@ -27,7 +27,7 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-
+                HttpContext.Response.StatusCode = 500;
             }
 
             return eList;
@@ -43,7 +43,7 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-
+                HttpContext.Response.StatusCode = 500;
             }
 
             return e;
@@ -59,7 +59,7 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-
+                HttpContext.Response.StatusCode = 500;
             }
 
             return e;
@@ -75,12 +75,12 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-
+                HttpContext.Response.StatusCode = 500;
             }
 
             return e;
         }
-        //    {
+
         [HttpDelete("{id}")]
         public virtual async Task Delete(Guid id)
         {
@@ -90,16 +90,10 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-
+                HttpContext.Response.StatusCode = 500;
             }
-        //public virtual async Task<IActionResult> Delete(Guid id)
+
             return;
         }
-        //    {
-        //        await session.Delete(id);
-        //    }
-
-        //    return Ok();
-        //}
     }
 }

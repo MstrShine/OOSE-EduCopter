@@ -5,7 +5,7 @@ using EduCopter.Logic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EduCopter.API.Controllers
+namespace EduCopter.API.Controllers.Users
 {
     [ApiVersion("1")]
     [Route("[controller]")]
