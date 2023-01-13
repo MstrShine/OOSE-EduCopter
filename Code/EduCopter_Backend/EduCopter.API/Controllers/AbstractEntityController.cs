@@ -1,6 +1,5 @@
 ﻿using EduCopter.Domain;
 using EduCopter.Logic.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduCopter.API.Controllers

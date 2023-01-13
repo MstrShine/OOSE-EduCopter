@@ -1,5 +1,4 @@
-﻿using EduCopter.Domain.Geography;
-using EduCopter.Persistency.DataBase.Domain.Game;
+﻿using EduCopter.Persistency.DataBase.Domain.Game;
 using EduCopter.Persistency.DataBase.Domain.Geography;
 using EduCopter.Persistency.DataBase.Domain.Mission;
 using EduCopter.Persistency.DataBase.Domain.School;

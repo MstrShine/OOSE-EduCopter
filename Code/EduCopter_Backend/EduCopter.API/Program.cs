@@ -27,6 +27,12 @@ namespace EduCopter.API
                 options.ResolveConflictingActions(description => description.First());
             });
 
+            builder.Services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromHours(1);
+            });
+            builder.Services.AddDistributedMemoryCache();
             builder.Services.AddTransient<ITokenService, TokenService>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -56,6 +62,7 @@ namespace EduCopter.API
                 options.InjectStylesheet("/swagger-ui/SwaggerDark.css");
             });
 
+            app.UseSession();
             app.Use(async (context, next) =>
             {
                 var token = context.Session.GetString("Token");

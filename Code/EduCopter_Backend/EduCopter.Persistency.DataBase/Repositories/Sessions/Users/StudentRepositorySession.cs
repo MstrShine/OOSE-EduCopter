@@ -1,7 +1,7 @@
 ﻿using EduCopter.Persistency.DataBase.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace EduCopter.Persistency.DataBase.Repository.Sessions.Users
+namespace EduCopter.Persistency.DataBase.Repositories.Sessions.Users
 {
     public class StudentRepositorySession : EntityRepositorySession<EFStudent>
     {

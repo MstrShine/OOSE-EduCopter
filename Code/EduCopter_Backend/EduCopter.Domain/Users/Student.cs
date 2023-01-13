@@ -1,8 +1,4 @@
-﻿using EduCopter.Domain.Game;
-using EduCopter.Domain.Mission;
-using EduCopter.Domain.School;
-
-namespace EduCopter.Domain.Users
+﻿namespace EduCopter.Domain.Users
 {
     public class Student : UserInfo
     {

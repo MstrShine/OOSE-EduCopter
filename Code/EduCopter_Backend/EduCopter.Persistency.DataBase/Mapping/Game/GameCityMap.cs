@@ -1,5 +1,5 @@
-﻿using EduCopter.Domain.Geography;
-using EduCopter.Persistency.DataBase.Domain.Game;
+﻿using EduCopter.Persistency.DataBase.Domain.Game;
+using EduCopter.Persistency.DataBase.Domain.Geography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

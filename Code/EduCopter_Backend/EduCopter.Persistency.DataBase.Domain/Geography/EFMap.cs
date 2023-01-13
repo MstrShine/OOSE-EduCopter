@@ -1,5 +1,4 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Mission;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Geography
 {

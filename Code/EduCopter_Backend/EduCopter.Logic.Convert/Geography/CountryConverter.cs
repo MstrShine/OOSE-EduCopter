@@ -1,15 +1,11 @@
 ﻿using EduCopter.Domain.Geography;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EduCopter.Persistency.DataBase.Domain.Geography;
 
 namespace EduCopter.Logic.Convert.Geography
 {
     public static class CountryConverter
     {
-        public static Country Convert(EFCountry ef) 
+        public static Country Convert(EFCountry ef)
         {
             return new()
             {
@@ -18,7 +14,7 @@ namespace EduCopter.Logic.Convert.Geography
             };
         }
 
-        public static EFCountry Convert(Country e) 
+        public static EFCountry Convert(Country e)
         {
             return new()
             {

@@ -1,7 +1,8 @@
 ﻿using EduCopter.Persistency.DataBase.Domain;
-using EduCopter.Persistency.DataBase.Repository.Interfaces;
+using EduCopter.Persistency.DataBase.Repositories.Interfaces;
+using EduCopter.Persistency.DataBase.Repositories.Interfaces.Sessions;
 
-namespace EduCopter.Persistency.DataBase.Repository
+namespace EduCopter.Persistency.DataBase.Repositories
 {
     public class EntityRepository<EF> : IEntityRepository<EF> where EF : EFEntity
     {

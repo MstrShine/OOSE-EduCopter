@@ -1,11 +1,5 @@
 ﻿using EduCopter.Domain.School;
-using EduCopter.Logic.Convert.Users;
 using EduCopter.Persistency.DataBase.Domain.School;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Logic.Convert.School
 {

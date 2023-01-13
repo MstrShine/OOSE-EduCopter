@@ -1,5 +1,4 @@
 ﻿using EduCopter.Logic.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduCopter.API.Controllers.School

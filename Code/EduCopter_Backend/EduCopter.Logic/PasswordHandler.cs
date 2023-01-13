@@ -1,9 +1,4 @@
 ﻿using EduCopter.Logic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Logic
 {
@@ -11,7 +6,7 @@ namespace EduCopter.Logic
     {
         public async Task<bool> CheckPassword(string savedPassword, string toCheck)
         {
-            if(string.IsNullOrEmpty(savedPassword) || string.IsNullOrEmpty(toCheck))
+            if (string.IsNullOrEmpty(savedPassword) || string.IsNullOrEmpty(toCheck))
             {
                 return false;
             }

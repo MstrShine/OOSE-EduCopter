@@ -1,8 +1,8 @@
 ﻿using EduCopter.Persistency.DataBase.Domain;
-using EduCopter.Persistency.DataBase.Repository.Interfaces;
+using EduCopter.Persistency.DataBase.Repositories.Interfaces.Sessions;
 using Microsoft.EntityFrameworkCore;
 
-namespace EduCopter.Persistency.DataBase.Repository.Sessions
+namespace EduCopter.Persistency.DataBase.Repositories.Sessions
 {
     public abstract class EntityRepositorySession<EF> : IEntityRepositorySession<EF> where EF : EFEntity, new()
     {

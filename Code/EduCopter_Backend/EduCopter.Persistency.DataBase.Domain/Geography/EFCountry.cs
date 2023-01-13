@@ -1,7 +1,6 @@
-﻿using EduCopter.Persistency.DataBase.Domain;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EduCopter.Domain.Geography
+namespace EduCopter.Persistency.DataBase.Domain.Geography
 {
     [Table("Country")]
     public class EFCountry : EFEntity

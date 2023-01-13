@@ -1,9 +1,6 @@
-﻿using EduCopter.Persistency.DataBase.Domain;
-using EduCopter.Persistency.DataBase.Domain.Game;
-using EduCopter.Persistency.DataBase.Domain.Mission;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EduCopter.Domain.Geography
+namespace EduCopter.Persistency.DataBase.Domain.Geography
 {
     [Table("City")]
     public class EFCity : EFEntity

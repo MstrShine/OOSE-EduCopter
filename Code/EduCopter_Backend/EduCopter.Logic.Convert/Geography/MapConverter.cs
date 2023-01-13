@@ -1,11 +1,5 @@
 ﻿using EduCopter.Domain.Geography;
-using EduCopter.Logic.Convert.Mission;
 using EduCopter.Persistency.DataBase.Domain.Geography;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Logic.Convert.Geography
 {

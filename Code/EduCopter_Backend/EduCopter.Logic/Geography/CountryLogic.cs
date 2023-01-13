@@ -1,10 +1,6 @@
 ﻿using EduCopter.Domain.Geography;
-using EduCopter.Persistency.DataBase.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EduCopter.Persistency.DataBase.Domain.Geography;
+using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
 namespace EduCopter.Logic.Geography
 {

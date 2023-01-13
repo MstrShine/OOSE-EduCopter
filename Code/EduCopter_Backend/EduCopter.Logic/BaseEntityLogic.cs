@@ -1,7 +1,7 @@
 ﻿using EduCopter.Domain;
 using EduCopter.Logic.Interfaces;
 using EduCopter.Persistency.DataBase.Domain;
-using EduCopter.Persistency.DataBase.Repository.Interfaces;
+using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
 namespace EduCopter.Logic
 {

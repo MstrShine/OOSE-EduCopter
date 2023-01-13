@@ -1,4 +1,4 @@
-﻿using EduCopter.Domain.Geography;
+﻿using EduCopter.Persistency.DataBase.Domain.Geography;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EduCopter.Persistency.DataBase.Mapping.Geography

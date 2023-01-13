@@ -1,6 +1,4 @@
-﻿using EduCopter.Domain.Geography;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Game
 {
@@ -13,5 +11,13 @@ namespace EduCopter.Persistency.DataBase.Domain.Game
 
         public Guid CityId { get; set; }
 
+        public EFGameCity() { }
+
+        public EFGameCity(double score, Guid gameId, Guid cityId)
+        {
+            Score = score;
+            GameId = gameId;
+            CityId = cityId;
+        }
     }
 }

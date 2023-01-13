@@ -1,6 +1,4 @@
-﻿using EduCopter.Domain.Game;
-using EduCopter.Domain.Geography;
-using EduCopter.Domain.Users;
+﻿using EduCopter.Domain.Geography;
 
 namespace EduCopter.Domain.Mission
 {

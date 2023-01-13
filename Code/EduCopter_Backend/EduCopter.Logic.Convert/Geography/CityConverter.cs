@@ -1,18 +1,11 @@
-﻿using EduCopter.Domain.Game;
-using EduCopter.Domain.Geography;
-using EduCopter.Logic.Convert.Game;
-using EduCopter.Logic.Convert.Mission;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EduCopter.Domain.Geography;
+using EduCopter.Persistency.DataBase.Domain.Geography;
 
 namespace EduCopter.Logic.Convert.Geography
 {
     public static class CityConverter
     {
-        public static City Convert(EFCity ef) 
+        public static City Convert(EFCity ef)
         {
             return new()
             {
@@ -23,7 +16,7 @@ namespace EduCopter.Logic.Convert.Geography
             };
         }
 
-        public static EFCity Convert(City e) 
+        public static EFCity Convert(City e)
         {
             return new()
             {

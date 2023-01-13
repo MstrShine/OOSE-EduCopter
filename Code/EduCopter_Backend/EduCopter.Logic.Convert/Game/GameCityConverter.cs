@@ -1,11 +1,5 @@
 ﻿using EduCopter.Domain.Game;
-using EduCopter.Logic.Convert.Geography;
 using EduCopter.Persistency.DataBase.Domain.Game;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduCopter.Logic.Convert.Game
 {

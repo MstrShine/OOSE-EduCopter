@@ -2,9 +2,6 @@
 using EduCopter.Domain.Users;
 using EduCopter.Logic.Interfaces;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 namespace EduCopter.API.JWT
 {

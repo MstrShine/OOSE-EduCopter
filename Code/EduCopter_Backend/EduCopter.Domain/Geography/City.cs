@@ -1,7 +1,4 @@
-﻿using EduCopter.Domain.Game;
-using EduCopter.Domain.Mission;
-
-namespace EduCopter.Domain.Geography
+﻿namespace EduCopter.Domain.Geography
 {
     public class City : Entity
     {
