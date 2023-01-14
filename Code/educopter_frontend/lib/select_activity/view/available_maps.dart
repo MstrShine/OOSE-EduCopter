@@ -26,8 +26,7 @@ class _AvailableMapsState extends State<AvailableMaps> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Text('Oneindige speelmodus'),
-                Text(
-                    'Bezoek zoveel mogelijk steden voordat je brandstof opraakt!'),
+                Text('Bezoek zoveel mogelijk steden voordat je brandstof opraakt!'),
               ],
             ),
           ),
