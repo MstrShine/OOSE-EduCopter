@@ -6,8 +6,6 @@
 name: Dart
 
 on:
-  push:
-    branches: [ "master", "development" ]
   pull_request:
     branches: [ "master", "development" ]
 
