@@ -19,6 +19,7 @@ class _AvailableMissionsState extends State<AvailableMissions> {
   @override
   Widget build(BuildContext context) {
     print('de selectedindex is $selectedIndex');
+    final yourScrollController = ScrollController();
 
     return Column(
       children: [
@@ -36,7 +37,9 @@ class _AvailableMissionsState extends State<AvailableMissions> {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 340, maxHeight: 270),
           child: Scrollbar(
+            controller: yourScrollController,
             child: ListView.builder(
+              controller: yourScrollController,
               itemCount: widget.availableMissions.length,
               itemBuilder: ((context, index) {
                 return GestureDetector(

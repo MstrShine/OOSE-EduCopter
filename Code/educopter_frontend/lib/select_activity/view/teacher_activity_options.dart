@@ -12,7 +12,7 @@ class TeacherActivityOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.green,
+        color: Colors.yellowAccent,
         alignment: FractionalOffset.center,
         child: (userData['rol'] != 'leerling')
             ? Row(

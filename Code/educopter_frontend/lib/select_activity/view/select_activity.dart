@@ -1,4 +1,3 @@
-import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart';
 import 'package:educopter_frontend/select_activity/model/dummy_data.dart';
 import 'package:educopter_frontend/select_activity/view/available_maps.dart';
 import 'package:educopter_frontend/select_activity/view/available_missions.dart';
@@ -13,8 +12,9 @@ class ActivitySelectScreen extends StatefulWidget {
 }
 
 class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
+  
   Map userData = {};
-
+  
   @override
   Widget build(BuildContext context) {
     userData = userData.isNotEmpty
@@ -27,18 +27,15 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
         centerTitle: true,
       ),
       body: Center(
-        child: MaxContentWidth(
-          widthConstraint: 700,
-          childWidget: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TeacherActivityOptions(userData: userData, context: context),
-              AvailableMissions(availableMissions: availableMissions),
-              AvailableMaps(
-                  availableWorldmaps: availableWorldmaps),
-            ],
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TeacherActivityOptions(userData: userData, context: context),
+          AvailableMissions(availableMissions: availableMissions),
+          AvailableMaps(
+              availableWorldmaps: availableWorldmaps),
+        ],
           ),
-        ),
       ),
     );
   }

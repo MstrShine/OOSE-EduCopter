@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+//In toekomst evt van toepassing voor verschillende devices en screensizes 
 class MaxContentWidth extends StatelessWidget {
   const MaxContentWidth(
       {super.key, required this.childWidget, required this.widthConstraint});

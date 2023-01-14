@@ -15,6 +15,7 @@ class AvailableMaps extends StatefulWidget {
 class _AvailableMapsState
     extends State<AvailableMaps> {
   int selectedIndex = 0;
+   final yourScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,9 @@ class _AvailableMapsState
                       constraints:
                           BoxConstraints(maxWidth: 340, maxHeight: 170),
                       child: Scrollbar(
+                        controller: yourScrollController,
                         child: ListView.builder(
+                          controller: yourScrollController,
                           itemCount: widget.availableWorldmaps.length,
                           itemBuilder: ((context, index) {
                             return GestureDetector(
