@@ -1,31 +1,22 @@
-﻿using EduCopter.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduCopter.Persistency.DataBase.Domain.Users
 {
-    public class EFStudent : EFEntity<Student, EFStudent>
+    [Table("Student")]
+    public class EFStudent : EFEntity
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public string Password { get; set; }
 
-        protected override EFStudent _FromDomain(Student entity)
-        {
-            return new EFStudent()
-            {
-                UserName = entity.UserName,
-                Password = entity.Password,
-            };
-        }
+        public string Email { get; set; }
 
-        protected override void _ToDomain(ref Student entity)
-        {
-            entity.UserName = UserName;
-            entity.Password = Password;
-        }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public Guid SchoolId { get; set; }
+
+        public Guid ClassId { get; set; }
     }
 }

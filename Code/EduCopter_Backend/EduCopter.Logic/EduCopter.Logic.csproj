@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EduCopter.Domain\EduCopter.Domain.csproj" />
+    <ProjectReference Include="..\EduCopter.Logic.Convert\EduCopter.Logic.Convert.csproj" />
+    <ProjectReference Include="..\EduCopter.Persistency.DataBase.Domain\EduCopter.Persistency.DataBase.Domain.csproj" />
+    <ProjectReference Include="..\EduCopter.Persistency.DataBase\EduCopter.Persistency.DataBase.csproj" />
+  </ItemGroup>
+
+</Project>
