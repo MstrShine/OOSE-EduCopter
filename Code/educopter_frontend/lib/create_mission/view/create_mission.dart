@@ -1,7 +1,7 @@
 import 'package:educopter_frontend/create_mission/model/dummy_data.dart';
 import 'package:educopter_frontend/create_mission/model/mission_criteria.dart';
 import 'package:educopter_frontend/general/general_widgets/customformfield.dart';
-import 'package:educopter_frontend/handlers/filterpattern.dart';
+import 'package:educopter_frontend/create_mission/services/city_filter.dart';
 import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart';
 import 'package:educopter_frontend/general/model/city.dart';
 import 'package:educopter_frontend/select_activity/model/worldmap.dart';
@@ -20,18 +20,6 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   MissionCriteria missionCriteria = MissionCriteria();
 
   String dropdownvalue = '';
-
-  // String missionName = '';
-  // String missionNameDisplayed = '';
-
-  // bool countryCapitolFilter = false;
-  // bool stateCapitolFilter = false;
-  // late int minPopulationFilter;
-  // late int maxPopulationFilter;
-
-  // late int destinationCount;
-
-  // bool fixedRoute = false;
 
   @override
   void initState() {
@@ -67,7 +55,8 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           constraints: BoxConstraints(maxWidth: 700),
                           child: CustomFormField(
                               labelText: 'Getoonde naam aan leerlingen',
-                              saveValue: missionCriteria.setMissionNameDisplayed),
+                              saveValue:
+                                  missionCriteria.setMissionNameDisplayed),
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 200),
@@ -93,10 +82,10 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           child: CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
                               title: Text('Alleen hoofdsteden'),
-                              value: missionCriteria.countryCapitolFilter,
+                              value: missionCriteria.countryCapitalFilter,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  missionCriteria.countryCapitolFilter = value!;
+                                  missionCriteria.countryCapitalFilter = value!;
                                 });
                               }),
                         ),
@@ -105,10 +94,10 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           child: CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
                               title: Text('Alleen provinciehoofdsteden'),
-                              value: missionCriteria.stateCapitolFilter,
+                              value: missionCriteria.stateCapitalFilter,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  missionCriteria.stateCapitolFilter = value!;
+                                  missionCriteria.stateCapitalFilter = value!;
                                 });
                               }),
                         ),
@@ -121,13 +110,15 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                                 child: CustomFormField(
                                     numOnly: true,
                                     labelText: 'Minimum aantal inwoners',
-                                    saveValue: missionCriteria.setMinPopulationFilter),
+                                    saveValue:
+                                        missionCriteria.setMinPopulationFilter),
                               ),
                               Expanded(
                                 child: CustomFormField(
                                     numOnly: true,
                                     labelText: 'Maximum aantal inwoners',
-                                    saveValue: missionCriteria.setMaxPopulationFilter),
+                                    saveValue:
+                                        missionCriteria.setMaxPopulationFilter),
                               ),
                               ElevatedButton(
                                 onPressed: () {

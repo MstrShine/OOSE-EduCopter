@@ -1,8 +1,8 @@
 class MissionCriteria {
   String missionName = '';
   String missionNameDisplayed = '';
-  bool countryCapitolFilter = false;
-  bool stateCapitolFilter = false;
+  bool countryCapitalFilter = false;
+  bool stateCapitalFilter = false;
   late int minPopulationFilter;
   late int maxPopulationFilter;
   late int destinationCount;
@@ -11,8 +11,8 @@ class MissionCriteria {
   MissionCriteria({
     this.missionName = "",
     this.missionNameDisplayed = "",
-    this.countryCapitolFilter = false,
-    this.stateCapitolFilter = false,
+    this.countryCapitalFilter = false,
+    this.stateCapitalFilter = false,
     this.fixedRoute = false,
   });
 

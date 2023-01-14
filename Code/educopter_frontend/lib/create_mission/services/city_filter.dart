@@ -1,40 +1,36 @@
+import 'package:educopter_frontend/general/services/filter_pattern.dart';
 import 'package:educopter_frontend/general/model/city.dart';
 
-abstract class Criteria {
-  List<City> meetCriteria(List<City> cities);
-}
 
-class CriteriaCapital implements Criteria {
+class CriteriaCapital implements Criteria<City> {
   @override
   List<City> meetCriteria(List<City> cities) {
-    List<City> capitolCities = [];
+    List<City> capitalCities = [];
 
     for (City city in cities) {
-      if (city.capitol) {
-        capitolCities.add(city);
+      if (city.capital) {
+        capitalCities.add(city);
       }
     }
-
-    return capitolCities;
+    return capitalCities;
   }
 }
 
-class CriteriaStateCapitol implements Criteria {
+class CriteriaStateCapital implements Criteria<City> {
   @override
   List<City> meetCriteria(List<City> cities) {
-    List<City> stateCapitolCities = [];
+    List<City> stateCapitalCities = [];
 
     for (City city in cities) {
-      if (city.capitol) {
-        stateCapitolCities.add(city);
+      if (city.capital) {
+        stateCapitalCities.add(city);
       }
     }
-
-    return stateCapitolCities;
+    return stateCapitalCities;
   }
 }
 
-class CriteriaAmmountResidentsLessThan implements Criteria {
+class CriteriaAmmountResidentsLessThan implements Criteria<City> {
   int upperAmmountResidents;
 
   CriteriaAmmountResidentsLessThan({this.upperAmmountResidents = 99999999});
@@ -48,13 +44,11 @@ class CriteriaAmmountResidentsLessThan implements Criteria {
         smallerCities.add(city);
       }
     }
-
     return smallerCities;
   }
 }
 
-class CriteriaCityInState implements Criteria {
-
+class CriteriaCityInState implements Criteria<City> {
   String stateName;
 
   CriteriaCityInState({required this.stateName});
@@ -68,12 +62,11 @@ class CriteriaCityInState implements Criteria {
         citiesInState.add(city);
       }
     }
-
     return citiesInState;
   }
 }
 
-class CriteriaAmmountResidentsMoreThan implements Criteria {
+class CriteriaAmmountResidentsMoreThan implements Criteria<City> {
   int bottomAmmountResidents;
 
   CriteriaAmmountResidentsMoreThan({this.bottomAmmountResidents = 0});
@@ -92,35 +85,16 @@ class CriteriaAmmountResidentsMoreThan implements Criteria {
   }
 }
 
-class CombinedCriteria implements Criteria {
-  List<Criteria> criteriaList = [];
 
-  CombinedCriteria({required this.criteriaList});
-
-  @override
-  List<City> meetCriteria(List<City> cities) {
-    List<City> filteredCities = [];
-
-    for (Criteria criterium in criteriaList) {
-      if (filteredCities.isEmpty) {
-        filteredCities = criterium.meetCriteria(cities);
-      } else {
-        filteredCities = criterium.meetCriteria(filteredCities);
-      }
-    }
-
-    return filteredCities;
-  }
-}
-
-Criteria capital = CriteriaCapital();
-Criteria upperLimitResidents40000 =
+Criteria<City> capital = CriteriaCapital();
+Criteria<City> upperLimitResidents40000 =
     CriteriaAmmountResidentsLessThan(upperAmmountResidents: 40000);
 
 //List<Criteria> combinedCriteria = [capitol, upperLimitResidents40000];
-List<Criteria> combinedCriteria = [upperLimitResidents40000];
+List<Criteria<City>> combinedCriteria = [upperLimitResidents40000];
 
-Criteria completeFilter = CombinedCriteria(criteriaList: combinedCriteria);
+Criteria<City> completeFilter =
+    CombinedCriteria(criteriaList: combinedCriteria);
 
 
 //List<City> cityResult = completeFilter.meetCriteria(cities);
