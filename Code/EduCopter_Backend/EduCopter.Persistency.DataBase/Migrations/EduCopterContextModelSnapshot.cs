@@ -91,8 +91,7 @@ namespace EduCopter.Persistency.DataBase.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MapId")
-                        .IsUnique();
+                    b.HasIndex("MapId");
 
                     b.HasIndex("ProvinceId");
 
@@ -114,8 +113,7 @@ namespace EduCopter.Persistency.DataBase.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MapId")
-                        .IsUnique();
+                    b.HasIndex("MapId");
 
                     b.ToTable("Country");
                 });
@@ -159,8 +157,7 @@ namespace EduCopter.Persistency.DataBase.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("MapId")
-                        .IsUnique();
+                    b.HasIndex("MapId");
 
                     b.ToTable("Province");
                 });
@@ -392,8 +389,8 @@ namespace EduCopter.Persistency.DataBase.Migrations
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Geography.EFCity", b =>
                 {
                     b.HasOne("EduCopter.Persistency.DataBase.Domain.Geography.EFMap", null)
-                        .WithOne()
-                        .HasForeignKey("EduCopter.Persistency.DataBase.Domain.Geography.EFCity", "MapId")
+                        .WithMany()
+                        .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -407,8 +404,8 @@ namespace EduCopter.Persistency.DataBase.Migrations
             modelBuilder.Entity("EduCopter.Persistency.DataBase.Domain.Geography.EFCountry", b =>
                 {
                     b.HasOne("EduCopter.Persistency.DataBase.Domain.Geography.EFMap", null)
-                        .WithOne()
-                        .HasForeignKey("EduCopter.Persistency.DataBase.Domain.Geography.EFCountry", "MapId")
+                        .WithMany()
+                        .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -422,8 +419,8 @@ namespace EduCopter.Persistency.DataBase.Migrations
                         .IsRequired();
 
                     b.HasOne("EduCopter.Persistency.DataBase.Domain.Geography.EFMap", null)
-                        .WithOne()
-                        .HasForeignKey("EduCopter.Persistency.DataBase.Domain.Geography.EFProvince", "MapId")
+                        .WithMany()
+                        .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

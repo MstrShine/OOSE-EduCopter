@@ -11,7 +11,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.Geography
             builder.Property(x => x.Name).IsRequired();
 
             builder.HasOne<EFCountry>().WithMany().HasForeignKey(x => x.CountryId);
-            builder.HasOne<EFMap>().WithOne().HasForeignKey<EFProvince>(x => x.MapId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne<EFMap>().WithMany().HasForeignKey(x => x.MapId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -329,8 +329,7 @@ namespace EduCopter.Persistency.DataBase.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_City_MapId",
                 table: "City",
-                column: "MapId",
-                unique: true);
+                column: "MapId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_ProvinceId",
@@ -345,8 +344,7 @@ namespace EduCopter.Persistency.DataBase.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Country_MapId",
                 table: "Country",
-                column: "MapId",
-                unique: true);
+                column: "MapId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Game_MissionId",
@@ -386,8 +384,7 @@ namespace EduCopter.Persistency.DataBase.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Province_MapId",
                 table: "Province",
-                column: "MapId",
-                unique: true);
+                column: "MapId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Student_ClassId",

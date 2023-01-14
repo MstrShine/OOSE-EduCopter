@@ -11,6 +11,7 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = ef.Id,
                 Name = ef.Name,
+                MapId = ef.MapId,
             };
         }
 
@@ -20,6 +21,7 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = e.Id,
                 Name = e.Name,
+                MapId = e.MapId,
             };
         }
     }

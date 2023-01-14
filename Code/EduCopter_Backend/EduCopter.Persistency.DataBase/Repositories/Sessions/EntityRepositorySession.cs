@@ -26,7 +26,7 @@ namespace EduCopter.Persistency.DataBase.Repositories.Sessions
             if (e == null)
                 throw new ArgumentOutOfRangeException($"Could not find entity in table {typeof(EF)} with id {id}");
 
-            Table.Remove(new EF());
+            Table.Remove(e);
             await _context.SaveChangesAsync();
         }
 
@@ -55,11 +55,11 @@ namespace EduCopter.Persistency.DataBase.Repositories.Sessions
             if (entity.Id == Guid.Empty)
             {
                 entity.Id = Guid.NewGuid();
-                await Table.AddAsync(new EF());
+                await Table.AddAsync(entity);
             }
             else
             {
-                Table.Update(new EF());
+                Table.Update(entity);
             }
 
             await _context.SaveChangesAsync();

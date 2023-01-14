@@ -12,6 +12,7 @@ namespace EduCopter.Logic.Convert.Geography
                 Id = ef.Id,
                 Name = ef.Name,
                 CountryId = ef.CountryId,
+                MapId = ef.MapId,
             };
         }
 
@@ -22,6 +23,7 @@ namespace EduCopter.Logic.Convert.Geography
                 Id = e.Id,
                 Name = e.Name,
                 CountryId = e.CountryId,
+                MapId = e.MapId,
             };
         }
     }
