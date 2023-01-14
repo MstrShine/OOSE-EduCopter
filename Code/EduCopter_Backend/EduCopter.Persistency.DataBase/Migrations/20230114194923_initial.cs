@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -19,18 +20,6 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Administrator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,22 +48,22 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Province",
+                name: "Country",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    MapId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Province", x => x.Id);
+                    table.PrimaryKey("PK_Country", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Province_Country_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Country",
+                        name: "FK_Country_Map_MapId",
+                        column: x => x.MapId,
+                        principalTable: "Map",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,23 +86,29 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "City",
+                name: "Province",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Population = table.Column<long>(type: "bigint", nullable: false),
-                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MapId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.PrimaryKey("PK_Province", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_City_Province_ProvinceId",
-                        column: x => x.ProvinceId,
-                        principalTable: "Province",
+                        name: "FK_Province_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Country",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Province_Map_MapId",
+                        column: x => x.MapId,
+                        principalTable: "Map",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,7 +137,8 @@ namespace EduCopter.Persistency.DataBase.Migrations
                         name: "FK_Student_School_SchoolId",
                         column: x => x.SchoolId,
                         principalTable: "School",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,7 +167,37 @@ namespace EduCopter.Persistency.DataBase.Migrations
                         name: "FK_Teacher_School_SchoolId",
                         column: x => x.SchoolId,
                         principalTable: "School",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "City",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Population = table.Column<long>(type: "bigint", nullable: false),
+                    X = table.Column<int>(type: "int", nullable: false),
+                    Y = table.Column<int>(type: "int", nullable: false),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MapId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_City_Map_MapId",
+                        column: x => x.MapId,
+                        principalTable: "Map",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_City_Province_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "Province",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,7 +248,8 @@ namespace EduCopter.Persistency.DataBase.Migrations
                         name: "FK_Game_Student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Student",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,7 +297,8 @@ namespace EduCopter.Persistency.DataBase.Migrations
                         name: "FK_StudentMission_Student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Student",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -299,6 +327,12 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_City_MapId",
+                table: "City",
+                column: "MapId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_City_ProvinceId",
                 table: "City",
                 column: "ProvinceId");
@@ -307,6 +341,12 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 name: "IX_Class_SchoolId",
                 table: "Class",
                 column: "SchoolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Country_MapId",
+                table: "Country",
+                column: "MapId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Game_MissionId",
@@ -342,6 +382,12 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 name: "IX_Province_CountryId",
                 table: "Province",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Province_MapId",
+                table: "Province",
+                column: "MapId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Student_ClassId",
@@ -400,9 +446,6 @@ namespace EduCopter.Persistency.DataBase.Migrations
                 name: "Province");
 
             migrationBuilder.DropTable(
-                name: "Map");
-
-            migrationBuilder.DropTable(
                 name: "Teacher");
 
             migrationBuilder.DropTable(
@@ -410,6 +453,9 @@ namespace EduCopter.Persistency.DataBase.Migrations
 
             migrationBuilder.DropTable(
                 name: "Class");
+
+            migrationBuilder.DropTable(
+                name: "Map");
 
             migrationBuilder.DropTable(
                 name: "School");

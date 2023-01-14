@@ -12,7 +12,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.Game
         {
             builder.Property(x => x.Date);
 
-            builder.HasOne<EFStudent>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne<EFStudent>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne<EFMission>().WithMany().HasForeignKey(x => x.MissionId);
         }
     }

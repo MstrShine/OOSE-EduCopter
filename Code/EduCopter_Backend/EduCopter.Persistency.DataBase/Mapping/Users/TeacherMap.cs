@@ -15,7 +15,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.Users
             builder.Property(x => x.FirstName).IsRequired();
             builder.Property(x => x.LastName).IsRequired();
 
-            builder.HasOne<EFSchool>().WithMany().HasForeignKey(x => x.SchoolId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne<EFSchool>().WithMany().HasForeignKey(x => x.SchoolId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne<EFClass>().WithOne().HasForeignKey<EFTeacher>(x => x.ClassId);
         }
     }

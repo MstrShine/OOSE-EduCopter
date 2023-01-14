@@ -1,4 +1,5 @@
 ﻿using EduCopter.Persistency.DataBase.Domain.Geography;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EduCopter.Persistency.DataBase.Mapping.Geography
@@ -10,6 +11,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.Geography
             builder.Property(x => x.Name).IsRequired();
 
             builder.HasOne<EFCountry>().WithMany().HasForeignKey(x => x.CountryId);
+            builder.HasOne<EFMap>().WithOne().HasForeignKey<EFProvince>(x => x.MapId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
