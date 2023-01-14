@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.Users;
+using EduCopter.Logic.Convert.Users;
 using EduCopter.Persistency.DataBase.Domain.Users;
 using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
@@ -12,12 +13,12 @@ namespace EduCopter.Logic.Users
 
         protected override Administrator Convert(EFAdministrator entity)
         {
-            throw new NotImplementedException();
+            return AdministratorConverter.Convert(entity);
         }
 
         protected override EFAdministrator Convert(Administrator entity)
         {
-            throw new NotImplementedException();
+            return AdministratorConverter.Convert(entity);
         }
     }
 }

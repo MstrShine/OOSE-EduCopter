@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.School;
+using EduCopter.Logic.Convert.School;
 using EduCopter.Persistency.DataBase.Domain.School;
 using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
@@ -12,12 +13,12 @@ namespace EduCopter.Logic.School
 
         protected override Class Convert(EFClass entity)
         {
-            throw new NotImplementedException();
+            return ClassConverter.Convert(entity);
         }
 
         protected override EFClass Convert(Class entity)
         {
-            throw new NotImplementedException();
+            return ClassConverter.Convert(entity);
         }
     }
 }
