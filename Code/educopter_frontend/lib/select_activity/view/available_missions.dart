@@ -1,8 +1,8 @@
 import 'package:educopter_frontend/select_activity/model/mission.dart';
 import 'package:flutter/material.dart';
 
-class CreateMissionList extends StatefulWidget {
-  const CreateMissionList({
+class AvailableMissions extends StatefulWidget {
+  const AvailableMissions({
     Key? key,
     required this.availableMissions,
   }) : super(key: key);
@@ -10,10 +10,10 @@ class CreateMissionList extends StatefulWidget {
   final List<Mission> availableMissions;
 
   @override
-  State<CreateMissionList> createState() => _CreateMissionListState();
+  State<AvailableMissions> createState() => _AvailableMissionsState();
 }
 
-class _CreateMissionListState extends State<CreateMissionList> {
+class _AvailableMissionsState extends State<AvailableMissions> {
   int selectedIndex = -1;
 
   @override
@@ -29,10 +29,7 @@ class _CreateMissionListState extends State<CreateMissionList> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text('Missies'),
-              ElevatedButton(
-                  onPressed: (() {
-                  }),
-                  child: Text('Start missie'))
+              ElevatedButton(onPressed: (() {}), child: Text('Start missie'))
             ],
           ),
         ),

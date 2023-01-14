@@ -28,17 +28,21 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Form(
                   key: formKey,
-                  child: Column(
-                    children: [
-                      CustomFormField(
-                          labelText: 'Naam school', saveValue: loginData.setSchool),
-                      CustomFormField(
-                          labelText: 'Login naam', saveValue: loginData.setLogin),
-                      CustomFormField(
-                          labelText: 'Password', saveValue: loginData.setPassword),
-                    ],
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                        CustomFormField(
+                            labelText: 'Naam school', saveValue: loginData.setSchool),
+                        CustomFormField(
+                            labelText: 'Login naam', saveValue: loginData.setLogin),
+                        CustomFormField(
+                            labelText: 'Password', saveValue: loginData.setPassword),
+                      ],
+                    ),
                   ),
                 ),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     final form = formKey.currentState!;
@@ -50,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                   child: Text('Log in'),
-                )
+                ),
               ],
             ),
           ),

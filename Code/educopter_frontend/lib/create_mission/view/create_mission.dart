@@ -1,4 +1,5 @@
 import 'package:educopter_frontend/create_mission/model/dummy_data.dart';
+import 'package:educopter_frontend/create_mission/model/mission_criteria.dart';
 import 'package:educopter_frontend/general/general_widgets/customformfield.dart';
 import 'package:educopter_frontend/handlers/filterpattern.dart';
 import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart';
@@ -16,20 +17,21 @@ class MissionCreateScreen extends StatefulWidget {
 class _MissionCreateScreenState extends State<MissionCreateScreen> {
   GlobalKey<FormState> formKey = GlobalKey();
 
+  MissionCriteria missionCriteria = MissionCriteria();
 
   String dropdownvalue = '';
 
-  String missionName = '';
-  String missionNameDisplayed = '';
+  // String missionName = '';
+  // String missionNameDisplayed = '';
 
-  bool countryCapitolFilter = false;
-  bool stateCapitolFilter = false;
-  late int minPopulationFilter;
-  late int maxPopulationFilter;
+  // bool countryCapitolFilter = false;
+  // bool stateCapitolFilter = false;
+  // late int minPopulationFilter;
+  // late int maxPopulationFilter;
 
-  late int destinationCount;
+  // late int destinationCount;
 
-  bool fixedRoute = false;
+  // bool fixedRoute = false;
 
   @override
   void initState() {
@@ -59,30 +61,30 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           constraints: BoxConstraints(maxWidth: 700),
                           child: CustomFormField(
                               labelText: 'Naam missie',
-                              saveValue: setMissionName),
+                              saveValue: missionCriteria.setMissionName),
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 700),
                           child: CustomFormField(
                               labelText: 'Getoonde naam aan leerlingen',
-                              saveValue: setMissionNameDisplayed),
+                              saveValue: missionCriteria.setMissionNameDisplayed),
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 200),
                           child: CustomFormField(
                               numOnly: true,
                               labelText: 'Aantal Steden',
-                              saveValue: setDestinationCount),
+                              saveValue: missionCriteria.setDestinationCount),
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 300),
                           child: CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
                               title: Text('Statische route?'),
-                              value: fixedRoute,
+                              value: missionCriteria.fixedRoute,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  fixedRoute = value!;
+                                  missionCriteria.fixedRoute = value!;
                                 });
                               }),
                         ),
@@ -91,10 +93,10 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           child: CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
                               title: Text('Alleen hoofdsteden'),
-                              value: countryCapitolFilter,
+                              value: missionCriteria.countryCapitolFilter,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  countryCapitolFilter = value!;
+                                  missionCriteria.countryCapitolFilter = value!;
                                 });
                               }),
                         ),
@@ -103,10 +105,10 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           child: CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
                               title: Text('Alleen provinciehoofdsteden'),
-                              value: stateCapitolFilter,
+                              value: missionCriteria.stateCapitolFilter,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  stateCapitolFilter = value!;
+                                  missionCriteria.stateCapitolFilter = value!;
                                 });
                               }),
                         ),
@@ -119,13 +121,13 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                                 child: CustomFormField(
                                     numOnly: true,
                                     labelText: 'Minimum aantal inwoners',
-                                    saveValue: setMinPopulationFilter),
+                                    saveValue: missionCriteria.setMinPopulationFilter),
                               ),
                               Expanded(
                                 child: CustomFormField(
                                     numOnly: true,
                                     labelText: 'Maximum aantal inwoners',
-                                    saveValue: setMaxPopulationFilter),
+                                    saveValue: missionCriteria.setMaxPopulationFilter),
                               ),
                               ElevatedButton(
                                 onPressed: () {
@@ -220,25 +222,5 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
         ),
       ),
     );
-  }
-
-  setMinPopulationFilter(var value) {
-    minPopulationFilter = int.tryParse(value)!;
-  }
-
-  setMaxPopulationFilter(var value) {
-    maxPopulationFilter = int.tryParse(value)!;
-  }
-
-  setMissionName(var value) {
-    missionName = value;
-  }
-
-  setMissionNameDisplayed(var value) {
-    missionNameDisplayed = value;
-  }
-
-  setDestinationCount(var value) {
-    destinationCount = int.tryParse(value)!;
   }
 }
