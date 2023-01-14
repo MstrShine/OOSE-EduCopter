@@ -26,14 +26,18 @@ class _AvailableMissionsState extends State<AvailableMissions> {
         Container(
           color: Colors.amber,
           alignment: FractionalOffset.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text('Missies'),
-              ElevatedButton(onPressed: (() {}), child: Text('Start missie'))
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Missies'),
+                ElevatedButton(onPressed: (() {}), child: Text('Start missie'))
+              ],
+            ),
           ),
         ),
+        SizedBox(height: 10),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 340, maxHeight: 270),
           child: Scrollbar(

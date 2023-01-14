@@ -2,20 +2,17 @@ import 'package:educopter_frontend/select_activity/model/worldmap.dart';
 import 'package:flutter/material.dart';
 
 class AvailableMaps extends StatefulWidget {
-  const AvailableMaps(
-      {super.key, required this.availableWorldmaps});
+  const AvailableMaps({super.key, required this.availableWorldmaps});
 
   final List<Worldmap> availableWorldmaps;
 
   @override
-  State<AvailableMaps> createState() =>
-      _AvailableMapsState();
+  State<AvailableMaps> createState() => _AvailableMapsState();
 }
 
-class _AvailableMapsState
-    extends State<AvailableMaps> {
+class _AvailableMapsState extends State<AvailableMaps> {
   int selectedIndex = 0;
-   final yourScrollController = ScrollController();
+  final yourScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +20,16 @@ class _AvailableMapsState
       children: [
         Container(
           color: Colors.amber,
-          alignment: FractionalOffset.center,
-          child: Column(
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                child: Text('Oneindige speelmodus'),
-              ),
-              Text(
-                  'Bezoek zoveel mogelijk steden voordat je brandstof opraakt!'),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                Text('Oneindige speelmodus'),
+                Text(
+                    'Bezoek zoveel mogelijk steden voordat je brandstof opraakt!'),
+              ],
+            ),
           ),
         ),
         Row(

@@ -31,6 +31,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   Widget build(BuildContext context) {
     processCsv(context);
     int selectedIndex = -1;
+    final yourScrollController = ScrollController();
 
     return Scaffold(
       body: SafeArea(
@@ -172,7 +173,9 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                       constraints:
                           BoxConstraints(maxWidth: 340, maxHeight: 270),
                       child: Scrollbar(
+                        controller: yourScrollController,
                         child: ListView.builder(
+                          controller: yourScrollController,
                           itemCount: snapshot.data?.length,
                           itemBuilder: ((context, index) {
                             return GestureDetector(

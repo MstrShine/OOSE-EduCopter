@@ -30,10 +30,19 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TeacherActivityOptions(userData: userData, context: context),
-          AvailableMissions(availableMissions: availableMissions),
-          AvailableMaps(
-              availableWorldmaps: availableWorldmaps),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TeacherActivityOptions(userData: userData, context: context),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AvailableMissions(availableMissions: availableMissions),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AvailableMaps(
+                availableWorldmaps: availableWorldmaps),
+          ),
         ],
           ),
       ),

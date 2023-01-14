@@ -12,22 +12,28 @@ class TeacherActivityOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.yellowAccent,
+        color: Colors.amber,
         alignment: FractionalOffset.center,
         child: (userData['rol'] != 'leerling')
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                    onPressed: (() {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/createmission');
-                    }),
-                    child: Text('Create mission'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: (() {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/createmission');
+                      }),
+                      child: Text('Create mission'),
+                    ),
                   ),
-                  ElevatedButton(
-                    onPressed: (() {}),
-                    child: Text('Review students'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: (() {}),
+                      child: Text('Review students'),
+                    ),
                   ),
                 ],
               )
