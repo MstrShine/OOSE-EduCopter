@@ -11,9 +11,10 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
-
+    defaults:
+      run:
+        working-directory: ./Code/EduCopter_Backend
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
