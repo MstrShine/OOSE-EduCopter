@@ -1,11 +1,10 @@
-import 'dart:html';
-import 'package:educopter_frontend/model/city.dart';
+import 'package:educopter_frontend/general/model/city.dart';
 
 abstract class Criteria {
   List<City> meetCriteria(List<City> cities);
 }
 
-class CriteriaCapitol implements Criteria {
+class CriteriaCapital implements Criteria {
   @override
   List<City> meetCriteria(List<City> cities) {
     List<City> capitolCities = [];
@@ -114,7 +113,7 @@ class CombinedCriteria implements Criteria {
   }
 }
 
-Criteria capitol = CriteriaCapitol();
+Criteria capital = CriteriaCapital();
 Criteria upperLimitResidents40000 =
     CriteriaAmmountResidentsLessThan(upperAmmountResidents: 40000);
 

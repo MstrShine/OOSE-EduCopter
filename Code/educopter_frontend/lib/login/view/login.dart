@@ -1,7 +1,8 @@
-import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
+import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart';
+import 'package:educopter_frontend/login/view/login_attempt_dialogbox.dart';
 import 'package:flutter/material.dart';
-import '../helperwidgets/customformfield.dart';
-import '../model/logindata.dart';
+import '../../general/general_widgets/customformfield.dart';
+import '../model/login.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       form.save();
                       loginData.saveTest();
                       print('Ik gebruik nu ${loginData.login} en ${loginData.school} en ${loginData.password}');
-                      loginHandler(loginData);
+                      loginAttemptDialogBox(loginData, context);
                     }
                   },
                   child: Text('Log in'),
@@ -56,43 +57,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  loginHandler(LoginData loginData) {
-    if (loginData.attemptLogin(loginData)) {
-      return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Inlogpoging succesvol'),
-          actions: [
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.pop(context);
-                Map userdata = loginData.getUser();
-                Navigator.of(context)
-                    .pushReplacementNamed('/select', arguments: userdata);
-              },
-            )
-          ],
-        ),
-      );
-    } else {
-      return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Inlogpoging succesvol'),
-          actions: [
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.of(context).pushReplacementNamed('/select');
-              },
-            )
-          ],
-        ),
-      );
-    }
   }
 }

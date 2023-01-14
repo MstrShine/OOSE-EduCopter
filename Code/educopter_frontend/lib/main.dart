@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '/pages/home.dart';
-import 'pages/login.dart';
-import 'pages/missioncreate.dart';
-import 'pages/activityselect.dart';
-import 'pages/game.dart';
+import 'home/view/home.dart';
+import 'login/view/login.dart';
+import 'create_mission/view/create_mission.dart';
+import 'select_activity/view/select_activity.dart';
+import 'game/view/game.dart';
 
 void main() {
   runApp(MaterialApp(

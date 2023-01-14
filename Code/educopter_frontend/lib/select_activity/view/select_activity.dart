@@ -1,7 +1,10 @@
-import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
+import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart';
+import 'package:educopter_frontend/select_activity/model/dummy_data.dart';
+import 'package:educopter_frontend/select_activity/model/worldmap.dart';
+import 'package:educopter_frontend/select_activity/view/available_missions.dart';
+import 'package:educopter_frontend/select_activity/view/teacher_activity_options.dart';
 import 'package:flutter/material.dart';
-import '../model/mission.dart';
-import '../model/worldmap.dart';
+
 
 class ActivitySelectScreen extends StatefulWidget {
   const ActivitySelectScreen({super.key});
@@ -13,28 +16,6 @@ class ActivitySelectScreen extends StatefulWidget {
 class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
   Map userData = {};
 
-  final List<Mission> availableMissions = [
-    Mission(
-        missionId: 12, mapName: 'Nederland', missionDescription: 'Inkomertje'),
-    Mission(
-        missionId: 13, mapName: 'Nederland', missionDescription: 'Uitdaging'),
-    Mission(
-        missionId: 14, mapName: 'Duitsland', missionDescription: 'Inkomertje'),
-    Mission(
-        missionId: 15, mapName: 'Duitsland', missionDescription: 'Uitdaging'),
-    Mission(
-        missionId: 17,
-        mapName: 'Europa',
-        missionDescription: 'Speciaal voor jou'),
-  ];
-
-  final List<Worldmap> availableWorldmaps = [
-    Worldmap(mapId: 1, mapName: 'Nederland', mapLocation: 'Netherlands.svg'),
-    Worldmap(mapId: 2, mapName: 'Duitsland', mapLocation: 'Duitsland.svg'),
-    Worldmap(mapId: 3, mapName: 'Europa', mapLocation: 'Europa.svg'),
-    Worldmap(mapId: 4, mapName: 'Zweden', mapLocation: 'Zweden.svg'),
-    Worldmap(mapId: 5, mapName: 'Verenigde Staten', mapLocation: 'VS.svg'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +34,7 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
           childWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CreateTeacherOptions(userData: userData),
+              TeacherActivityOptions(userData: userData, context: context),
               CreateMissionList(availableMissions: availableMissions),
               CreateAvailableWorldmapList(
                   availableWorldmaps: availableWorldmaps),
@@ -64,6 +45,8 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
     );
   }
 }
+
+
 
 class CreateAvailableWorldmapList extends StatefulWidget {
   const CreateAvailableWorldmapList(
@@ -166,120 +149,6 @@ class _CreateAvailableWorldmapListState
               ),
             ),
           ],
-        ),
-      ],
-    );
-  }
-}
-
-class CreateTeacherOptions extends StatelessWidget {
-  const CreateTeacherOptions({
-    Key? key,
-    required this.userData,
-  }) : super(key: key);
-
-  final Map userData;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.green,
-        alignment: FractionalOffset.center,
-        child: (userData['rol'] != 'leerling')
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: (() {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/createmission');
-                    }),
-                    child: Text('Create mission'),
-                  ),
-                  ElevatedButton(
-                    onPressed: (() {}),
-                    child: Text('Review students'),
-                  ),
-                ],
-              )
-            : null);
-  }
-}
-
-class CreateMissionList extends StatefulWidget {
-  const CreateMissionList({
-    Key? key,
-    required this.availableMissions,
-  }) : super(key: key);
-
-  final List<Mission> availableMissions;
-
-  @override
-  State<CreateMissionList> createState() => _CreateMissionListState();
-}
-
-class _CreateMissionListState extends State<CreateMissionList> {
-  int selectedIndex = -1;
-
-  @override
-  Widget build(BuildContext context) {
-    print('de selectedindex is $selectedIndex');
-
-    return Column(
-      children: [
-        Container(
-          color: Colors.amber,
-          alignment: FractionalOffset.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              Text('Missies'),
-              ElevatedButton(
-                  onPressed: (() {
-                    //start geselecteerde missie
-                  }),
-                  child: Text('Start missie'))
-            ],
-          ),
-        ),
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 340, maxHeight: 270),
-          child: Scrollbar(
-            child: ListView.builder(
-              itemCount: widget.availableMissions.length,
-              itemBuilder: ((context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = index;
-                      print('ik heb nu de index veranderd naar $selectedIndex');
-                    });
-                  },
-                  child: Container(
-                    color: (index == selectedIndex)
-                        ? Colors.red
-                        : (index % 2 == 0)
-                            ? Colors.lightBlueAccent[400]
-                            : Colors.lightBlueAccent[200],
-                    height: 40,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Text(widget.availableMissions[index].mapName),
-                          SizedBox(width: 10),
-                          Text(widget
-                              .availableMissions[index].missionDescription),
-                          Text(index.toString()),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
         ),
       ],
     );

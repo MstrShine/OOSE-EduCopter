@@ -1,8 +1,6 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../handlers/filterpattern.dart';
-
 class City {
   String country;
   String cityName;

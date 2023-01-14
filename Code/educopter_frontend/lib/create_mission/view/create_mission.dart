@@ -1,11 +1,10 @@
+import 'package:educopter_frontend/create_mission/model/dummy_data.dart';
+import 'package:educopter_frontend/general/general_widgets/customformfield.dart';
 import 'package:educopter_frontend/handlers/filterpattern.dart';
-import 'package:educopter_frontend/helperwidgets/maxcontentwidth.dart';
-import 'package:educopter_frontend/model/city.dart';
+import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart';
+import 'package:educopter_frontend/general/model/city.dart';
+import 'package:educopter_frontend/select_activity/model/worldmap.dart';
 import 'package:flutter/material.dart';
-import 'package:csv/csv.dart';
-
-import '../helperwidgets/customformfield.dart';
-import '../model/worldmap.dart';
 
 class MissionCreateScreen extends StatefulWidget {
   const MissionCreateScreen({super.key});
@@ -17,13 +16,7 @@ class MissionCreateScreen extends StatefulWidget {
 class _MissionCreateScreenState extends State<MissionCreateScreen> {
   GlobalKey<FormState> formKey = GlobalKey();
 
-  final List<Worldmap> availableWorldmaps = [
-    Worldmap(mapId: 1, mapName: 'Nederland', mapLocation: 'Netherlands.svg'),
-    Worldmap(mapId: 2, mapName: 'Duitsland', mapLocation: 'Duitsland.svg'),
-    Worldmap(mapId: 3, mapName: 'Europa', mapLocation: 'Europa.svg'),
-    Worldmap(mapId: 4, mapName: 'Zweden', mapLocation: 'Zweden.svg'),
-    Worldmap(mapId: 5, mapName: 'Verenigde Staten', mapLocation: 'VS.svg'),
-  ];
+
   String dropdownvalue = '';
 
   String missionName = '';
@@ -40,7 +33,6 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dropdownvalue = availableWorldmaps.first.mapName;
   }
