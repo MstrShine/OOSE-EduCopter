@@ -1,4 +1,5 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Game;
+﻿using EduCopter.Logic.Convert.Game;
+using EduCopter.Persistency.DataBase.Domain.Game;
 using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
 namespace EduCopter.Logic.Game
@@ -11,12 +12,12 @@ namespace EduCopter.Logic.Game
 
         protected override Domain.Game.Game Convert(EFGame entity)
         {
-            throw new NotImplementedException();
+            return GameConverter.Convert(entity);
         }
 
         protected override EFGame Convert(Domain.Game.Game entity)
         {
-            throw new NotImplementedException();
+            return GameConverter.Convert(entity);
         }
     }
 }

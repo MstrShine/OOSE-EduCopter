@@ -1,4 +1,5 @@
 ﻿using EduCopter.Domain.Geography;
+using EduCopter.Logic.Convert.Geography;
 using EduCopter.Persistency.DataBase.Domain.Geography;
 using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
@@ -12,12 +13,12 @@ namespace EduCopter.Logic.Geography
 
         protected override Country Convert(EFCountry entity)
         {
-            throw new NotImplementedException();
+            return CountryConverter.Convert(entity);
         }
 
         protected override EFCountry Convert(Country entity)
         {
-            throw new NotImplementedException();
+            return CountryConverter.Convert(entity);
         }
     }
 }

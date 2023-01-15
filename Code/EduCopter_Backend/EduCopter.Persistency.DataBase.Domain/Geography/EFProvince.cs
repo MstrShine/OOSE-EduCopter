@@ -9,5 +9,7 @@ namespace EduCopter.Persistency.DataBase.Domain.Geography
 
         public Guid CountryId { get; set; }
 
+        public Guid MapId { get; set; }
+
     }
 }

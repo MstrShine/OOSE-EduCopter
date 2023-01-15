@@ -11,7 +11,7 @@ namespace EduCopter.Persistency.DataBase.Mapping.Mission
         {
             builder.HasKey(x => new { x.StudentId, x.MissionId });
 
-            builder.HasOne<EFStudent>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne<EFStudent>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne<EFMission>().WithMany().HasForeignKey(x => x.MissionId);
         }
     }

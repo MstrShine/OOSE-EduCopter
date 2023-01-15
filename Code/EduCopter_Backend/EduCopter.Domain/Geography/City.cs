@@ -7,5 +7,7 @@
         public long Population { get; set; }
 
         public Guid ProvinceId { get; set; }
+
+        public Guid MapId { get; set; }
     }
 }

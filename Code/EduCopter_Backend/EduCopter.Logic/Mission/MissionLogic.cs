@@ -1,4 +1,5 @@
-﻿using EduCopter.Persistency.DataBase.Domain.Mission;
+﻿using EduCopter.Logic.Convert.Mission;
+using EduCopter.Persistency.DataBase.Domain.Mission;
 using EduCopter.Persistency.DataBase.Repositories.Interfaces;
 
 namespace EduCopter.Logic.Mission
@@ -11,12 +12,12 @@ namespace EduCopter.Logic.Mission
 
         protected override Domain.Mission.Mission Convert(EFMission entity)
         {
-            throw new NotImplementedException();
+            return MissionConverter.Convert(entity);
         }
 
         protected override EFMission Convert(Domain.Mission.Mission entity)
         {
-            throw new NotImplementedException();
+            return MissionConverter.Convert(entity);
         }
     }
 }
