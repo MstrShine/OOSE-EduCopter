@@ -1,7 +1,7 @@
+import 'package:educopter_frontend/general/general_widgets/customformfield.dart';
+import 'package:educopter_frontend/login/model/login.dart';
 import 'package:educopter_frontend/login/view/login_attempt_dialogbox.dart';
 import 'package:flutter/material.dart';
-import '../../general/general_widgets/customformfield.dart';
-import '../model/login.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

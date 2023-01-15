@@ -29,7 +29,6 @@ class _CustomFormFieldState extends State<CustomFormField> {
         child: Padding(
           padding: EdgeInsets.fromLTRB(8, 10, 8, 8),
           child: TextFormField(
-            //padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             decoration: InputDecoration(
               labelText: widget.labelText,
             ),
