@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TeacherActivityOptions extends StatelessWidget {
-  const TeacherActivityOptions({
-    Key? key,
-    required this.userData,
-    required BuildContext context 
-  }) : super(key: key);
+  const TeacherActivityOptions(
+      {Key? key, required this.userData, required BuildContext context})
+      : super(key: key);
 
   final Map userData;
 
@@ -22,8 +20,7 @@ class TeacherActivityOptions extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: (() {
-                        Navigator.of(context)
-                            .pushReplacementNamed('/createmission');
+                        Navigator.of(context).pushNamed('/createmission');
                       }),
                       child: Text('Create mission'),
                     ),
@@ -31,7 +28,9 @@ class TeacherActivityOptions extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.of(context).pushNamed('/reviewstudents');
+                      }),
                       child: Text('Review students'),
                     ),
                   ),
@@ -40,4 +39,3 @@ class TeacherActivityOptions extends StatelessWidget {
             : null);
   }
 }
-

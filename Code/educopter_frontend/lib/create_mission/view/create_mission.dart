@@ -34,6 +34,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
     final yourScrollController = ScrollController();
 
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 1400),
