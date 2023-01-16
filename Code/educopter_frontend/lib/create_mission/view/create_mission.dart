@@ -54,7 +54,11 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
     super.initState();
     dropdownvalue = availableWorldmaps.first.mapName;
     selectedCities = [];
-    //futureAlbum = fetchAlbum();
+    runAsync();
+  }
+
+  void runAsync() async {
+    var futureAlbum = await fetchGameMaps();
   }
 
   // @override
@@ -214,7 +218,8 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                     onPressed: () {
                       print("ik wil nu de filter toepassen");
                       completeFilter = CombinedCriteria(
-                          criteriaList: createCityFilter(missionCriteria, selectedCities));
+                          criteriaList: createCityFilter(
+                              missionCriteria, selectedCities));
                       setState(() {
                         filteredCities =
                             completeFilter.meetCriteria(allCitiesFromMap);
@@ -249,7 +254,8 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
                           //createFilter(missionCriteria);
                           completeFilter = CombinedCriteria(
-                              criteriaList: createCityFilter(missionCriteria, selectedCities));
+                              criteriaList: createCityFilter(
+                                  missionCriteria, selectedCities));
 
                           filteredCities =
                               completeFilter.meetCriteria(allCitiesFromMap);
@@ -310,9 +316,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                                                       index,
                                                       filteredCities,
                                                       selectedCities);
-                                                  setState(() {
-                                                    
-                                                  });
+                                                  setState(() {});
                                                 },
                                                 icon: Icon(
                                                     Icons.arrow_right_rounded))
@@ -336,64 +340,62 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                   SizedBox(width: 20),
                   Expanded(
                     child: Center(
-                      child: ConstrainedBox(
-                            constraints:
-                                BoxConstraints(maxHeight: 170, maxWidth: 1200),
-                            child: Scrollbar(
-                              controller: yourSecondScrollController,
-                              child: ListView.builder(
-                                controller: yourSecondScrollController,
-                                //itemCount: snapshot.data?.length,
-                                itemCount: selectedCities.length,
-                                itemBuilder: ((context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      //setState(() {});
-                                    },
-                                    child: Container(
-                                      color: (index == selectedIndex)
-                                          ? Colors.red
-                                          : (index % 2 == 0)
-                                              ? Colors.lightBlueAccent[400]
-                                              : Colors.lightBlueAccent[200],
-                                      height: 40,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Row(
-                                          children: [
-                                            //Text(snapshot.data?[index].cityName),
-                                            SizedBox(
-                                              width: 180,
-                                              child: Text(selectedCities[index]
-                                                  .cityName),
-                                            ),
-                                            SizedBox(width: 10),
-                                            Text(selectedCities[index]
-                                                .residents
-                                                .toString()),
-                                            SizedBox(width: 40),
-                                            IconButton(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                onPressed: () {
-                                                  // addCityToSelection(
-                                                  //     index,
-                                                  //     filteredCities,
-                                                  //     selectedCities);
-                                                },
-                                                icon: Icon(
-                                                    Icons.arrow_right_rounded))
-                                            //Text(snapshot.data![index].residents
-                                            //   .toString()),
-                                          ],
-                                        ),
+                        child: ConstrainedBox(
+                      constraints:
+                          BoxConstraints(maxHeight: 170, maxWidth: 1200),
+                      child: Scrollbar(
+                        controller: yourSecondScrollController,
+                        child: ListView.builder(
+                          controller: yourSecondScrollController,
+                          //itemCount: snapshot.data?.length,
+                          itemCount: selectedCities.length,
+                          itemBuilder: ((context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                //setState(() {});
+                              },
+                              child: Container(
+                                color: (index == selectedIndex)
+                                    ? Colors.red
+                                    : (index % 2 == 0)
+                                        ? Colors.lightBlueAccent[400]
+                                        : Colors.lightBlueAccent[200],
+                                height: 40,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      //Text(snapshot.data?[index].cityName),
+                                      SizedBox(
+                                        width: 180,
+                                        child: Text(
+                                            selectedCities[index].cityName),
                                       ),
-                                    ),
-                                  );
-                                }),
+                                      SizedBox(width: 10),
+                                      Text(selectedCities[index]
+                                          .residents
+                                          .toString()),
+                                      SizedBox(width: 40),
+                                      IconButton(
+                                          alignment: Alignment.centerRight,
+                                          onPressed: () {
+                                            // addCityToSelection(
+                                            //     index,
+                                            //     filteredCities,
+                                            //     selectedCities);
+                                          },
+                                          icon: Icon(Icons.arrow_right_rounded))
+                                      //Text(snapshot.data![index].residents
+                                      //   .toString()),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          )
+                            );
+                          }),
+                        ),
+                      ),
+                    )
 
                         //     child: FutureBuilder<Album>(
                         //   future: futureAlbum,

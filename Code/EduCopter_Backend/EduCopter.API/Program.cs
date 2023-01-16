@@ -15,6 +15,7 @@ namespace EduCopter.API
 
             // Add services to the container.
             #region Configure Services
+            builder.Services.AddCors();
             builder.Services.AddRepositories();
             builder.Services.AddDataBase();
             builder.Services.AddLogic();
@@ -55,6 +56,7 @@ namespace EduCopter.API
             #region Configure App
             var app = builder.Build();
 
+
             app.UseStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
@@ -79,6 +81,8 @@ namespace EduCopter.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod());
 
             app.UseRouting();
             app.UseAuthorization();
