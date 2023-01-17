@@ -29,6 +29,24 @@ class CriteriaStateCapital implements Criteria<City> {
   }
 }
 
+class CriteriaCityInState implements Criteria<City> {
+  String stateName;
+  CriteriaCityInState({required this.stateName});
+
+  @override
+  List<City> meetCriteria(List<City> cities) {
+    List<City> citiesInState = [];
+
+    for (City city in cities) {
+      if (city.stateName == stateName) {
+        citiesInState.add(city);
+      }
+    }
+
+    return citiesInState;
+  }
+}
+
 class CriteriaMinAmmountResidents implements Criteria<City> {
   int bottomAmmountResidents;
 
@@ -73,53 +91,32 @@ class CriteriaCityNotSelected implements Criteria<City> {
 
   @override
   List<City> meetCriteria(List<City> cities) {
-    List<City> initialList = cities;
+    List<City> filteredCities = List.from(cities);
 
-    // for (City city in cities) {
-    //   for (int i = (selectedCities.length - 1); i > 0; i--) {
-    //     if (city.cityName == selectedCities[i].cityName) {
-    //       initialList.removeAt(i);
-    //     }
-    //   }
-    // }
-
-    // for (int i = (cities.length - 1); i > 0; i--){
-    //   for (int j = 0; j<selectedCities.length; j++){
-    //   }
-    // }
-
-    //TODO: Loop lukt even niet, daarom verkeerde returnwaarde
-    return initialList;
-  }
-}
-
-class CriteriaCityInState implements Criteria<City> {
-  String stateName;
-
-  CriteriaCityInState({required this.stateName});
-
-  @override
-  List<City> meetCriteria(List<City> cities) {
-    List<City> citiesInState = [];
-
-    for (City city in cities) {
-      if (city.stateName == stateName) {
-        citiesInState.add(city);
+    if (filteredCities.isNotEmpty) {
+      for (int i = (cities.length - 1); i >= 0; i--) {
+        for (City selectedCity in selectedCities) {
+          if (cities[i].cityName == selectedCity.cityName) {
+            filteredCities.removeAt(i);
+          }
+        }
       }
     }
-    return citiesInState;
+
+    return filteredCities;
   }
 }
 
-Criteria<City> capital = CriteriaCapital();
-Criteria<City> upperLimitResidents40000 =
-    CriteriaMaxAmmountResidents(upperAmmountResidents: 40000);
+
+// Criteria<City> capital = CriteriaCapital();
+// Criteria<City> upperLimitResidents40000 =
+//     CriteriaMaxAmmountResidents(upperAmmountResidents: 40000);
 
 //List<Criteria> combinedCriteria = [capitol, upperLimitResidents40000];
-List<Criteria<City>> combinedCriteria = [upperLimitResidents40000];
+// List<Criteria<City>> combinedCriteria = [upperLimitResidents40000];
 
-Criteria<City> completeFilter =
-    CombinedCriteria(criteriaList: combinedCriteria);
+// Criteria<City> completeFilter =
+//     CombinedCriteria(criteriaList: combinedCriteria);
 
 
 //List<City> cityResult = completeFilter.meetCriteria(cities);

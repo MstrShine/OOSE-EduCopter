@@ -17,6 +17,14 @@ List<Criteria<City>> createCityFilter(
     combinedCriteria.add(capital);
   }
 
+  if (missionCriteria.stateName != null) {
+    String stateName = missionCriteria.stateName!;
+    if (stateName.isNotEmpty) {
+      Criteria<City> cityIsInState = CriteriaCityInState(stateName: stateName);
+      combinedCriteria.add(cityIsInState);
+    }
+  }
+
   if (missionCriteria.minPopulationFilter != null) {
     int bottomAmmount = missionCriteria.minPopulationFilter!;
     Criteria<City> bottomAmmountResidents =

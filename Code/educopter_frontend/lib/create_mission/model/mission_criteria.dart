@@ -7,6 +7,7 @@ class MissionCriteria {
   int? maxPopulationFilter;
   int? destinationCount;
   bool fixedRoute = false;
+  String? stateName;
 
   MissionCriteria({
     this.missionName = "",
@@ -16,9 +17,25 @@ class MissionCriteria {
     this.fixedRoute = false,
   });
 
+  resetMissionCriteria() {
+    missionName = "";
+    missionNameDisplayed = "";
+    countryCapitalFilter = false;
+    stateCapitalFilter = false;
+    fixedRoute = false;
+    minPopulationFilter = 0;
+    stateName = "";
+  }
+
+  setStateName(String value) {
+    stateName = value;
+  }
+
   setMinPopulationFilter(var value) {
     if (int.tryParse(value) != null) {
       minPopulationFilter = int.tryParse(value)!;
+    } else {
+      minPopulationFilter = 0;
     }
     //print("ik pas nu de minpopfilter aan");
   }
@@ -26,6 +43,8 @@ class MissionCriteria {
   setMaxPopulationFilter(var value) {
     if (int.tryParse(value) != null) {
       maxPopulationFilter = int.tryParse(value)!;
+    } else {
+      maxPopulationFilter = 99999999;
     }
   }
 

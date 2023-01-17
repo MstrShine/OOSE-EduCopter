@@ -1,14 +1,10 @@
-import 'dart:async';
-import 'package:educopter_frontend/create_mission/model/album.dart';
 import 'package:educopter_frontend/create_mission/model/dummy_data.dart';
-import 'package:educopter_frontend/create_mission/model/gamemap.dart';
+import 'package:educopter_frontend/create_mission/model/mission.dart';
 import 'package:educopter_frontend/create_mission/model/mission_criteria.dart';
-import 'package:educopter_frontend/create_mission/services/add_city_to_selection.dart';
+import 'package:educopter_frontend/create_mission/services/city_selection_handler.dart';
 import 'package:educopter_frontend/create_mission/services/create_filter.dart';
-import 'package:educopter_frontend/create_mission/services/get_album.dart';
-import 'package:educopter_frontend/create_mission/services/get_gamemaps.dart';
+import 'package:educopter_frontend/create_mission/services/get_statenames.dart';
 import 'package:educopter_frontend/general/general_widgets/customformfield.dart';
-import 'package:educopter_frontend/create_mission/services/city_filter.dart';
 import 'package:educopter_frontend/general/model/city.dart';
 import 'package:educopter_frontend/general/services/filter_pattern.dart';
 import 'package:educopter_frontend/select_activity/model/worldmap.dart';
@@ -24,8 +20,11 @@ class MissionCreateScreen extends StatefulWidget {
 class _MissionCreateScreenState extends State<MissionCreateScreen> {
   GlobalKey<FormState> formKey = GlobalKey();
 
-  //late Future<GameMap> gameMap;
-  //late Future<Album> futureAlbum;
+  final TextEditingController missionNamesController = TextEditingController();
+  final TextEditingController missionNamesDisplayedController =
+      TextEditingController();
+  final yourScrollController = ScrollController();
+  final yourSecondScrollController = ScrollController();
 
   late List<City> citiesFromMap;
   late List<City> filteredCities;
@@ -35,44 +34,17 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
   MissionCriteria missionCriteria = MissionCriteria();
   String dropdownvalue = '';
-
-  Timer searchOnStoppedTyping = Timer(Duration(milliseconds: 10), (() {}));
-
-  _onChangedHandler(var value, Function updateValue) {
-    const duration = Duration(
-        milliseconds:
-            1500); // set the duration that you want call search() after that.
-    if (searchOnStoppedTyping != null) {
-      setState(() => searchOnStoppedTyping.cancel());
-    }
-    setState(() =>
-        searchOnStoppedTyping = Timer(duration, () => updateValue(value)));
-  }
+  String dropdownStateValue = "";
 
   @override
   void initState() {
     super.initState();
     dropdownvalue = availableWorldmaps.first.mapName;
     selectedCities = [];
-    runAsync();
   }
-
-  void runAsync() async {
-    var futureAlbum = await fetchGameMaps();
-  }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   gameMap = fetchGameMaps();
-  // }
 
   @override
   Widget build(BuildContext context) {
-    processCsv(context);
-    int selectedIndex = -1;
-    final yourScrollController = ScrollController();
-    final yourSecondScrollController = ScrollController();
 
     return Scaffold(
       appBar: AppBar(),
@@ -81,363 +53,413 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
           constraints: BoxConstraints(maxWidth: 1400),
           child: Column(
             children: [
-              Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 10),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Select map"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: DropdownButton(
-                            value: dropdownvalue,
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            items: availableWorldmaps.map((Worldmap map) {
-                              return DropdownMenuItem(
-                                value: map.mapName,
-                                child: Text(map.mapName),
-                              );
-                            }).toList(),
-                            onChanged: (String? selectedValue) {
-                              setState(() {
-                                dropdownvalue = selectedValue!;
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Flexible(
-                          child: CustomFormField(
-                              labelText: 'Naam missie',
-                              saveValue: missionCriteria.setMissionName),
-                        ),
-                        SizedBox(width: 10),
-                        Flexible(
-                          child: CustomFormField(
-                              labelText: 'Getoonde naam aan leerlingen',
-                              saveValue:
-                                  missionCriteria.setMissionNameDisplayed),
-                        ),
-                        SizedBox(width: 10),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: "Minimum aantal inwoners"),
-                            onChanged: (value) {
-                              missionCriteria.setMinPopulationFilter(value);
-
-                              //onchangedhandler werkt niet, voorlopig via knop filter steden, nog naar kijken
-
-                              // _onChangedHandler(value,
-                              //     missionCriteria.setMinPopulationFilter);
-
-                              // setState(() {
-                              //   print("nu gaat deze af");
-                              // });
-                              //print(missionCriteria.minPopulationFilter);
-                            },
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: "Maximum aantal inwoners"),
-                            onChanged: (value) {
-                              missionCriteria.setMaxPopulationFilter(value);
-                              // _onChangedHandler(value,
-                              //     missionCriteria.setMaxPopulationFilter);
-                            },
-                          ),
-                        ),
-                        Flexible(
-                          child: CheckboxListTile(
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: Text('Statische route?'),
-                              value: missionCriteria.fixedRoute,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  missionCriteria.fixedRoute = value!;
-                                });
-                              }),
-                        ),
-                        Flexible(
-                          child: CheckboxListTile(
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: Text('Alleen hoofdsteden'),
-                              value: missionCriteria.countryCapitalFilter,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  missionCriteria.countryCapitalFilter = value!;
-                                });
-                              }),
-                        ),
-                        Flexible(
-                          child: CheckboxListTile(
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: Text('Alleen provincie-hoofdsteden'),
-                              value: missionCriteria.stateCapitalFilter,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  missionCriteria.stateCapitalFilter = value!;
-                                });
-                              }),
-                        ),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: 150),
-                          child: CustomFormField(
-                              numOnly: true,
-                              labelText: 'Aantal Steden',
-                              saveValue: missionCriteria.setDestinationCount),
-                        ),
-                        SizedBox(width: 10),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              formSectionWidget(),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    //DEZE KNOP WERKT NOG NIET
-                    onPressed: () {
-                      print("ik wil nu de filter toepassen");
-                      completeFilter = CombinedCriteria(
-                          criteriaList: createCityFilter(
-                              missionCriteria, selectedCities));
-                      setState(() {
-                        filteredCities =
-                            completeFilter.meetCriteria(allCitiesFromMap);
-                      });
-                    },
-                    child: Text('Filter steden'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Voeg alle steden toe"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Wis lijst geselecteerd steden"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Sla missie op"),
-                  ),
-                ],
-              ),
+              actionButtons(),
               SizedBox(height: 20),
               Row(
                 children: [
                   SizedBox(width: 10),
-                  Expanded(
-                    child: FutureBuilder(
-                      future: processCsv(context),
-                      builder: ((context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          allCitiesFromMap = snapshot.data as List<City>;
-
-                          //createFilter(missionCriteria);
-                          completeFilter = CombinedCriteria(
-                              criteriaList: createCityFilter(
-                                  missionCriteria, selectedCities));
-
-                          filteredCities =
-                              completeFilter.meetCriteria(allCitiesFromMap);
-                          //print(filteredCities[5].cityName);
-                          // if (missionCriteria.minPopulationFilter != null) {
-                          //   print(missionCriteria.minPopulationFilter);
-                          // }
-
-                          //Ik wil iets zeggen als...
-                          //Criteria totalFilter = createFilter(filterCriteria);
-                          //en dan...
-                          //List<City> filteredCities =
-                          //    totalFilter.meetCriteria(allCitiesFromMap);
-
-                          print("de rebuild van lijst wordt nu getriggered");
-
-                          return ConstrainedBox(
-                            constraints:
-                                BoxConstraints(maxHeight: 170, maxWidth: 1200),
-                            child: Scrollbar(
-                              controller: yourScrollController,
-                              child: ListView.builder(
-                                controller: yourScrollController,
-                                //itemCount: snapshot.data?.length,
-                                itemCount: filteredCities.length,
-                                itemBuilder: ((context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      //setState(() {});
-                                    },
-                                    child: Container(
-                                      color: (index == selectedIndex)
-                                          ? Colors.red
-                                          : (index % 2 == 0)
-                                              ? Colors.lightBlueAccent[400]
-                                              : Colors.lightBlueAccent[200],
-                                      height: 40,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Row(
-                                          children: [
-                                            //Text(snapshot.data?[index].cityName),
-                                            SizedBox(
-                                              width: 180,
-                                              child: Text(filteredCities[index]
-                                                  .cityName),
-                                            ),
-                                            SizedBox(width: 10),
-                                            Text(filteredCities[index]
-                                                .residents
-                                                .toString()),
-                                            SizedBox(width: 40),
-                                            IconButton(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                onPressed: () {
-                                                  addCityToSelection(
-                                                      index,
-                                                      filteredCities,
-                                                      selectedCities);
-                                                  setState(() {});
-                                                },
-                                                icon: Icon(
-                                                    Icons.arrow_right_rounded))
-                                            //Text(snapshot.data![index].residents
-                                            //   .toString()),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Text("Ben nog niet klaar");
-                        }
-                      }),
-                    ),
-                  ),
+                  filteredCitiesWidget(),
                   SizedBox(width: 20),
-                  Expanded(
-                    child: Center(
-                        child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(maxHeight: 170, maxWidth: 1200),
-                      child: Scrollbar(
-                        controller: yourSecondScrollController,
-                        child: ListView.builder(
-                          controller: yourSecondScrollController,
-                          //itemCount: snapshot.data?.length,
-                          itemCount: selectedCities.length,
-                          itemBuilder: ((context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                //setState(() {});
-                              },
-                              child: Container(
-                                color: (index == selectedIndex)
-                                    ? Colors.red
-                                    : (index % 2 == 0)
-                                        ? Colors.lightBlueAccent[400]
-                                        : Colors.lightBlueAccent[200],
-                                height: 40,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    children: [
-                                      //Text(snapshot.data?[index].cityName),
-                                      SizedBox(
-                                        width: 180,
-                                        child: Text(
-                                            selectedCities[index].cityName),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(selectedCities[index]
-                                          .residents
-                                          .toString()),
-                                      SizedBox(width: 40),
-                                      IconButton(
-                                          alignment: Alignment.centerRight,
-                                          onPressed: () {
-                                            // addCityToSelection(
-                                            //     index,
-                                            //     filteredCities,
-                                            //     selectedCities);
-                                          },
-                                          icon: Icon(Icons.arrow_right_rounded))
-                                      //Text(snapshot.data![index].residents
-                                      //   .toString()),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                    )
-
-                        //     child: FutureBuilder<Album>(
-                        //   future: futureAlbum,
-                        //   builder: (context, snapshot) {
-                        //     if (snapshot.hasData) {
-                        //       return Text("Ik print nu: ${snapshot.data!.title}");
-                        //     } else if (snapshot.hasError) {
-                        //       return Text('${snapshot.error}');
-                        //     }
-
-                        //     // By default, show a loading spinner.
-                        //     return const CircularProgressIndicator();
-                        //   },
-                        // )
-
-                        // child: FutureBuilder(
-                        //   future: gameMap,
-                        //   builder: (context, snapshot) {
-                        //     if (snapshot.connectionState ==
-                        //         ConnectionState.done) {
-                        //       if (snapshot.hasData) {
-                        //         return Text(snapshot.data!.mapName);
-                        //       } else if (snapshot.hasError) {
-                        //         return Text('${snapshot.error}');
-                        //       }
-                        //     } else {
-                        //       Text("Waiting");
-                        //     }
-                        //     throw {print("error")};
-                        //   },
-                        // ),
-
-                        ),
-                  ),
-                  // child: Text(
-                  //     "Voor test hier komen de geselecteerde steden."))),
+                  selectedCitiesWidget(),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget formSectionWidget() {
+    return Form(
+      key: formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 10),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Select map"),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownButton(
+                  value: dropdownvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: availableWorldmaps.map((Worldmap map) {
+                    return DropdownMenuItem(
+                      value: map.mapName,
+                      child: Text(map.mapName),
+                    );
+                  }).toList(),
+                  onChanged: (String? selectedValue) {
+                    setState(() {
+                      dropdownvalue = selectedValue!;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: TextField(
+                  controller: missionNamesController,
+                  decoration: InputDecoration(hintText: "Naam missie"),
+                  onChanged: (value) {
+                    missionCriteria.setMissionName(value);
+                  },
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: TextField(
+                  controller: missionNamesDisplayedController,
+                  decoration:
+                      InputDecoration(hintText: "Getoonde naam aan leerlingen"),
+                  onChanged: (value) {
+                    missionCriteria.setMissionNameDisplayed(value);
+                  },
+                ),
+              ),
+              SizedBox(width: 10),
+            ],
+          ),
+          Row(
+            children: [
+              SizedBox(width: 10),
+              FutureBuilder(
+                  future: processCsv(context),
+                  builder: ((context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      allCitiesFromMap = snapshot.data as List<City>;
+                      List<String> stateList = getStatenames(allCitiesFromMap);
+
+                      if (dropdownStateValue.isEmpty) {
+                        dropdownStateValue = stateList.first;
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton<String>(
+                          value: dropdownStateValue,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: stateList
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? selectedValue) {
+                            setState(() {
+                              dropdownStateValue = selectedValue!;
+                              missionCriteria.setStateName(selectedValue);
+                            });
+                          },
+                        ),
+                      );
+                    } else {
+                      return Text("ik ben nog niet klaar");
+                    }
+                  })),
+              SizedBox(width: 10),
+              Expanded(
+                child: TextField(
+                  decoration:
+                      InputDecoration(hintText: "Minimum aantal inwoners"),
+                  onChanged: (value) {
+                    missionCriteria.setMinPopulationFilter(value);
+                  },
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: TextField(
+                  decoration:
+                      InputDecoration(hintText: "Maximum aantal inwoners"),
+                  onChanged: (value) {
+                    missionCriteria.setMaxPopulationFilter(value);
+                  },
+                ),
+              ),
+
+              //Onderstaande knop en functionaliteit voor specifieke missies, not niet geimplementeerd
+              // Flexible(
+              //   child: CheckboxListTile(
+              //       controlAffinity: ListTileControlAffinity.leading,
+              //       title: Text('Statische route?'),
+              //       value: missionCriteria.fixedRoute,
+              //       onChanged: (bool? value) {
+              //         setState(() {
+              //           missionCriteria.fixedRoute = value!;
+              //         });
+              //       }),
+              // ),
+
+              Flexible(
+                child: CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text('Alleen hoofdsteden'),
+                    value: missionCriteria.countryCapitalFilter,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        missionCriteria.countryCapitalFilter = value!;
+                      });
+                    }),
+              ),
+              Flexible(
+                child: CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text('Alleen provincie-hoofdsteden'),
+                    value: missionCriteria.stateCapitalFilter,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        missionCriteria.stateCapitalFilter = value!;
+                      });
+                    }),
+              ),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 150),
+                child: CustomFormField(
+                    numOnly: true,
+                    labelText: 'Aantal Steden',
+                    saveValue: missionCriteria.setDestinationCount),
+              ),
+              SizedBox(width: 10),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget actionButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            completeFilter = CombinedCriteria(
+                criteriaList:
+                    createCityFilter(missionCriteria, selectedCities));
+            setState(() {
+              filteredCities = completeFilter.meetCriteria(allCitiesFromMap);
+            });
+          },
+          child: Text('Filter steden'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            addAllFilteredCities(filteredCities, selectedCities);
+            setState(() {});
+          },
+          child: Text("Voeg alle steden toe"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            clearSelection(selectedCities);
+            setState(() {});
+          },
+          child: Text("Wis lijst geselecteerd steden"),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            Mission newMission = Mission(
+                missionName: missionCriteria.missionName,
+                missionNameDisplayed: missionCriteria.missionNameDisplayed,
+                missionCities: selectedCities);
+
+            var result = await showDialog(
+              context: context,
+              builder: (context) {
+                return newMission.saveMissionDialog(context);
+              },
+            );
+            print(result);
+            if (result == true) {
+              setState(() {
+                clearSelection(selectedCities);
+                missionCriteria.resetMissionCriteria();
+                missionNamesController.clear();
+                missionNamesDisplayedController.clear();
+              });
+            }
+          },
+          child: Text("Sla missie op"),
+        ),
+      ],
+    );
+  }
+
+  Widget filteredCitiesWidget() {
+    return Expanded(
+      child: FutureBuilder(
+        future: processCsv(context),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            allCitiesFromMap = snapshot.data as List<City>;
+
+            completeFilter = CombinedCriteria(
+                criteriaList:
+                    createCityFilter(missionCriteria, selectedCities));
+            filteredCities = completeFilter.meetCriteria(allCitiesFromMap);
+
+            return ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 600, maxWidth: 1200),
+              child: Scrollbar(
+                controller: yourScrollController,
+                child: ListView.builder(
+                  controller: yourScrollController,
+                  //itemCount: snapshot.data?.length,
+                  itemCount: filteredCities.length,
+                  itemBuilder: ((context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        color: (index % 2 == 0)
+                            ? Colors.lightBlueAccent[400]
+                            : Colors.lightBlueAccent[200],
+                        height: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Row(
+                            children: [
+                              //Text(snapshot.data?[index].cityName),
+                              SizedBox(
+                                width: 200,
+                                child: Text(filteredCities[index].cityName),
+                              ),
+                              SizedBox(width: 10),
+                              SizedBox(
+                                width: 180,
+                                child: Text(filteredCities[index].stateName),
+                              ),
+                              SizedBox(width: 10),
+                              SizedBox(
+                                width: 120,
+                                child: Text(
+                                    filteredCities[index].residents.toString()),
+                              ),
+                              SizedBox(width: 60),
+                              IconButton(
+                                  alignment: Alignment.centerRight,
+                                  onPressed: () {
+                                    addCityToSelection(
+                                        index, filteredCities, selectedCities);
+                                    setState(() {});
+                                  },
+                                  icon: Icon(Icons.arrow_circle_right_sharp)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            );
+          } else {
+            return Text("Ben nog niet klaar");
+          }
+        }),
+      ),
+    );
+  }
+
+  Widget selectedCitiesWidget() {
+    return Expanded(
+      child: Center(
+          child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: 600, maxWidth: 1200),
+        child: Scrollbar(
+          controller: yourSecondScrollController,
+          child: ListView.builder(
+            controller: yourSecondScrollController,
+            itemCount: selectedCities.length,
+            itemBuilder: ((context, index) {
+              return GestureDetector(
+                onTap: () {},
+                child: Container(
+                  color:  (index % 2 == 0)
+                          ? Colors.lightBlueAccent[400]
+                          : Colors.lightBlueAccent[200],
+                  height: 40,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      children: [
+                        //Text(snapshot.data?[index].cityName),
+                        SizedBox(
+                          width: 200,
+                          child: Text(selectedCities[index].cityName),
+                        ),
+                        SizedBox(width: 10),
+                        SizedBox(
+                          width: 180,
+                          child: Text(selectedCities[index].stateName),
+                        ),
+                        SizedBox(width: 10),
+                        SizedBox(
+                          width: 120,
+                          child:
+                              Text(selectedCities[index].residents.toString()),
+                        ),
+                        SizedBox(width: 60),
+                        IconButton(
+                            alignment: Alignment.centerRight,
+                            onPressed: () {
+                              setState(() {
+                                selectedCities.removeAt(index);
+                              });
+                            },
+                            icon: Icon(Icons.delete))
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      )
+
+          //     child: FutureBuilder<Album>(
+          //   future: futureAlbum,
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       return Text("Ik print nu: ${snapshot.data!.title}");
+          //     } else if (snapshot.hasError) {
+          //       return Text('${snapshot.error}');
+          //     }
+
+          //     // By default, show a loading spinner.
+          //     return const CircularProgressIndicator();
+          //   },
+          // )
+
+          // child: FutureBuilder(
+          //   future: gameMap,
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState ==
+          //         ConnectionState.done) {
+          //       if (snapshot.hasData) {
+          //         return Text(snapshot.data!.mapName);
+          //       } else if (snapshot.hasError) {
+          //         return Text('${snapshot.error}');
+          //       }
+          //     } else {
+          //       Text("Waiting");
+          //     }
+          //     throw {print("error")};
+          //   },
+          // ),
+
+          ),
     );
   }
 }

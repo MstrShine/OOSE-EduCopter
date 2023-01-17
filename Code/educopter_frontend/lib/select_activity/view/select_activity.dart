@@ -17,7 +17,8 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
   
   @override
   Widget build(BuildContext context) {
-    userData = userData.isNotEmpty
+
+        userData = userData.isNotEmpty
         ? userData
         : ModalRoute.of(context)!.settings.arguments as Map;
 
@@ -38,10 +39,12 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
             padding: const EdgeInsets.all(8.0),
             child: AvailableMissions(availableMissions: availableMissions),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AvailableMaps(
-                availableWorldmaps: availableWorldmaps),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AvailableMaps(
+                  availableWorldmaps: availableWorldmaps),
+            ),
           ),
         ],
           ),

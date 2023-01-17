@@ -16,7 +16,6 @@ class CustomFormField extends StatefulWidget {
 }
 
 class _CustomFormFieldState extends State<CustomFormField> {
-  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,14 +39,10 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 if (int.tryParse(value) == null) {
                   return 'Alleen cijfers';
                 }
-              } else {
-                  //return 'Geen probleem';
               }
+              return null;
             },
-            onSaved: (val) =>
-                //setState(() => loginData.setLogin(val.toString()) ),
-                //setState(() => widget.loginValue = val.toString()),
-                widget.saveValue(val),
+            onSaved: (val) => widget.saveValue(val),
           ),
         ),
       ),
