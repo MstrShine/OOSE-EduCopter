@@ -9,12 +9,9 @@ class TeacherActivityOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.amber,
-        alignment: FractionalOffset.center,
-        child: (userData['rol'] != 'leerling')
+    return  (userData['rol'] != 'leerling')
             ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -27,6 +24,10 @@ class TeacherActivityOptions extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
+                    child: Text("Selecteer een managementactiviteit...of speel een spelletje"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: (() {
                         Navigator.of(context).pushNamed('/reviewstudents');
@@ -36,6 +37,6 @@ class TeacherActivityOptions extends StatelessWidget {
                   ),
                 ],
               )
-            : null);
+            : SizedBox(height: 20);
   }
 }

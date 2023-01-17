@@ -29,13 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
               constraints: BoxConstraints(maxWidth: 1000),
               child: Column(
                 children: [
-                  SizedBox(height:40),
+                  SizedBox(height: 40),
                   Text(
                     "Welkom bij EduCopter",
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 60),
-                    ) ,
+                    style: TextStyle(fontFamily: 'Roboto', fontSize: 60),
+                  ),
                   SizedBox(height: 30),
                   Form(
                     key: formKey,

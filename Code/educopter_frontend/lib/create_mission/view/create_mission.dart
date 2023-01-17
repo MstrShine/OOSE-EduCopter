@@ -45,27 +45,29 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 1400),
-          child: Column(
-            children: [
-              formSectionWidget(),
-              SizedBox(height: 20),
-              actionButtons(),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  filteredCitiesWidget(),
-                  SizedBox(width: 20),
-                  selectedCitiesWidget(),
-                ],
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 1400),
+            child: Column(
+              children: [
+                formSectionWidget(),
+                SizedBox(height: 20),
+                actionButtons(),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    filteredCitiesWidget(),
+                    SizedBox(width: 20),
+                    selectedCitiesWidget(),
+                    SizedBox(width: 10)
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -330,22 +332,20 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                           child: Row(
                             children: [
                               //Text(snapshot.data?[index].cityName),
-                              SizedBox(
-                                width: 200,
+                              Expanded(
                                 child: Text(filteredCities[index].cityName),
                               ),
                               SizedBox(width: 10),
-                              SizedBox(
-                                width: 180,
+                              Expanded(
                                 child: Text(filteredCities[index].stateName),
                               ),
                               SizedBox(width: 10),
                               SizedBox(
-                                width: 120,
+                                width: 80,
                                 child: Text(
                                     filteredCities[index].residents.toString()),
                               ),
-                              SizedBox(width: 60),
+                              SizedBox(width: 20),
                               IconButton(
                                   alignment: Alignment.centerRight,
                                   onPressed: () {
@@ -354,6 +354,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                                     setState(() {});
                                   },
                                   icon: Icon(Icons.arrow_circle_right_sharp)),
+                              SizedBox(width: 20),
                             ],
                           ),
                         ),
@@ -385,31 +386,29 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
               return GestureDetector(
                 onTap: () {},
                 child: Container(
-                  color:  (index % 2 == 0)
-                          ? Colors.lightBlueAccent[400]
-                          : Colors.lightBlueAccent[200],
+                  color: (index % 2 == 0)
+                      ? Colors.lightBlueAccent[400]
+                      : Colors.lightBlueAccent[200],
                   height: 40,
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Row(
                       children: [
                         //Text(snapshot.data?[index].cityName),
-                        SizedBox(
-                          width: 200,
+                        Expanded(
                           child: Text(selectedCities[index].cityName),
                         ),
                         SizedBox(width: 10),
-                        SizedBox(
-                          width: 180,
+                        Expanded(
                           child: Text(selectedCities[index].stateName),
                         ),
                         SizedBox(width: 10),
                         SizedBox(
-                          width: 120,
+                          width: 80,
                           child:
                               Text(selectedCities[index].residents.toString()),
                         ),
-                        SizedBox(width: 60),
+                        SizedBox(width: 20),
                         IconButton(
                             alignment: Alignment.centerRight,
                             onPressed: () {
@@ -417,7 +416,8 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                                 selectedCities.removeAt(index);
                               });
                             },
-                            icon: Icon(Icons.delete))
+                            icon: Icon(Icons.delete)),
+                        SizedBox(width: 20),
                       ],
                     ),
                   ),

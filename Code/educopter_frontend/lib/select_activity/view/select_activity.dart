@@ -27,27 +27,24 @@ class _ActivitySelectScreenState extends State<ActivitySelectScreen> {
         title: Text('Welkom ${userData["naam"]}'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TeacherActivityOptions(userData: userData, context: context),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AvailableMissions(availableMissions: availableMissions),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AvailableMaps(
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 1400),
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 10),
+              TeacherActivityOptions(userData: userData, context: context),
+              SizedBox(height: 20),
+              AvailableMissions(availableMissions: availableMissions),
+              SizedBox(height: 20),
+              AvailableMaps(
                   availableWorldmaps: availableWorldmaps),
-            ),
+            ],
+              ),
           ),
-        ],
-          ),
+        ),
       ),
     );
   }
