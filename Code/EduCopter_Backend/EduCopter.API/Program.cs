@@ -13,6 +13,8 @@ namespace EduCopter.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors();
+
             // Add services to the container.
             #region Configure Services
             builder.Services.AddRepositories();
@@ -80,6 +82,7 @@ namespace EduCopter.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod());
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

@@ -17,7 +17,7 @@ namespace EduCopter.API.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<List<E>> GetAll()
+        public virtual async Task<IActionResult> GetAll()
         {
             List<E> eList = null;
             try
@@ -26,14 +26,14 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = 500;
+                BadRequest(ex);
             }
 
-            return eList;
+            return Ok(eList);
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<E> Get(Guid id)
+        public virtual async Task<IActionResult> Get(Guid id)
         {
             E e = null;
             try
@@ -42,14 +42,14 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = 500;
+                BadRequest(ex);
             }
 
-            return e;
+            return Ok(e);
         }
 
         [HttpPost]
-        public virtual async Task<E> Post(E entity)
+        public virtual async Task<IActionResult> Post(E entity)
         {
             E e = null;
             try
@@ -58,14 +58,14 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = 500;
+                BadRequest(ex);
             }
 
-            return e;
+            return Ok(e);
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<E> Put(Guid id, E entity)
+        public virtual async Task<IActionResult> Put(Guid id, E entity)
         {
             E e = null;
             try
@@ -74,14 +74,14 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = 500;
+                BadRequest(ex);
             }
 
-            return e;
+            return Ok(e);
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task Delete(Guid id)
+        public virtual async Task<IActionResult> Delete(Guid id)
         {
             try
             {
@@ -89,10 +89,10 @@ namespace EduCopter.API.Controllers
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = 500;
+                BadRequest(ex);
             }
 
-            return;
+            return Ok();
         }
     }
 }

@@ -39,34 +39,33 @@ namespace EduCopter.API.Controllers.Users
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<string> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            if (loginModel == null || string.IsNullOrWhiteSpace(loginModel.Username) || string.IsNullOrWhiteSpace(loginModel.Password))
+            if (loginModel == null || string.IsNullOrWhiteSpace(loginModel.Username) || string.IsNullOrWhiteSpace(loginModel.Password) || loginModel.SchoolId == Guid.Empty)
             {
-                HttpContext.Response.StatusCode = 204;
-                return null;
+                NoContent();
             }
 
 
             var students = await studentLogic.GetAll();
-            var student = students.FirstOrDefault(x => x.Username == loginModel.Username);
+            var student = students.FirstOrDefault(x => x.Username == loginModel.Username && x.SchoolId == loginModel.SchoolId);
             if (student != null)
             {
                 if (await passwordHandler.CheckPassword(student.Password, loginModel.Password))
                 {
                     var token = tokenService.BuildToken(configuration["Jwt:Key"], configuration["Jwt:Issuer"], student);
-                    return token;
+                    return Ok(token);
                 }
             }
 
             var teachers = await teacherLogic.GetAll();
-            var teacher = teachers.FirstOrDefault(x => x.Username == loginModel.Username);
+            var teacher = teachers.FirstOrDefault(x => x.Username == loginModel.Username && x.SchoolId == loginModel.SchoolId);
             if (teacher != null)
             {
                 if (await passwordHandler.CheckPassword(teacher.Password, loginModel.Password))
                 {
                     var token = tokenService.BuildToken(configuration["Jwt:Key"], configuration["Jwt:Issuer"], teacher);
-                    return token;
+                    return Ok(token);
                 }
             }
 
@@ -77,12 +76,11 @@ namespace EduCopter.API.Controllers.Users
                 if (await passwordHandler.CheckPassword(admin.Password, loginModel.Password))
                 {
                     var token = tokenService.BuildToken(configuration["Jwt:Key"], configuration["Jwt:Issuer"], admin);
-                    return token;
+                    return Ok(token);
                 }
             }
 
-            HttpContext.Response.StatusCode = 404;
-            return null;
+            return NotFound();
         }
     }
 }
