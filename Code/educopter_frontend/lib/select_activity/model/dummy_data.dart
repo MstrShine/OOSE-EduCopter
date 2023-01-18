@@ -36,7 +36,7 @@ final List<Worldmap> availableWorldmaps = [
   Worldmap(mapId: 4, mapName: 'Zweden', mapLocation: 'Zweden.png'),
   Worldmap(mapId: 5, mapName: 'Verenigde Staten', mapLocation: 'VS.png'),
   Worldmap(mapId: 6, mapName: 'Ijsland', mapLocation: 'Ijsland.png'),
-  Worldmap(mapId: 7, mapName: 'Polen', mapLocation: 'Polen.png'),
+  Worldmap(mapId: 7, mapName: 'Polen', mapLocation: 'Poland.png'),
   Worldmap(mapId: 8, mapName: 'Verenigd Koninkrijk', mapLocation: 'VK.png'),
   Worldmap(mapId: 9, mapName: 'Noorwegen', mapLocation: 'Noorwegen.png'),
   Worldmap(mapId: 10, mapName: 'België', mapLocation: 'Belgie.png'),

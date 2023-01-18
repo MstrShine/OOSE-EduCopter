@@ -35,7 +35,6 @@ class _CustomFormFieldState extends State<CustomFormField> {
               if (value == null || value.isEmpty) {
                 return 'Invoer vereist';
               } else if (widget.numOnly) {
-                //print('check nu of widget numonly is');
                 if (int.tryParse(value) == null) {
                   return 'Alleen cijfers';
                 }

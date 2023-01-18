@@ -13,11 +13,7 @@ class CombinedCriteria<T> implements Criteria<T> {
     List<T> filteredList = listEntries;
 
     for (Criteria<T> criterium in criteriaList) {
-      // if (filteredList.isEmpty) {
-      //   filteredList = criterium.meetCriteria(listEntries);
-      // } else {
         filteredList = criterium.meetCriteria(filteredList);
-      //}
     }
 
     return filteredList;

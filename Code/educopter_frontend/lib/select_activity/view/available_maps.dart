@@ -45,7 +45,7 @@ class _AvailableMapsState extends State<AvailableMaps> {
                         padding: const EdgeInsets.all(4.0),
                         child: Row(
                           children: [
-                            Text(availableWorldmaps[index].mapLocation),
+                            Text(availableWorldmaps[index].mapName),
                           ],
                         ),
                       ),
@@ -62,8 +62,9 @@ class _AvailableMapsState extends State<AvailableMaps> {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               SizedBox(height: 10),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 400, maxHeight: 300),
+              SizedBox(
+                height: 300,
+                width: 400,
                 child: (selectedIndex != -1)
                     ? Container(
                         decoration: BoxDecoration(
@@ -71,7 +72,7 @@ class _AvailableMapsState extends State<AvailableMaps> {
                                 image: AssetImage(widget
                                     .availableWorldmaps[selectedIndex]
                                     .mapLocation),
-                                fit: BoxFit.cover)),
+                                fit: BoxFit.scaleDown)),
                       )
                     : Text("Selecteer een kaart"),
               ),

@@ -61,8 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (form.validate()) {
                         form.save();
                         loginData.saveTest();
-                        print(
-                            'Ik gebruik nu ${loginData.login} en ${loginData.school} en ${loginData.password}');
                         loginAttemptDialogBox(loginData, context);
                       }
                     },

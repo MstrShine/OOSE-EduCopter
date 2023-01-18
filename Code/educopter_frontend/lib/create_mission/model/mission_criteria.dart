@@ -37,7 +37,6 @@ class MissionCriteria {
     } else {
       minPopulationFilter = 0;
     }
-    //print("ik pas nu de minpopfilter aan");
   }
 
   setMaxPopulationFilter(var value) {

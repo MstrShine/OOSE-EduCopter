@@ -282,7 +282,6 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                 return newMission.saveMissionDialog(context);
               },
             );
-            print(result);
             if (result == true) {
               setState(() {
                 clearSelection(selectedCities);
