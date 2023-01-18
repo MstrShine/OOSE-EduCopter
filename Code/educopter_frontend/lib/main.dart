@@ -1,3 +1,4 @@
+import 'package:educopter_frontend/review_students/view/review_students.dart';
 import 'package:flutter/material.dart';
 import 'home/view/home.dart';
 import 'login/view/login.dart';
@@ -13,7 +14,7 @@ void main() {
       '/login': (context) => LoginScreen(),
       '/select': (context) => ActivitySelectScreen(),
       '/createmission':(context) => MissionCreateScreen(),
-      //'/managestudents':(context) => ManageStudentsScreen(),
+      '/reviewstudents':(context) => ReviewStudents(),
       '/game':(context) => GameScreen()
       }
     )
