@@ -10,7 +10,6 @@ class LoginData {
   }
 
   saveTest() {
-    //loginHandler('Roos', 'Lanteerne', 'kat123');
     print('ik ben nu data aan het saven');
   }
 

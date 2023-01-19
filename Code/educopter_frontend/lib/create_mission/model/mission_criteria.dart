@@ -3,10 +3,11 @@ class MissionCriteria {
   String missionNameDisplayed = '';
   bool countryCapitalFilter = false;
   bool stateCapitalFilter = false;
-  late int minPopulationFilter;
-  late int maxPopulationFilter;
-  late int destinationCount;
+  int? minPopulationFilter;
+  int? maxPopulationFilter;
+  int? destinationCount;
   bool fixedRoute = false;
+  String? stateName;
 
   MissionCriteria({
     this.missionName = "",
@@ -16,12 +17,34 @@ class MissionCriteria {
     this.fixedRoute = false,
   });
 
+  resetMissionCriteria() {
+    missionName = "";
+    missionNameDisplayed = "";
+    countryCapitalFilter = false;
+    stateCapitalFilter = false;
+    fixedRoute = false;
+    minPopulationFilter = 0;
+    stateName = "";
+  }
+
+  setStateName(String value) {
+    stateName = value;
+  }
+
   setMinPopulationFilter(var value) {
-    minPopulationFilter = int.tryParse(value)!;
+    if (int.tryParse(value) != null) {
+      minPopulationFilter = int.tryParse(value)!;
+    } else {
+      minPopulationFilter = 0;
+    }
   }
 
   setMaxPopulationFilter(var value) {
-    maxPopulationFilter = int.tryParse(value)!;
+    if (int.tryParse(value) != null) {
+      maxPopulationFilter = int.tryParse(value)!;
+    } else {
+      maxPopulationFilter = 99999999;
+    }
   }
 
   setMissionName(var value) {
@@ -33,6 +56,8 @@ class MissionCriteria {
   }
 
   setDestinationCount(var value) {
-    destinationCount = int.tryParse(value)!;
+    if (int.tryParse(value) != null) {
+      destinationCount = int.tryParse(value)!;
+    }
   }
 }

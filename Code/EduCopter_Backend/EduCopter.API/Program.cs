@@ -61,6 +61,7 @@ namespace EduCopter.API
             #region Configure App
             var app = builder.Build();
 
+
             app.UseStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUI(options =>

@@ -18,66 +18,69 @@ class _AvailableMissionsState extends State<AvailableMissions> {
 
   @override
   Widget build(BuildContext context) {
-    print('de selectedindex is $selectedIndex');
     final yourScrollController = ScrollController();
 
-    return Column(
+    return Row(
       children: [
-        Container(
-          color: Colors.amber,
-          alignment: FractionalOffset.center,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text('Missies'),
-                ElevatedButton(onPressed: (() {}), child: Text('Start missie'))
-              ],
-            ),
+        SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            children: [
+              Text('Kies een missie'),
+              SizedBox(height: 30),
+              Text(
+                  "Speel een missie waarbij de route door je leraar is samengesteld en leer spelenderwijs je topografie!"),
+              SizedBox(height: 20),
+              ElevatedButton(onPressed: (() {}), child: Text('Start missie')),
+            ],
           ),
         ),
-        SizedBox(height: 10),
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 340, maxHeight: 270),
-          child: Scrollbar(
-            controller: yourScrollController,
-            child: ListView.builder(
+        SizedBox(width: 20),
+        Expanded(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 800, maxHeight: 400),
+            child: Scrollbar(
               controller: yourScrollController,
-              itemCount: widget.availableMissions.length,
-              itemBuilder: ((context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = index;
-                      print('ik heb nu de index veranderd naar $selectedIndex');
-                    });
-                  },
-                  child: Container(
-                    color: (index == selectedIndex)
-                        ? Colors.red
-                        : (index % 2 == 0)
-                            ? Colors.lightBlueAccent[400]
-                            : Colors.lightBlueAccent[200],
-                    height: 40,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Text(widget.availableMissions[index].mapName),
-                          SizedBox(width: 10),
-                          Text(widget
-                              .availableMissions[index].missionDescription),
-                          Text(index.toString()),
-                        ],
+              child: ListView.builder(
+                controller: yourScrollController,
+                itemCount: widget.availableMissions.length,
+                itemBuilder: ((context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                    child: Container(
+                      color: (index == selectedIndex)
+                          ? Colors.red
+                          : (index % 2 == 0)
+                              ? Colors.lightBlueAccent[400]
+                              : Colors.lightBlueAccent[200],
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Text(
+                                    widget.availableMissions[index].mapName)),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Text(widget
+                                  .availableMissions[index].missionDescription),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ),
           ),
         ),
+        SizedBox(width: 10)
       ],
     );
   }

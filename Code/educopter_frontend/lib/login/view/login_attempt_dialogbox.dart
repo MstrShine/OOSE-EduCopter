@@ -14,7 +14,7 @@ loginAttemptDialogBox(LoginData loginData, BuildContext context) {
                 Navigator.pop(context);
                 Map userdata = loginData.getUser();
                 Navigator.of(context)
-                    .pushReplacementNamed('/select', arguments: userdata);
+                    .pushNamed('/select', arguments: userdata);
               },
             )
           ],
@@ -30,7 +30,7 @@ loginAttemptDialogBox(LoginData loginData, BuildContext context) {
               child: Text('OK'),
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.of(context).pushReplacementNamed('/select');
+                Navigator.of(context).pushNamed('/select');
               },
             )
           ],

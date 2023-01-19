@@ -10,14 +10,10 @@ class CombinedCriteria<T> implements Criteria<T> {
 
   @override
   List<T> meetCriteria(List<T> listEntries) {
-    List<T> filteredList = [];
+    List<T> filteredList = listEntries;
 
     for (Criteria<T> criterium in criteriaList) {
-      if (filteredList.isEmpty) {
-        filteredList = criterium.meetCriteria(listEntries);
-      } else {
         filteredList = criterium.meetCriteria(filteredList);
-      }
     }
 
     return filteredList;

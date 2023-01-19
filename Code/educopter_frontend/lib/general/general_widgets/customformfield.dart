@@ -16,7 +16,6 @@ class CustomFormField extends StatefulWidget {
 }
 
 class _CustomFormFieldState extends State<CustomFormField> {
-  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +28,6 @@ class _CustomFormFieldState extends State<CustomFormField> {
         child: Padding(
           padding: EdgeInsets.fromLTRB(8, 10, 8, 8),
           child: TextFormField(
-            //padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             decoration: InputDecoration(
               labelText: widget.labelText,
             ),
@@ -37,18 +35,13 @@ class _CustomFormFieldState extends State<CustomFormField> {
               if (value == null || value.isEmpty) {
                 return 'Invoer vereist';
               } else if (widget.numOnly) {
-                //print('check nu of widget numonly is');
                 if (int.tryParse(value) == null) {
                   return 'Alleen cijfers';
                 }
-              } else {
-                  //return 'Geen probleem';
               }
+              return null;
             },
-            onSaved: (val) =>
-                //setState(() => loginData.setLogin(val.toString()) ),
-                //setState(() => widget.loginValue = val.toString()),
-                widget.saveValue(val),
+            onSaved: (val) => widget.saveValue(val),
           ),
         ),
       ),
