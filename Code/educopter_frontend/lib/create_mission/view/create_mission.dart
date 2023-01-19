@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:educopter_frontend/create_mission/model/dummy_data.dart';
 import 'package:educopter_frontend/create_mission/model/mission_criteria.dart';
 import 'package:educopter_frontend/general/general_widgets/customformfield.dart';
@@ -6,6 +8,7 @@ import 'package:educopter_frontend/general/general_widgets/maxcontentwidth.dart'
 import 'package:educopter_frontend/general/model/city.dart';
 import 'package:educopter_frontend/select_activity/model/worldmap.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MissionCreateScreen extends StatefulWidget {
   const MissionCreateScreen({super.key});
@@ -25,6 +28,31 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   void initState() {
     super.initState();
     dropdownvalue = availableWorldmaps.first.mapName;
+    testApi();
+  }
+
+  Future<List<City>> testApi() async {
+    try {
+      var response = await http.get(Uri.parse('http://127.0.0.1:7223/city'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods':
+                'POST, GET, OPTIONS, PUT, DELETE, HEAD'
+          });
+      if (response.statusCode == 200) {
+        List<dynamic> decoded = jsonDecode(response.body);
+        List<City> cities = [];
+        for (var d in decoded) {
+          cities.add(City.fromJson(d));
+        }
+        return cities;
+      }
+    } catch (e) {
+      return [];
+    }
+
+    return [];
   }
 
   @override
@@ -39,112 +67,108 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
           Form(
             key: formKey,
             child: Column(
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 700),
-                child: CustomFormField(
-                    labelText: 'Naam missie',
-                    saveValue: missionCriteria.setMissionName),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 700),
-                child: CustomFormField(
-                    labelText: 'Getoonde naam aan leerlingen',
-                    saveValue:
-                        missionCriteria.setMissionNameDisplayed),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 200),
-                child: CustomFormField(
-                    numOnly: true,
-                    labelText: 'Aantal Steden',
-                    saveValue: missionCriteria.setDestinationCount),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 300),
-                child: CheckboxListTile(
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: Text('Statische route?'),
-                    value: missionCriteria.fixedRoute,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        missionCriteria.fixedRoute = value!;
-                      });
-                    }),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 300),
-                child: CheckboxListTile(
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: Text('Alleen hoofdsteden'),
-                    value: missionCriteria.countryCapitalFilter,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        missionCriteria.countryCapitalFilter = value!;
-                      });
-                    }),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 300),
-                child: CheckboxListTile(
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: Text('Alleen provinciehoofdsteden'),
-                    value: missionCriteria.stateCapitalFilter,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        missionCriteria.stateCapitalFilter = value!;
-                      });
-                    }),
-              ),
-              ConstrainedBox(
-                constraints:
-                    BoxConstraints(maxWidth: 1400, minWidth: 500),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CustomFormField(
-                          numOnly: true,
-                          labelText: 'Minimum aantal inwoners',
-                          saveValue:
-                              missionCriteria.setMinPopulationFilter),
-                    ),
-                    Expanded(
-                      child: CustomFormField(
-                          numOnly: true,
-                          labelText: 'Maximum aantal inwoners',
-                          saveValue:
-                              missionCriteria.setMaxPopulationFilter),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        final form = formKey.currentState!;
-                        if (form.validate()) {
-                          form.save();
-                          print('Formulier gevalideerd ik save');
-                        }
-                      },
-                      child: Text('Filter steden'),
-                    ),
-                  ],
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 700),
+                  child: CustomFormField(
+                      labelText: 'Naam missie',
+                      saveValue: missionCriteria.setMissionName),
                 ),
-              ),
-              DropdownButton(
-                value: dropdownvalue,
-                icon: const Icon(Icons.keyboard_arrow_down),
-                items: availableWorldmaps.map((Worldmap map) {
-                  return DropdownMenuItem(
-                    value: map.mapName,
-                    child: Text(map.mapName),
-                  );
-                }).toList(),
-                onChanged: (String? selectedValue) {
-                  setState(() {
-                    dropdownvalue = selectedValue!;
-                  });
-                },
-              ),
-            ],
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 700),
+                  child: CustomFormField(
+                      labelText: 'Getoonde naam aan leerlingen',
+                      saveValue: missionCriteria.setMissionNameDisplayed),
                 ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 200),
+                  child: CustomFormField(
+                      numOnly: true,
+                      labelText: 'Aantal Steden',
+                      saveValue: missionCriteria.setDestinationCount),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 300),
+                  child: CheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      title: Text('Statische route?'),
+                      value: missionCriteria.fixedRoute,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          missionCriteria.fixedRoute = value!;
+                        });
+                      }),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 300),
+                  child: CheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      title: Text('Alleen hoofdsteden'),
+                      value: missionCriteria.countryCapitalFilter,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          missionCriteria.countryCapitalFilter = value!;
+                        });
+                      }),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 300),
+                  child: CheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      title: Text('Alleen provinciehoofdsteden'),
+                      value: missionCriteria.stateCapitalFilter,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          missionCriteria.stateCapitalFilter = value!;
+                        });
+                      }),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 1400, minWidth: 500),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomFormField(
+                            numOnly: true,
+                            labelText: 'Minimum aantal inwoners',
+                            saveValue: missionCriteria.setMinPopulationFilter),
+                      ),
+                      Expanded(
+                        child: CustomFormField(
+                            numOnly: true,
+                            labelText: 'Maximum aantal inwoners',
+                            saveValue: missionCriteria.setMaxPopulationFilter),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          final form = formKey.currentState!;
+                          if (form.validate()) {
+                            form.save();
+                            print('Formulier gevalideerd ik save');
+                          }
+                        },
+                        child: Text('Filter steden'),
+                      ),
+                    ],
+                  ),
+                ),
+                DropdownButton(
+                  value: dropdownvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: availableWorldmaps.map((Worldmap map) {
+                    return DropdownMenuItem(
+                      value: map.mapName,
+                      child: Text(map.mapName),
+                    );
+                  }).toList(),
+                  onChanged: (String? selectedValue) {
+                    setState(() {
+                      dropdownvalue = selectedValue!;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
           FutureBuilder(
             future: processCsv(context),
@@ -162,8 +186,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                 //    totalFilter.meetCriteria(allCitiesFromMap);
 
                 return ConstrainedBox(
-                  constraints:
-                      BoxConstraints(maxWidth: 340, maxHeight: 270),
+                  constraints: BoxConstraints(maxWidth: 340, maxHeight: 270),
                   child: Scrollbar(
                     controller: yourScrollController,
                     child: ListView.builder(

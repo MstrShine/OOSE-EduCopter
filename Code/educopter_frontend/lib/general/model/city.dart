@@ -17,10 +17,13 @@ class City {
       required this.residents,
       this.capital = false,
       this.stateCapital = false});
+
+  factory City.fromJson(Map<String, dynamic> json) {
+    return City(
+        cityName: json['name'],
+        stateName: '',
+        xCoordCity: json['x'],
+        yCoordCity: json['y'],
+        residents: json['population']);
+  }
 }
-
-
-
-
-
-
