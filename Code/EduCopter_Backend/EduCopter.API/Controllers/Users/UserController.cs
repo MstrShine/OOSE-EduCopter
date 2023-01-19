@@ -46,7 +46,6 @@ namespace EduCopter.API.Controllers.Users
                 NoContent();
             }
 
-
             var students = await _studentLogic.GetAll();
             var student = students.FirstOrDefault(x => x.Username == loginModel.Username && x.SchoolId == loginModel.SchoolId);
             if (student != null)
@@ -54,7 +53,8 @@ namespace EduCopter.API.Controllers.Users
                 if (await _passwordHandler.CheckPassword(student.Password, loginModel.Password))
                 {
                     var token = _tokenService.BuildToken(_configuration["Jwt:Key"], _configuration["Jwt:Issuer"], student);
-                    return Ok(token);
+                    student.Password = null;
+                    return Ok(student);
                 }
             }
 
@@ -65,7 +65,8 @@ namespace EduCopter.API.Controllers.Users
                 if (await _passwordHandler.CheckPassword(teacher.Password, loginModel.Password))
                 {
                     var token = _tokenService.BuildToken(_configuration["Jwt:Key"], _configuration["Jwt:Issuer"], teacher);
-                    return Ok(token);
+                    teacher.Password = null;
+                    return Ok(teacher);
                 }
             }
 
@@ -79,7 +80,8 @@ namespace EduCopter.API.Controllers.Users
                     if (token != null)
                     {
                         HttpContext.Session.SetString("Token", token);
-                        return Ok(token);
+                        admin.Password = null;
+                        return Ok(admin);
                     }
                     else
                     {
