@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:educopter_frontend/create_mission/model/dummy_data.dart';
 import 'package:educopter_frontend/create_mission/model/mission.dart';
 import 'package:educopter_frontend/create_mission/model/mission_criteria.dart';
@@ -9,6 +11,7 @@ import 'package:educopter_frontend/general/model/city.dart';
 import 'package:educopter_frontend/general/services/filter_pattern.dart';
 import 'package:educopter_frontend/select_activity/model/worldmap.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MissionCreateScreen extends StatefulWidget {
   const MissionCreateScreen({super.key});
@@ -41,6 +44,31 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
     super.initState();
     dropdownvalue = availableWorldmaps.first.mapName;
     selectedCities = [];
+    testApi();
+  }
+
+  Future<List<City>> testApi() async {
+    try {
+      var response = await http.get(Uri.parse('http://127.0.0.1:7223/city'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods':
+                'POST, GET, OPTIONS, PUT, DELETE, HEAD'
+          });
+      if (response.statusCode == 200) {
+        List<dynamic> decoded = jsonDecode(response.body);
+        List<City> cities = [];
+        for (var d in decoded) {
+          cities.add(City.fromJson(d));
+        }
+        return cities;
+      }
+    } catch (e) {
+      return [];
+    }
+
+    return [];
   }
 
   @override

@@ -13,6 +13,8 @@ namespace EduCopter.Logic.Convert.Geography
                 Name = ef.Name,
                 Population = ef.Population,
                 ProvinceId = ef.ProvinceId,
+                X = ef.X,
+                Y = ef.Y,
                 MapId = ef.MapId
             };
         }
@@ -23,6 +25,8 @@ namespace EduCopter.Logic.Convert.Geography
             {
                 Id = e.Id,
                 Name = e.Name,
+                X = e.X,
+                Y = e.Y,
                 Population = e.Population,
                 ProvinceId = e.ProvinceId,
                 MapId = e.MapId

@@ -1,19 +1,19 @@
-﻿using EduCopter.Domain;
+﻿using EduCopter.Domain.Users;
 using EduCopter.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EduCopter.API.Controllers
+namespace EduCopter.API.Controllers.Users
 {
-    /// <summary>
-    /// Base controller class for creating simple CRUD controller, that can be overriden
-    /// </summary>
-    public abstract class AbstractEntityController<E> : ControllerBase where E : Entity, new()
+    public class AbstractUserController<E> : ControllerBase where E : UserInfo
     {
         protected readonly IEntityLogic<E> _logic;
 
-        public AbstractEntityController(IEntityLogic<E> logic)
+        private readonly IPasswordHandler _passwordHandler;
+
+        public AbstractUserController(IEntityLogic<E> logic, IPasswordHandler passwordHandler)
         {
             _logic = logic;
+            _passwordHandler = passwordHandler;
         }
 
         [HttpGet]
@@ -23,6 +23,10 @@ namespace EduCopter.API.Controllers
             try
             {
                 eList = await _logic.GetAll();
+                foreach(var e  in eList)
+                {
+                    e.Password = null;
+                }
             }
             catch (Exception ex)
             {
@@ -39,6 +43,7 @@ namespace EduCopter.API.Controllers
             try
             {
                 e = await _logic.Get(id);
+                e.Password = null;
             }
             catch (Exception ex)
             {
@@ -54,12 +59,16 @@ namespace EduCopter.API.Controllers
             E e = null;
             try
             {
+                var newPassword = await _passwordHandler.CreatePassword(entity.Password);
+                entity.Password = newPassword;
                 e = await _logic.SaveOrUpdate(entity);
             }
             catch (Exception ex)
             {
                 BadRequest(ex);
             }
+
+            e.Password = null;
 
             return Ok(e);
         }
@@ -70,12 +79,16 @@ namespace EduCopter.API.Controllers
             E e = null;
             try
             {
+                var newPassword = await _passwordHandler.CreatePassword(entity.Password);
+                entity.Password = newPassword;
                 e = await _logic.SaveOrUpdate(entity);
             }
             catch (Exception ex)
             {
                 BadRequest(ex);
             }
+
+            e.Password = null;
 
             return Ok(e);
         }
