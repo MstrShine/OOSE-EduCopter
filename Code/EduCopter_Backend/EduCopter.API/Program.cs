@@ -1,7 +1,9 @@
 using EduCopter.API.JWT;
+using EduCopter.Domain.Options;
 using EduCopter.Logic.Extensions;
 using EduCopter.Persistency.DataBase.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -17,6 +19,8 @@ namespace EduCopter.API
 
             // Add services to the container.
             #region Configure Services
+            builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.Position));
+
             builder.Services.AddRepositories();
             builder.Services.AddDataBase();
             builder.Services.AddLogic();
@@ -83,6 +87,7 @@ namespace EduCopter.API
             }
 
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod());
+            app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

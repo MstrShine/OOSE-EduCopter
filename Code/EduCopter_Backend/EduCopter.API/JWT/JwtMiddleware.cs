@@ -39,7 +39,12 @@ namespace EduCopter.API.JWT
                 userInfos.AddRange(await teacherService.GetAll());
                 userInfos.AddRange(await adminService.GetAll());
 
-                context.Items["User"] = userInfos.FirstOrDefault(x => x.Username == userName);
+                var user = userInfos.FirstOrDefault(x => x.Username == userName);
+                if (user != null)
+                {
+                    user.Password = null;
+                    context.Items["User"] = user;
+                }
             }
         }
     }

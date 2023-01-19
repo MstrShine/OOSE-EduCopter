@@ -19,15 +19,15 @@ namespace EduCopter.API.JWT
 
             if (user is Student)
             {
-                claims.Add(new Claim(ClaimTypes.Actor, nameof(Student)));
+                claims.Add(new Claim(ClaimTypes.Role, nameof(Student)));
             }
             else if (user is Teacher)
             {
-                claims.Add(new Claim(ClaimTypes.Actor, nameof(Teacher)));
+                claims.Add(new Claim(ClaimTypes.Role, nameof(Teacher)));
             }
             else if (user is Administrator)
             {
-                claims.Add(new Claim(ClaimTypes.Actor, nameof(Administrator)));
+                claims.Add(new Claim(ClaimTypes.Role, nameof(Administrator)));
             }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
@@ -60,7 +60,7 @@ namespace EduCopter.API.JWT
                 var name = jwtToken.Claims.First(x => x.Type == ClaimTypes.Name).Value;
                 user = name;
             }
-            catch
+            catch(Exception e)
             {
                 user = null;
                 return false;
